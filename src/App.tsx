@@ -13,7 +13,7 @@ const App: FunctionComponent<AppProps> = () => {
     try {
       const res = await fetch("https://xspelling.duckdns.org/api/get_word");
       const data = await res.json();
-      setWord(data.word);
+      setWord(data.result);
       setInput("");
       setFeedback("");
     } catch (err) {
