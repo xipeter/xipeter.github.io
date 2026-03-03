@@ -68,7 +68,7 @@ const App = observer((): React.JSX.Element => {
   };
 
   return (
-    <Box sx={{ display: 'flex', minHeight: '100vh', bgcolor: '#121212' }}>
+    <Box sx={{ display: 'flex', minHeight: '100vh', bgcolor: '#2d2d2d' }}>
       <Navigation 
         currentFormat={appStore.format} 
         onFormatChange={handleFormatChange} 

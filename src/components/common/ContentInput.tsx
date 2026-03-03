@@ -1,13 +1,13 @@
-import { useState, useCallback } from 'react';
-
 // 1. React/core
-// Already imported above
+import { useCallback } from 'react';
 
 // 2. MobX (none needed)
 
 // 3. External libraries (none needed)
 
-// 4. Internal modules (none needed)
+// 4. Internal modules
+import { useStores } from '../../hooks/useStores';
+import type { FormatType } from '../../stores/AppStore';
 
 // MUI
 import { Box, TextField, ToggleButton, ToggleButtonGroup } from '@mui/material';
@@ -17,26 +17,25 @@ interface ContentInputProps {
 }
 
 export const ContentInput = ({ onContentChange }: ContentInputProps): React.JSX.Element => {
-  const [content, setContent] = useState('');
-  const [format, setFormat] = useState<string>('markdown');
+  const { appStore } = useStores();
 
   const handleContentChange = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
-    setContent(value);
-    onContentChange(value, format);
-  }, [onContentChange, format]);
+    appStore.setContent(value);
+    onContentChange(value, appStore.format);
+  }, [appStore, onContentChange]);
 
   const handleFormatChange = useCallback((_event: React.MouseEvent<HTMLElement>, newFormat: string | null) => {
     if (newFormat) {
-      setFormat(newFormat);
-      onContentChange(content, newFormat);
+      appStore.setFormat(newFormat as FormatType);
+      onContentChange(appStore.content, newFormat);
     }
-  }, [content, onContentChange]);
+  }, [appStore, onContentChange]);
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
       <ToggleButtonGroup
-        value={format}
+        value={appStore.format}
         exclusive
         onChange={handleFormatChange}
         aria-label="content format"
@@ -51,8 +50,8 @@ export const ContentInput = ({ onContentChange }: ContentInputProps): React.JSX.
         multiline
         rows={15}
         fullWidth
-        placeholder={`Paste your ${format} content here...`}
-        value={content}
+        placeholder={`Paste your ${appStore.format} content here...`}
+        value={appStore.content}
         onChange={handleContentChange}
         sx={{
           '& .MuiOutlinedInput-root': {
