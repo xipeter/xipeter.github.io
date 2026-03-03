@@ -1,5 +1,16 @@
-import { Box, TextField, ToggleButton, ToggleButtonGroup } from '@mui/material';
 import { useState, useCallback } from 'react';
+
+// 1. React/core
+// Already imported above
+
+// 2. MobX (none needed)
+
+// 3. External libraries (none needed)
+
+// 4. Internal modules (none needed)
+
+// MUI
+import { Box, TextField, ToggleButton, ToggleButtonGroup } from '@mui/material';
 
 interface ContentInputProps {
   onContentChange: (content: string, type: string) => void;

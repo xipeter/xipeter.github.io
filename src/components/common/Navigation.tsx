@@ -1,4 +1,6 @@
 import { useState } from 'react';
+
+// 1. React/core
 import {
   Box,
   Drawer,
@@ -14,6 +16,14 @@ import {
   useMediaQuery,
   useTheme
 } from '@mui/material';
+
+// 2. MobX (none needed)
+
+// 3. External libraries (none needed)
+
+// 4. Internal modules (none needed)
+
+// Icons
 import MenuIcon from '@mui/icons-material/Menu';
 import DescriptionIcon from '@mui/icons-material/Description';
 import CodeIcon from '@mui/icons-material/Code';

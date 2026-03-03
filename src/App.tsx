@@ -1,4 +1,22 @@
-import { useState, useCallback } from 'react';
+import { observer } from 'mobx-react-lite';
+import { useStores } from './hooks/useStores';
+
+// 1. React/core
+import { useCallback } from 'react';
+
+// 2. MobX (already imported above)
+
+// 3. External libraries (none needed)
+
+// 4. Internal modules
+import { Navigation, drawerWidth } from './components/common/Navigation';
+import { ContentInput } from './components/common/ContentInput';
+import { MarkdownPreview, JsonPreview, XmlPreview } from './components/preview';
+
+// 5. Types
+import type { FormatType } from './stores/AppStore';
+
+// MUI
 import { 
   Box, 
   Container, 
@@ -10,42 +28,36 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete';
 import PreviewIcon from '@mui/icons-material/Preview';
 import EditIcon from '@mui/icons-material/Edit';
-import { Navigation, drawerWidth } from './components/common/Navigation';
-import { ContentInput } from './components/common/ContentInput';
-import { MarkdownPreview, JsonPreview, XmlPreview } from './components/preview';
 
-const App = (): React.JSX.Element => {
-  const [content, setContent] = useState('');
-  const [format, setFormat] = useState<string>('markdown');
-  const [mode, setMode] = useState<'edit' | 'preview'>('edit');
+const App = observer((): React.JSX.Element => {
+  const { appStore } = useStores();
 
   const handleContentChange = useCallback((newContent: string, newFormat: string) => {
-    setContent(newContent);
-    setFormat(newFormat);
-  }, []);
+    appStore.setContent(newContent);
+    appStore.setFormat(newFormat as FormatType);
+  }, [appStore]);
 
   const handleFormatChange = useCallback((newFormat: string) => {
-    setFormat(newFormat);
-    if (content) {
-      handleContentChange(content, newFormat);
+    appStore.setFormat(newFormat as FormatType);
+    if (appStore.content) {
+      handleContentChange(appStore.content, newFormat);
     }
-  }, [content, handleContentChange]);
+  }, [appStore, handleContentChange]);
 
   const handleClear = useCallback(() => {
-    setContent('');
-    setMode('edit');
-  }, []);
+    appStore.clear();
+  }, [appStore]);
 
   const renderPreview = () => {
-    if (!content) return null;
+    if (!appStore.content) return null;
 
-    switch (format) {
+    switch (appStore.format) {
       case 'markdown':
-        return <MarkdownPreview content={content} />;
+        return <MarkdownPreview content={appStore.content} />;
       case 'json':
-        return <JsonPreview content={content} />;
+        return <JsonPreview content={appStore.content} />;
       case 'xml':
-        return <XmlPreview content={content} />;
+        return <XmlPreview content={appStore.content} />;
       default:
         return (
           <Paper sx={{ p: 3, bgcolor: '#1e1e1e', color: '#d4d4d4' }}>
@@ -57,7 +69,10 @@ const App = (): React.JSX.Element => {
 
   return (
     <Box sx={{ display: 'flex', minHeight: '100vh', bgcolor: '#121212' }}>
-      <Navigation currentFormat={format} onFormatChange={handleFormatChange} />
+      <Navigation 
+        currentFormat={appStore.format} 
+        onFormatChange={handleFormatChange} 
+      />
       
       <Box
         component="main"
@@ -71,24 +86,24 @@ const App = (): React.JSX.Element => {
         <Container maxWidth="lg">
           <Box sx={{ mb: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <Typography variant="h5" color="white">
-              {mode === 'edit' ? 'Editor' : 'Preview'}
+              {appStore.mode === 'edit' ? 'Editor' : 'Preview'}
             </Typography>
             <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
               <Chip 
-                label={format.toUpperCase()} 
+                label={appStore.format.toUpperCase()} 
                 color="primary"
                 size="small"
                 sx={{ mr: 1 }}
               />
-              {content && (
+              {appStore.hasContent && (
                 <>
                   <Button
                     variant="outlined"
-                    startIcon={mode === 'edit' ? <PreviewIcon /> : <EditIcon />}
-                    onClick={() => setMode(mode === 'edit' ? 'preview' : 'edit')}
+                    startIcon={appStore.mode === 'edit' ? <PreviewIcon /> : <EditIcon />}
+                    onClick={() => appStore.setMode(appStore.mode === 'edit' ? 'preview' : 'edit')}
                     size="small"
                   >
-                    {mode === 'edit' ? 'Preview' : 'Edit'}
+                    {appStore.mode === 'edit' ? 'Preview' : 'Edit'}
                   </Button>
                   <Button
                     variant="outlined"
@@ -104,7 +119,7 @@ const App = (): React.JSX.Element => {
             </Box>
           </Box>
 
-          {mode === 'edit' ? (
+          {appStore.mode === 'edit' ? (
             <ContentInput onContentChange={handleContentChange} />
           ) : (
             renderPreview()
@@ -113,6 +128,6 @@ const App = (): React.JSX.Element => {
       </Box>
     </Box>
   );
-};
+});
 
 export default App;

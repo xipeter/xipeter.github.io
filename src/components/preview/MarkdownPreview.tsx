@@ -1,7 +1,16 @@
-import { Box, Paper } from '@mui/material';
+// 1. React/core
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+
+// 2. MobX (none needed)
+
+// 3. External libraries (none needed)
+
+// 4. Internal modules (none needed)
+
+// MUI
+import { Paper, Box } from '@mui/material';
 
 interface MarkdownPreviewProps {
   content: string;

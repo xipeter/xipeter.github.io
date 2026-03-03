@@ -1,7 +1,7 @@
-import { fileStore } from './FileStore';
+import { appStore } from './AppStore';
 
 export const stores = {
-  fileStore,
+  appStore,
 };
 
 export type RootStore = typeof stores;
