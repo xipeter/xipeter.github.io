@@ -60,7 +60,7 @@ const App = observer((): React.JSX.Element => {
         return <XmlPreview content={appStore.content} />;
       default:
         return (
-          <Paper sx={{ p: 3, bgcolor: '#1e1e1e', color: '#d4d4d4' }}>
+          <Paper sx={{ p: 3 }}>
             <Typography>Unsupported format</Typography>
           </Paper>
         );
@@ -68,7 +68,7 @@ const App = observer((): React.JSX.Element => {
   };
 
   return (
-    <Box sx={{ display: 'flex', minHeight: '100vh', bgcolor: '#2d2d2d' }}>
+    <Box sx={{ display: 'flex', minHeight: '100vh', bgcolor: 'background.default' }}>
       <Navigation 
         currentFormat={appStore.format} 
         onFormatChange={handleFormatChange} 
@@ -85,7 +85,7 @@ const App = observer((): React.JSX.Element => {
       >
         <Container maxWidth="lg">
           <Box sx={{ mb: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <Typography variant="h5" color="white">
+            <Typography variant="h5" color="text.primary">
               {appStore.mode === 'edit' ? 'Editor' : 'Preview'}
             </Typography>
             <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>

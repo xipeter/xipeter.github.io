@@ -1,7 +1,7 @@
 // 1. React/core
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 // 2. MobX (none needed)
 
@@ -19,20 +19,22 @@ interface MarkdownPreviewProps {
 export const MarkdownPreview = ({ content }: MarkdownPreviewProps): React.JSX.Element => {
   return (
     <Paper 
-      elevation={0} 
+      elevation={0}
       sx={{ 
         p: 3, 
-        bgcolor: '#1e1e1e', 
-        color: '#d4d4d4',
+        bgcolor: '#fafafa',
+        color: '#1d1d1f',
         minHeight: '400px',
-        borderRadius: 2
+        borderRadius: 3,
+        border: '1px solid',
+        borderColor: 'divider',
       }}
     >
       <Box 
         component="div"
         sx={{ 
           '& pre': { margin: 0 },
-          '& code': { fontFamily: 'Consolas, monospace' }
+          '& code': { fontFamily: 'SF Mono, Consolas, monospace' }
         }}
       >
         <ReactMarkdown
@@ -44,17 +46,18 @@ export const MarkdownPreview = ({ content }: MarkdownPreviewProps): React.JSX.El
                 <code 
                   {...props} 
                   style={{ 
-                    backgroundColor: '#2d2d2d', 
+                    backgroundColor: '#f0f0f0', 
                     padding: '2px 6px', 
                     borderRadius: '4px',
-                    fontFamily: 'Consolas, monospace'
+                    fontFamily: 'SF Mono, Consolas, monospace',
+                    fontSize: '0.9em',
                   }}
                 >
                   {children}
                 </code>
               ) : (
                 <SyntaxHighlighter
-                  style={oneDark}
+                  style={oneLight}
                   language={match[1]}
                   PreTag="div"
                 >

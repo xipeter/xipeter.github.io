@@ -53,9 +53,9 @@ export const Navigation = ({ currentFormat, onFormatChange }: NavigationProps): 
   };
 
   const drawer = (
-    <Box sx={{ bgcolor: '#1e1e1e', minHeight: '100%' }}>
+    <Box sx={{ bgcolor: 'background.paper', minHeight: '100%' }}>
       <Toolbar>
-        <MarkEmailReadIcon sx={{ mr: 1 }} />
+        <MarkEmailReadIcon sx={{ mr: 1, color: 'primary.main' }} />
         <Typography variant="h6" noWrap>
           Previewer
         </Typography>
@@ -71,14 +71,18 @@ export const Navigation = ({ currentFormat, onFormatChange }: NavigationProps): 
               }}
               sx={{
                 '&.Mui-selected': {
-                  bgcolor: 'rgba(144, 202, 249, 0.16)',
+                  bgcolor: 'primary.main',
+                  color: 'white',
                   '&:hover': {
-                    bgcolor: 'rgba(144, 202, 249, 0.24)',
+                    bgcolor: 'primary.dark',
+                  },
+                  '& .MuiListItemIcon-root': {
+                    color: 'white',
                   },
                 },
               }}
             >
-              <ListItemIcon sx={{ color: currentFormat === format.id ? '#90caf9' : 'inherit' }}>
+              <ListItemIcon sx={{ color: currentFormat === format.id ? 'inherit' : 'text.secondary' }}>
                 {format.icon}
               </ListItemIcon>
               <ListItemText primary={format.label} />
@@ -96,7 +100,6 @@ export const Navigation = ({ currentFormat, onFormatChange }: NavigationProps): 
         sx={{
           width: { md: `calc(100% - ${drawerWidth}px)` },
           ml: { md: `${drawerWidth}px` },
-          bgcolor: '#1e1e1e',
         }}
       >
         <Toolbar>
@@ -126,7 +129,6 @@ export const Navigation = ({ currentFormat, onFormatChange }: NavigationProps): 
             '& .MuiDrawer-paper': {
               boxSizing: 'border-box',
               width: drawerWidth,
-              borderRight: '1px solid rgba(255,255,255,0.12)',
             },
           }}
         >
