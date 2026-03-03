@@ -1,5 +1,4 @@
-import { useCallback } from 'react';
-import { observer } from 'mobx-react-lite';
+import { useState, useCallback } from 'react';
 import { 
   Box, 
   Container, 
@@ -7,31 +6,35 @@ import {
   AppBar, 
   Toolbar, 
   Paper,
-  Chip
+  Chip,
+  Button
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DescriptionIcon from '@mui/icons-material/Description';
-import { useStores } from './hooks/useStores';
-import { FileUploader } from './components/common/FileUploader';
+import PreviewIcon from '@mui/icons-material/Preview';
+import EditIcon from '@mui/icons-material/Edit';
+import { ContentInput } from './components/common/ContentInput';
 import { MarkdownPreview, JsonPreview, XmlPreview } from './components/preview';
 
-const App = observer(() => {
-  const { fileStore } = useStores();
+const App = (): React.JSX.Element => {
+  const [content, setContent] = useState('');
+  const [format, setFormat] = useState<string>('markdown');
+  const [mode, setMode] = useState<'edit' | 'preview'>('edit');
 
-  const handleFileSelect = useCallback((content: string, fileName: string, mimeType: string) => {
-    fileStore.setFile(content, fileName, mimeType);
-  }, [fileStore]);
+  const handleContentChange = useCallback((newContent: string, newFormat: string) => {
+    setContent(newContent);
+    setFormat(newFormat);
+  }, []);
 
   const handleClear = useCallback(() => {
-    fileStore.clearFile();
-  }, [fileStore]);
+    setContent('');
+    setMode('edit');
+  }, []);
 
   const renderPreview = () => {
-    if (!fileStore.currentFile) return null;
+    if (!content) return null;
 
-    const { content, type } = fileStore.currentFile;
-
-    switch (type) {
+    switch (format) {
       case 'markdown':
         return <MarkdownPreview content={content} />;
       case 'json':
@@ -41,7 +44,7 @@ const App = observer(() => {
       default:
         return (
           <Paper sx={{ p: 3, bgcolor: '#1e1e1e', color: '#d4d4d4' }}>
-            <Typography>Unsupported file type</Typography>
+            <Typography>Unsupported format</Typography>
           </Paper>
         );
     }
@@ -53,41 +56,57 @@ const App = observer(() => {
         <Toolbar>
           <DescriptionIcon sx={{ mr: 2 }} />
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            File Previewer
+            Content Previewer
           </Typography>
-          {fileStore.currentFile && (
+          {content && (
             <Chip 
-              label={fileStore.currentFile.name} 
-              onDelete={handleClear}
-              deleteIcon={<DeleteIcon />}
+              label={format.toUpperCase()} 
               color="primary"
               variant="outlined"
+              sx={{ mr: 1 }}
             />
           )}
         </Toolbar>
       </AppBar>
 
       <Container maxWidth="lg" sx={{ py: 4 }}>
-        {!fileStore.currentFile ? (
-          <FileUploader onFileSelect={handleFileSelect} />
-        ) : (
-          <Box>
-            <Box sx={{ mb: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <Typography variant="h5" color="white">
-                {fileStore.currentFile.name}
-              </Typography>
-              <Chip 
-                label={fileStore.currentFile.type.toUpperCase()} 
-                color="secondary"
-                size="small"
-              />
-            </Box>
-            {renderPreview()}
+        <Box sx={{ mb: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <Typography variant="h5" color="white">
+            {mode === 'edit' ? 'Editor' : 'Preview'}
+          </Typography>
+          <Box sx={{ display: 'flex', gap: 1 }}>
+            {content && (
+              <>
+                <Button
+                  variant="outlined"
+                  startIcon={mode === 'edit' ? <PreviewIcon /> : <EditIcon />}
+                  onClick={() => setMode(mode === 'edit' ? 'preview' : 'edit')}
+                  size="small"
+                >
+                  {mode === 'edit' ? 'Preview' : 'Edit'}
+                </Button>
+                <Button
+                  variant="outlined"
+                  color="error"
+                  startIcon={<DeleteIcon />}
+                  onClick={handleClear}
+                  size="small"
+                >
+                  Clear
+                </Button>
+              </>
+            )}
           </Box>
+        </Box>
+
+        {mode === 'edit' ? (
+          <ContentInput onContentChange={handleContentChange} />
+        ) : (
+          renderPreview()
         )}
       </Container>
     </Box>
   );
-});
+};
 
 export default App;
