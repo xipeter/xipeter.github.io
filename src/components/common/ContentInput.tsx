@@ -45,6 +45,7 @@ export const ContentInput = ({ onContentChange }: ContentInputProps): React.JSX.
           <ToggleButton value="markdown">Markdown</ToggleButton>
           <ToggleButton value="json">JSON</ToggleButton>
           <ToggleButton value="xml">XML</ToggleButton>
+          <ToggleButton value="diff">Diff</ToggleButton>
         </ToggleButtonGroup>
 
         <TextField

@@ -1,10 +1,11 @@
 import { makeAutoObservable } from 'mobx';
 
-export type FormatType = 'markdown' | 'json' | 'xml';
+export type FormatType = 'markdown' | 'json' | 'xml' | 'diff';
 export type ModeType = 'edit' | 'preview';
 
 class AppStore {
   content = '';
+  diffContent = ''; // Second content for diff comparison
   format: FormatType = 'markdown';
   mode: ModeType = 'edit';
 
@@ -14,6 +15,10 @@ class AppStore {
 
   setContent(newContent: string): void {
     this.content = newContent;
+  }
+
+  setDiffContent(newContent: string): void {
+    this.diffContent = newContent;
   }
 
   setFormat(newFormat: FormatType): void {
@@ -26,6 +31,7 @@ class AppStore {
 
   clear(): void {
     this.content = '';
+    this.diffContent = '';
     this.mode = 'edit';
   }
 

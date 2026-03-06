@@ -29,6 +29,7 @@ import DescriptionIcon from '@mui/icons-material/Description';
 import CodeIcon from '@mui/icons-material/Code';
 import DataObjectIcon from '@mui/icons-material/DataObject';
 import MarkEmailReadIcon from '@mui/icons-material/MarkEmailRead';
+import DifferenceIcon from '@mui/icons-material/Difference';
 
 const drawerWidth = 240;
 
@@ -41,6 +42,7 @@ const formats = [
   { id: 'markdown', label: 'Markdown', icon: <DescriptionIcon /> },
   { id: 'json', label: 'JSON', icon: <DataObjectIcon /> },
   { id: 'xml', label: 'XML', icon: <CodeIcon /> },
+  { id: 'diff', label: 'Diff', icon: <DifferenceIcon /> },
 ];
 
 export const Navigation = ({ currentFormat, onFormatChange }: NavigationProps): React.JSX.Element => {

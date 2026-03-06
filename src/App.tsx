@@ -11,7 +11,7 @@ import { useCallback } from 'react';
 // 4. Internal modules
 import { Navigation, drawerWidth } from './components/common/Navigation';
 import { ContentInput } from './components/common/ContentInput';
-import { MarkdownPreview, JsonPreview, XmlPreview } from './components/preview';
+import { MarkdownPreview, JsonPreview, XmlPreview, DiffViewer } from './components/preview';
 
 // 5. Types
 import type { FormatType } from './stores/AppStore';
@@ -49,6 +49,11 @@ const App = observer((): React.JSX.Element => {
   }, [appStore]);
 
   const renderPreview = () => {
+    // Diff mode has its own input UI
+    if (appStore.format === 'diff') {
+      return <DiffViewer />;
+    }
+
     if (!appStore.content) return null;
 
     switch (appStore.format) {
@@ -86,7 +91,7 @@ const App = observer((): React.JSX.Element => {
         <Container maxWidth="lg">
           <Box sx={{ mb: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <Typography variant="h5" color="text.primary">
-              {appStore.mode === 'edit' ? 'Editor' : 'Preview'}
+              {appStore.format === 'diff' ? 'Diff Viewer' : appStore.mode === 'edit' ? 'Editor' : 'Preview'}
             </Typography>
             <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
               <Chip 
@@ -95,7 +100,7 @@ const App = observer((): React.JSX.Element => {
                 size="small"
                 sx={{ mr: 1 }}
               />
-              {appStore.hasContent && (
+              {appStore.hasContent && appStore.format !== 'diff' && (
                 <>
                   <Button
                     variant="outlined"
@@ -105,21 +110,25 @@ const App = observer((): React.JSX.Element => {
                   >
                     {appStore.mode === 'edit' ? 'Preview' : 'Edit'}
                   </Button>
-                  <Button
-                    variant="outlined"
-                    color="error"
-                    startIcon={<DeleteIcon />}
-                    onClick={handleClear}
-                    size="small"
-                  >
-                    Clear
-                  </Button>
                 </>
+              )}
+              {(appStore.hasContent || appStore.format === 'diff') && (
+                <Button
+                  variant="outlined"
+                  color="error"
+                  startIcon={<DeleteIcon />}
+                  onClick={handleClear}
+                  size="small"
+                >
+                  Clear
+                </Button>
               )}
             </Box>
           </Box>
 
-          {appStore.mode === 'edit' ? (
+          {appStore.format === 'diff' ? (
+            <DiffViewer />
+          ) : appStore.mode === 'edit' ? (
             <ContentInput onContentChange={handleContentChange} />
           ) : (
             renderPreview()
