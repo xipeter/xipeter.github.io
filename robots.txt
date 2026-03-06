@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://xipeter.github.io/sitemap.xml
