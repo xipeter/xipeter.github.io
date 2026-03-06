@@ -14,6 +14,15 @@
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#1976d2" />
 
+    <!-- Alternate Languages (hreflang) -->
+    <link rel="alternate" hreflang="en" href="https://xipeter.github.io/" />
+    <link rel="alternate" hreflang="zh" href="https://xipeter.github.io/?lang=zh" />
+    <link rel="alternate" hreflang="es" href="https://xipeter.github.io/?lang=es" />
+    <link rel="alternate" hreflang="ja" href="https://xipeter.github.io/?lang=ja" />
+    <link rel="alternate" hreflang="de" href="https://xipeter.github.io/?lang=de" />
+    <link rel="alternate" hreflang="fr" href="https://xipeter.github.io/?lang=fr" />
+    <link rel="alternate" hreflang="x-default" href="https://xipeter.github.io/" />
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://xipeter.github.io/" />
@@ -21,6 +30,12 @@
     <meta property="og:description" content="Preview Markdown, JSON, XML and compare differences side-by-side. A developer-friendly content previewer with syntax highlighting." />
     <meta property="og:image" content="https://xipeter.github.io/preview.png" />
     <meta property="og:site_name" content="Content Previewer" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="zh_CN" />
+    <meta property="og:locale:alternate" content="es_ES" />
+    <meta property="og:locale:alternate" content="ja_JP" />
+    <meta property="og:locale:alternate" content="de_DE" />
+    <meta property="og:locale:alternate" content="fr_FR" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -35,13 +50,13 @@
     <!-- Google Site Verification -->
     <meta name="google-site-verification" content="El7FegUXX9M8Rxz07_fyGiqNIB8YgccDqWbpuH5AZxI" />
 
-    <!-- Structured Data -->
+    <!-- Structured Data - WebApplication -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
       "name": "Content Previewer",
-      "description": "Preview Markdown, JSON, XML and compare differences side-by-side",
+      "description": "Preview Markdown, JSON, XML and compare differences side-by-side. A developer-friendly content previewer with syntax highlighting.",
       "url": "https://xipeter.github.io/",
       "applicationCategory": "DeveloperApplication",
       "operatingSystem": "Web Browser",
@@ -53,8 +68,37 @@
         "Markdown Preview",
         "JSON Preview",
         "XML Preview",
-        "Diff Comparison"
-      ]
+        "Diff Comparison",
+        "Syntax Highlighting",
+        "Multi-language Support"
+      ],
+      "browserRequirements": "Requires JavaScript. Works in all modern browsers.",
+      "softwareVersion": "1.0.0",
+      "dateModified": "2026-03-06",
+      "inLanguage": ["en", "zh", "es", "ja", "de", "fr"]
+    }
+    </script>
+
+    <!-- Structured Data - BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://xipeter.github.io/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Tools",
+        "item": "https://xipeter.github.io/"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Content Previewer"
+      }]
     }
     </script>
 

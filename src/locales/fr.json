@@ -1,0 +1,35 @@
+{
+  "app": {
+    "title": "Aperçu de Contenu",
+    "subtitle": "Visualiseur Markdown JSON XML Diff"
+  },
+  "nav": {
+    "markdown": "Markdown",
+    "json": "JSON",
+    "xml": "XML",
+    "diff": "Diff",
+    "language": "Langue"
+  },
+  "editor": "Éditeur",
+  "preview": "Aperçu",
+  "clear": "Effacer",
+  "input": {
+    "placeholder": "Entrez votre contenu ici...",
+    "diffPlaceholder": "Entrez le contenu original...",
+    "diffPlaceholderNew": "Entrez le contenu modifié..."
+  },
+  "formats": {
+    "markdown": "Markdown",
+    "json": "JSON",
+    "xml": "XML",
+    "diff": "Diff"
+  },
+  "errors": {
+    "invalidJson": "Format JSON invalide",
+    "invalidXml": "Format XML invalide",
+    "emptyContent": "Veuillez entrer du contenu"
+  },
+  "seo": {
+    "description": "Aperçu Markdown, JSON, XML et comparaison des différences côte à côte. Un visualiseur de contenu pour développeurs avec coloration syntaxique."
+  }
+}

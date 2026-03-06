@@ -1,5 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { useStores } from './hooks/useStores';
+import { useTranslation } from 'react-i18next';
 
 // 1. React/core
 import { useCallback } from 'react';
@@ -31,6 +32,7 @@ import EditIcon from '@mui/icons-material/Edit';
 
 const App = observer((): React.JSX.Element => {
   const { appStore } = useStores();
+  const { t } = useTranslation();
 
   const handleContentChange = useCallback((newContent: string, newFormat: string) => {
     appStore.setContent(newContent);
@@ -72,6 +74,11 @@ const App = observer((): React.JSX.Element => {
     }
   };
 
+  const getTitle = () => {
+    if (appStore.format === 'diff') return t('nav.diff');
+    return appStore.mode === 'edit' ? t('editor') : t('preview');
+  };
+
   return (
     <Box sx={{ display: 'flex', minHeight: '100vh', bgcolor: 'background.default' }}>
       <Navigation 
@@ -91,7 +98,7 @@ const App = observer((): React.JSX.Element => {
         <Container maxWidth="lg">
           <Box sx={{ mb: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <Typography variant="h5" color="text.primary">
-              {appStore.format === 'diff' ? 'Diff Viewer' : appStore.mode === 'edit' ? 'Editor' : 'Preview'}
+              {getTitle()}
             </Typography>
             <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
               <Chip 
@@ -108,7 +115,7 @@ const App = observer((): React.JSX.Element => {
                     onClick={() => appStore.setMode(appStore.mode === 'edit' ? 'preview' : 'edit')}
                     size="small"
                   >
-                    {appStore.mode === 'edit' ? 'Preview' : 'Edit'}
+                    {appStore.mode === 'edit' ? t('preview') : t('editor')}
                   </Button>
                 </>
               )}
@@ -120,7 +127,7 @@ const App = observer((): React.JSX.Element => {
                   onClick={handleClear}
                   size="small"
                 >
-                  Clear
+                  {t('clear')}
                 </Button>
               )}
             </Box>

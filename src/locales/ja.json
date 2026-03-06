@@ -1,0 +1,35 @@
+{
+  "app": {
+    "title": "コンテンツプレビューアー",
+    "subtitle": "Markdown JSON XML 差分ビューアー"
+  },
+  "nav": {
+    "markdown": "Markdown",
+    "json": "JSON",
+    "xml": "XML",
+    "diff": "差分",
+    "language": "言語"
+  },
+  "editor": "エディター",
+  "preview": "プレビュー",
+  "clear": "クリア",
+  "input": {
+    "placeholder": "ここに内容を入力...",
+    "diffPlaceholder": "元のコンテンツを入力...",
+    "diffPlaceholderNew": "変更後のコンテンツを入力..."
+  },
+  "formats": {
+    "markdown": "Markdown",
+    "json": "JSON",
+    "xml": "XML",
+    "diff": "差分"
+  },
+  "errors": {
+    "invalidJson": "無効なJSON形式",
+    "invalidXml": "無効なXML形式",
+    "emptyContent": "コンテンツを入力してください"
+  },
+  "seo": {
+    "description": "Markdown、JSON、XMLをプレビューし、差分を比較。シンタックスハイライト付きの開発者向けコンテンツプレビューアー。"
+  }
+}

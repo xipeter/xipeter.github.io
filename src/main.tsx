@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
 import { StoreProvider } from './contexts/StoreContext';
 import App from './App';
+import './i18n';
 
 const lightTheme = createTheme({
   palette: {

@@ -1,0 +1,35 @@
+{
+  "app": {
+    "title": "内容预览器",
+    "subtitle": "Markdown JSON XML 对比查看器"
+  },
+  "nav": {
+    "markdown": "Markdown",
+    "json": "JSON",
+    "xml": "XML",
+    "diff": "差异对比",
+    "language": "语言"
+  },
+  "editor": "编辑器",
+  "preview": "预览",
+  "clear": "清空",
+  "input": {
+    "placeholder": "在此输入内容...",
+    "diffPlaceholder": "输入原始内容...",
+    "diffPlaceholderNew": "输入修改后的内容..."
+  },
+  "formats": {
+    "markdown": "Markdown",
+    "json": "JSON",
+    "xml": "XML",
+    "diff": "差异对比"
+  },
+  "errors": {
+    "invalidJson": "无效的 JSON 格式",
+    "invalidXml": "无效的 XML 格式",
+    "emptyContent": "请输入内容"
+  },
+  "seo": {
+    "description": "预览 Markdown、JSON、XML 并进行差异对比。一个支持语法高亮的开发者友好型内容预览器和差异比较工具。"
+  }
+}

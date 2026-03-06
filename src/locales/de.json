@@ -1,0 +1,35 @@
+{
+  "app": {
+    "title": "Inhaltsvorschau",
+    "subtitle": "Markdown JSON XML Diff-Viewer"
+  },
+  "nav": {
+    "markdown": "Markdown",
+    "json": "JSON",
+    "xml": "XML",
+    "diff": "Diff",
+    "language": "Sprache"
+  },
+  "editor": "Editor",
+  "preview": "Vorschau",
+  "clear": "Löschen",
+  "input": {
+    "placeholder": "Inhalt hier eingeben...",
+    "diffPlaceholder": "Originalinhalt eingeben...",
+    "diffPlaceholderNew": "Geänderten Inhalt eingeben..."
+  },
+  "formats": {
+    "markdown": "Markdown",
+    "json": "JSON",
+    "xml": "XML",
+    "diff": "Diff"
+  },
+  "errors": {
+    "invalidJson": "Ungültiges JSON-Format",
+    "invalidXml": "Ungültiges XML-Format",
+    "emptyContent": "Bitte Inhalt eingeben"
+  },
+  "seo": {
+    "description": "Markdown, JSON, XML Vorschau und Diff-Vergleich nebeneinander. Ein entwicklerfreundlicher Content-Previewer mit Syntax-Hervorhebung."
+  }
+}

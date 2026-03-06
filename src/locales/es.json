@@ -1,0 +1,35 @@
+{
+  "app": {
+    "title": "Visor de Contenido",
+    "subtitle": "Visor Markdown JSON XML Diff"
+  },
+  "nav": {
+    "markdown": "Markdown",
+    "json": "JSON",
+    "xml": "XML",
+    "diff": "Diff",
+    "language": "Idioma"
+  },
+  "editor": "Editor",
+  "preview": "Vista previa",
+  "clear": "Limpiar",
+  "input": {
+    "placeholder": "Ingresa tu contenido aquí...",
+    "diffPlaceholder": "Ingresa el contenido original...",
+    "diffPlaceholderNew": "Ingresa el contenido modificado..."
+  },
+  "formats": {
+    "markdown": "Markdown",
+    "json": "JSON",
+    "xml": "XML",
+    "diff": "Diff"
+  },
+  "errors": {
+    "invalidJson": "Formato JSON inválido",
+    "invalidXml": "Formato XML inválido",
+    "emptyContent": "Por favor ingresa contenido"
+  },
+  "seo": {
+    "description": "Vista previa de Markdown, JSON, XML y comparación de diferencias lado a lado. Un visor de contenido para desarrolladores con resaltado de sintaxis."
+  }
+}

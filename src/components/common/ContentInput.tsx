@@ -1,5 +1,6 @@
 // 1. React/core
 import { useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 
 // 2. MobX (none needed)
 
@@ -17,6 +18,7 @@ interface ContentInputProps {
 }
 
 export const ContentInput = ({ onContentChange }: ContentInputProps): React.JSX.Element => {
+  const { t } = useTranslation();
   const { appStore } = useStores();
 
   const handleContentChange = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -42,17 +44,17 @@ export const ContentInput = ({ onContentChange }: ContentInputProps): React.JSX.
           aria-label="content format"
           size="small"
         >
-          <ToggleButton value="markdown">Markdown</ToggleButton>
-          <ToggleButton value="json">JSON</ToggleButton>
-          <ToggleButton value="xml">XML</ToggleButton>
-          <ToggleButton value="diff">Diff</ToggleButton>
+          <ToggleButton value="markdown">{t('nav.markdown')}</ToggleButton>
+          <ToggleButton value="json">{t('nav.json')}</ToggleButton>
+          <ToggleButton value="xml">{t('nav.xml')}</ToggleButton>
+          <ToggleButton value="diff">{t('nav.diff')}</ToggleButton>
         </ToggleButtonGroup>
 
         <TextField
           multiline
           rows={15}
           fullWidth
-          placeholder={`Paste your ${appStore.format} content here...`}
+          placeholder={t('input.placeholder')}
           value={appStore.content}
           onChange={handleContentChange}
           sx={{
