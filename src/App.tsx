@@ -3,7 +3,7 @@ import { useStores } from './hooks/useStores';
 import { useTranslation } from 'react-i18next';
 
 // 1. React/core
-import { useCallback } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 
 // 2. MobX (already imported above)
 
@@ -34,6 +34,19 @@ import EditIcon from '@mui/icons-material/Edit';
 const App = observer((): React.JSX.Element => {
   const { appStore } = useStores();
   const { t } = useTranslation();
+  const [cookieConsent, setCookieConsent] = useState(false);
+
+  useEffect(() => {
+    const consent = localStorage.getItem('cookieConsent');
+    if (consent) {
+      setCookieConsent(true);
+    }
+  }, []);
+
+  const handleAcceptCookies = useCallback(() => {
+    localStorage.setItem('cookieConsent', 'accepted');
+    setCookieConsent(true);
+  }, []);
 
   const handleContentChange = useCallback((newContent: string, newFormat: string) => {
     appStore.setContent(newContent);
@@ -82,6 +95,33 @@ const App = observer((): React.JSX.Element => {
 
   return (
     <Box sx={{ display: 'flex', minHeight: '100vh', bgcolor: 'background.default' }}>
+      {!cookieConsent && (
+        <Paper
+          sx={{
+            position: 'fixed',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            p: 2,
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            zIndex: 9999,
+            bgcolor: 'background.paper',
+            borderTop: 1,
+            borderColor: 'divider'
+          }}
+          elevation={3}
+        >
+          <Typography variant="body2" color="text.secondary">
+            This website uses cookies and Google AdSense to deliver a better user experience. By continuing to use this site, you agree to our use of cookies. 
+            <Link href="/privacy-policy.html" sx={{ ml: 1 }}>Learn more</Link>
+          </Typography>
+          <Button variant="contained" size="small" onClick={handleAcceptCookies} sx={{ ml: 2 }}>
+            Got it
+          </Button>
+        </Paper>
+      )}
       <Navigation 
         currentFormat={appStore.format} 
         onFormatChange={handleFormatChange} 

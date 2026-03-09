@@ -34,6 +34,9 @@ import DataObjectIcon from '@mui/icons-material/DataObject';
 import MarkEmailReadIcon from '@mui/icons-material/MarkEmailRead';
 import DifferenceIcon from '@mui/icons-material/Difference';
 import LanguageIcon from '@mui/icons-material/Language';
+import InfoIcon from '@mui/icons-material/Info';
+import ContactPageIcon from '@mui/icons-material/ContactPage';
+import PrivacyTipIcon from '@mui/icons-material/PrivacyTip';
 
 const drawerWidth = 240;
 
@@ -119,6 +122,42 @@ export const Navigation = ({ currentFormat, onFormatChange }: NavigationProps): 
             </ListItemButton>
           </ListItem>
         ))}
+        <ListItem disablePadding sx={{ mt: 2 }}>
+          <ListItemButton
+            component="a"
+            href="/about.html"
+            target="_blank"
+          >
+            <ListItemIcon sx={{ color: 'text.secondary' }}>
+              <InfoIcon />
+            </ListItemIcon>
+            <ListItemText primary="About" />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton
+            component="a"
+            href="/contact.html"
+            target="_blank"
+          >
+            <ListItemIcon sx={{ color: 'text.secondary' }}>
+              <ContactPageIcon />
+            </ListItemIcon>
+            <ListItemText primary="Contact" />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton
+            component="a"
+            href="/privacy-policy.html"
+            target="_blank"
+          >
+            <ListItemIcon sx={{ color: 'text.secondary' }}>
+              <PrivacyTipIcon />
+            </ListItemIcon>
+            <ListItemText primary="Privacy Policy" />
+          </ListItemButton>
+        </ListItem>
       </List>
     </Box>
   );
