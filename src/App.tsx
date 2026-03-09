@@ -24,7 +24,8 @@ import {
   Typography, 
   Paper,
   Chip,
-  Button
+  Button,
+  Link
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import PreviewIcon from '@mui/icons-material/Preview';
@@ -140,6 +141,27 @@ const App = observer((): React.JSX.Element => {
           ) : (
             renderPreview()
           )}
+
+          <Box
+            component="footer"
+            sx={{
+              mt: 6,
+              pt: 3,
+              pb: 2,
+              borderTop: 1,
+              borderColor: 'divider',
+              textAlign: 'center'
+            }}
+          >
+            <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
+              <Link href="/about.html" sx={{ mr: 2 }}>About</Link>
+              <Link href="/contact.html" sx={{ mr: 2 }}>Contact</Link>
+              <Link href="/privacy-policy.html">Privacy Policy</Link>
+            </Typography>
+            <Typography variant="caption" color="text.secondary">
+              © 2026. All rights reserved.
+            </Typography>
+          </Box>
         </Container>
       </Box>
     </Box>
