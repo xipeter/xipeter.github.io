@@ -13,6 +13,8 @@
   "editor": "Editor",
   "preview": "Vorschau",
   "clear": "Löschen",
+  "copy": "Kopieren",
+  "copied": "Kopiert!",
   "input": {
     "placeholder": "Inhalt hier eingeben...",
     "diffPlaceholder": "Originalinhalt eingeben...",

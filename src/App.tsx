@@ -3,7 +3,7 @@ import { useStores } from './hooks/useStores';
 import { useTranslation } from 'react-i18next';
 
 // 1. React/core
-import { useCallback, useState, useEffect } from 'react';
+import { useCallback, useState, useEffect, useRef } from 'react';
 
 // 2. MobX (already imported above)
 
@@ -30,11 +30,14 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete';
 import PreviewIcon from '@mui/icons-material/Preview';
 import EditIcon from '@mui/icons-material/Edit';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 const App = observer((): React.JSX.Element => {
   const { appStore } = useStores();
   const { t } = useTranslation();
   const [cookieConsent, setCookieConsent] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const copyTimeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
     const consent = localStorage.getItem('cookieConsent');
@@ -63,6 +66,19 @@ const App = observer((): React.JSX.Element => {
   const handleClear = useCallback(() => {
     appStore.clear();
   }, [appStore]);
+
+  const handleCopy = useCallback(() => {
+    if (appStore.content) {
+      navigator.clipboard.writeText(appStore.content);
+      setCopied(true);
+      if (copyTimeoutRef.current) {
+        clearTimeout(copyTimeoutRef.current);
+      }
+      copyTimeoutRef.current = window.setTimeout(() => {
+        setCopied(false);
+      }, 2000);
+    }
+  }, [appStore.content]);
 
   const renderPreview = () => {
     // Diff mode has its own input UI
@@ -158,6 +174,17 @@ const App = observer((): React.JSX.Element => {
                   >
                     {appStore.mode === 'edit' ? t('preview') : t('editor')}
                   </Button>
+                  {appStore.mode === 'preview' && (
+                    <Button
+                      variant="outlined"
+                      startIcon={copied ? null : <ContentCopyIcon />}
+                      onClick={handleCopy}
+                      size="small"
+                      color={copied ? 'success' : 'primary'}
+                    >
+                      {copied ? t('copied') || 'Copied!' : t('copy') || 'Copy'}
+                    </Button>
+                  )}
                 </>
               )}
               {(appStore.hasContent || appStore.format === 'diff') && (

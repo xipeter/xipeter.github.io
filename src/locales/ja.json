@@ -13,6 +13,8 @@
   "editor": "エディター",
   "preview": "プレビュー",
   "clear": "クリア",
+  "copy": "コピー",
+  "copied": "コピーしました!",
   "input": {
     "placeholder": "ここに内容を入力...",
     "diffPlaceholder": "元のコンテンツを入力...",
