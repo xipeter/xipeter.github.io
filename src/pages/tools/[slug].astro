@@ -1,0 +1,201 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const tools = await getCollection('tools');
+  return tools.map(tool => ({
+    params: { slug: tool.slug },
+    props: { tool }
+  }));
+}
+
+const { tool } = Astro.props;
+const { Content } = await tool.render();
+---
+
+<MainLayout 
+  title={tool.data.seo?.title || tool.data.title} 
+  description={tool.data.seo?.description || tool.data.intro}
+  pageType="tool"
+>
+  <article class="tool-page">
+    <header class="tool-header">
+      <span class="category-tag">{tool.data.category}</span>
+      <h1>{tool.data.title}</h1>
+      <p class="intro">{tool.data.intro}</p>
+    </header>
+
+    <section class="tool-content">
+      <Content />
+    </section>
+
+    <aside class="tool-sidebar">
+      <div class="features-box">
+        <h3>Features</h3>
+        <ul>
+          {tool.data.features.map(f => (
+            <li>{f}</li>
+          ))}
+        </ul>
+      </div>
+
+      {tool.data.limitations && (
+        <div class="limitations-box">
+          <h3>Limitations</h3>
+          <ul>
+            {tool.data.limitations.map(l => (
+              <li>{l}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {tool.data.faq && (
+        <div class="faq-box">
+          <h3>FAQ</h3>
+          {tool.data.faq.map(faq => (
+            <div class="faq-item">
+              <strong>{faq.question}</strong>
+              <p>{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+      )}
+    </aside>
+  </article>
+</MainLayout>
+
+<style>
+  .tool-page {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: var(--spacing-xl);
+  }
+
+  .tool-header {
+    grid-column: 1 / -1;
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .category-tag {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .tool-header h1 {
+    font-size: 2rem;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .intro {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+  }
+
+  .tool-content {
+    min-width: 0;
+  }
+
+  .tool-content :global(h2) {
+    font-size: 1.5rem;
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+    color: var(--primary);
+  }
+
+  .tool-content :global(h3) {
+    font-size: 1.25rem;
+    margin-top: var(--spacing-lg);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .tool-content :global(p) {
+    line-height: 1.7;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .tool-content :global(ul), .tool-content :global(ol) {
+    padding-left: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .tool-content :global(li) {
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .tool-content :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--spacing-lg) 0;
+  }
+
+  .tool-content :global(th), .tool-content :global(td) {
+    padding: var(--spacing-sm);
+    border: 1px solid var(--border);
+    text-align: left;
+  }
+
+  .tool-content :global(th) {
+    background: var(--bg-secondary);
+  }
+
+  .tool-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
+
+  .features-box, .limitations-box, .faq-box {
+    background: var(--bg-secondary);
+    padding: var(--spacing-lg);
+    border-radius: 8px;
+  }
+
+  .features-box h3, .limitations-box h3, .faq-box h3 {
+    font-size: 1rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--primary);
+  }
+
+  .features-box ul, .limitations-box ul {
+    padding-left: var(--spacing-lg);
+    font-size: 0.875rem;
+  }
+
+  .features-box li, .limitations-box li {
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .faq-item {
+    margin-bottom: var(--spacing-md);
+    font-size: 0.875rem;
+  }
+
+  .faq-item strong {
+    display: block;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .faq-item p {
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  @media (max-width: 900px) {
+    .tool-page {
+      grid-template-columns: 1fr;
+    }
+
+    .tool-sidebar {
+      order: -1;
+    }
+  }
+</style>
