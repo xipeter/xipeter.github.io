@@ -25,7 +25,11 @@ import {
   Paper,
   Chip,
   Button,
-  Link
+  Link,
+  Grid,
+  Card,
+  CardContent,
+  Divider
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import PreviewIcon from '@mui/icons-material/Preview';
@@ -108,6 +112,80 @@ const App = observer((): React.JSX.Element => {
     if (appStore.format === 'diff') return t('nav.diff');
     return appStore.mode === 'edit' ? t('editor') : t('preview');
   };
+
+  const renderWelcome = () => (
+    <Paper elevation={0} sx={{ p: 4, bgcolor: 'background.paper', borderRadius: 2, mb: 3 }}>
+      <Typography variant="h4" component="h1" gutterBottom sx={{ fontWeight: 600 }}>
+        Content Previewer
+      </Typography>
+      <Typography variant="body1" color="text.secondary" sx={{ mb: 3, maxWidth: 800 }}>
+        A free online tool to preview and validate Markdown, JSON, and XML content. 
+        Compare differences between two versions with the built-in diff viewer. 
+        Perfect for developers, technical writers, and anyone working with structured content.
+      </Typography>
+      
+      <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>What you can do with this tool:</Typography>
+      <Grid container spacing={2} sx={{ mb: 3 }}>
+        <Grid size={{ xs: 12, md: 6 }}>
+          <Card variant="outlined" sx={{ height: '100%' }}>
+            <CardContent>
+              <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>Markdown Preview</Typography>
+              <Typography variant="body2" color="text.secondary">
+                Preview Markdown with syntax highlighting for code blocks. See how headings, lists, links, and formatting will render in real-time.
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid size={{ xs: 12, md: 6 }}>
+          <Card variant="outlined" sx={{ height: '100%' }}>
+            <CardContent>
+              <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>JSON Preview</Typography>
+              <Typography variant="body2" color="text.secondary">
+                Validate and format JSON with pretty printing. Quickly spot syntax errors and see the structure of your data.
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid size={{ xs: 12, md: 6 }}>
+          <Card variant="outlined" sx={{ height: '100%' }}>
+            <CardContent>
+              <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>XML Preview</Typography>
+              <Typography variant="body2" color="text.secondary">
+                Parse and validate XML documents. Check well-formedness and view the hierarchical structure.
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid size={{ xs: 12, md: 6 }}>
+          <Card variant="outlined" sx={{ height: '100%' }}>
+            <CardContent>
+              <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>Diff Comparison</Typography>
+              <Typography variant="body2" color="text.secondary">
+                Compare two versions of text side-by-side. Highlight additions, deletions, and changes with color-coded diffs.
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
+
+      <Divider sx={{ my: 3 }} />
+      
+      <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>How to use:</Typography>
+      <Box component="ol" sx={{ pl: 2, color: 'text.secondary' }}>
+        <li><Typography variant="body2" sx={{ mb: 1 }}>Select a format from the sidebar (Markdown, JSON, XML, or Diff)</Typography></li>
+        <li><Typography variant="body2" sx={{ mb: 1 }}>Enter or paste your content in the editor</Typography></li>
+        <li><Typography variant="body2" sx={{ mb: 1 }}>Click "Preview" to see how your content will render</Typography></li>
+        <li><Typography variant="body2" sx={{ mb: 1 }}>Use "Copy" to copy the content to your clipboard</Typography></li>
+        <li><Typography variant="body2">Use "Clear" to reset and start fresh</Typography></li>
+      </Box>
+
+      <Box sx={{ mt: 3, p: 2, bgcolor: 'action.hover', borderRadius: 1 }}>
+        <Typography variant="body2" color="text.secondary">
+          <strong>Tip:</strong> Select a format from the sidebar to get started. The editor supports syntax highlighting and will validate your content as you type.
+        </Typography>
+      </Box>
+    </Paper>
+  );
 
   return (
     <Box sx={{ display: 'flex', minHeight: '100vh', bgcolor: 'background.default' }}>
@@ -203,6 +281,8 @@ const App = observer((): React.JSX.Element => {
 
           {appStore.format === 'diff' ? (
             <DiffViewer />
+          ) : !appStore.hasContent ? (
+            renderWelcome()
           ) : appStore.mode === 'edit' ? (
             <ContentInput onContentChange={handleContentChange} />
           ) : (
@@ -223,6 +303,8 @@ const App = observer((): React.JSX.Element => {
             <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
               <Link href="/about.html" sx={{ mr: 2 }}>About</Link>
               <Link href="/contact.html" sx={{ mr: 2 }}>Contact</Link>
+              <Link href="/faq.html" sx={{ mr: 2 }}>FAQ</Link>
+              <Link href="/terms-of-service.html" sx={{ mr: 2 }}>Terms of Service</Link>
               <Link href="/privacy-policy.html">Privacy Policy</Link>
             </Typography>
             <Typography variant="caption" color="text.secondary">

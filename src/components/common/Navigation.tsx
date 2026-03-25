@@ -37,6 +37,8 @@ import LanguageIcon from '@mui/icons-material/Language';
 import InfoIcon from '@mui/icons-material/Info';
 import ContactPageIcon from '@mui/icons-material/ContactPage';
 import PrivacyTipIcon from '@mui/icons-material/PrivacyTip';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import PolicyIcon from '@mui/icons-material/Policy';
 
 const drawerWidth = 240;
 
@@ -156,6 +158,30 @@ export const Navigation = ({ currentFormat, onFormatChange }: NavigationProps): 
               <PrivacyTipIcon />
             </ListItemIcon>
             <ListItemText primary="Privacy Policy" />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton
+            component="a"
+            href="/faq.html"
+            target="_blank"
+          >
+            <ListItemIcon sx={{ color: 'text.secondary' }}>
+              <HelpOutlineIcon />
+            </ListItemIcon>
+            <ListItemText primary="FAQ" />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton
+            component="a"
+            href="/terms-of-service.html"
+            target="_blank"
+          >
+            <ListItemIcon sx={{ color: 'text.secondary' }}>
+              <PolicyIcon />
+            </ListItemIcon>
+            <ListItemText primary="Terms" />
           </ListItemButton>
         </ListItem>
       </List>
