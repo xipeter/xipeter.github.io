@@ -1,0 +1,77 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import { getCollection } from 'astro:content';
+
+const news = await getCollection('news');
+const sortedNews = news
+  .sort((a, b) => new Date(b.data.reviewedAt).getTime() - new Date(a.data.reviewedAt).getTime());
+
+const topics = [...new Set(news.map(n => n.data.topic))];
+---
+
+<MainLayout title="Tech News" description="Curated tech news with analysis and context." pageType="news">
+  <h1>Tech News</h1>
+  <p class="intro">Curated tech news with original summaries and analysis. We don't just aggregate—we explain why it matters.</p>
+
+  <div class="filters">
+    <span class="filter-label">Topics:</span>
+    <a href="/news" class="filter-tag active">All</a>
+    {topics.map(topic => (
+      <a href={`/news/${topic}`} class="filter-tag">{topic}</a>
+    ))}
+  </div>
+
+  <div class="news-list">
+    {sortedNews.map(item => (
+      <article class="news-item">
+        <span class="topic-tag">{item.data.topic}</span>
+        <a href={`/news/${item.slug}`}>
+          <h2>{item.data.title}</h2>
+        </a>
+        <p class="summary">{item.data.summary}</p>
+        <p class="why-it-matters"><strong>Why it matters:</strong> {item.data.whyItMatters}</p>
+        <div class="meta">
+          <span class="source">Source: {item.data.sourceName}</span>
+          <span class="date">{new Date(item.data.sourcePublishedAt).toLocaleDateString()}</span>
+          <span class="reviewed">Reviewed: {new Date(item.data.reviewedAt).toLocaleDateString()}</span>
+        </div>
+        {item.data.relatedLinks && (
+          <div class="related-links">
+            <span>Related:</span>
+            {item.data.relatedLinks.map(link => (
+              <a href={link.url} target="_blank" rel="noopener">{link.title}</a>
+            ))}
+          </div>
+        )}
+      </article>
+    ))}
+    {sortedNews.length === 0 && (
+      <div class="empty-state">
+        <p>No news yet. Check back soon for curated tech updates!</p>
+      </div>
+    )}
+  </div>
+</MainLayout>
+
+<style>
+  h1 { margin-bottom: var(--spacing-md); }
+  .intro { color: var(--text-secondary); font-size: 1.125rem; margin-bottom: var(--spacing-xl); }
+  
+  .filters { display: flex; gap: var(--spacing-sm); flex-wrap: wrap; margin-bottom: var(--spacing-xl); align-items: center; }
+  .filter-label { font-weight: 500; margin-right: var(--spacing-sm); }
+  .filter-tag { background: var(--bg-secondary); padding: 4px 12px; border-radius: 16px; font-size: 0.875rem; color: var(--text-secondary); }
+  .filter-tag.active, .filter-tag:hover { background: var(--primary); color: white; }
+  
+  .news-list { display: flex; flex-direction: column; gap: var(--spacing-xl); }
+  .news-item { border: 1px solid var(--border); border-radius: 8px; padding: var(--spacing-lg); }
+  .topic-tag { display: inline-block; background: var(--primary); color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; margin-bottom: var(--spacing-sm); }
+  .news-item h2 { font-size: 1.25rem; margin-bottom: var(--spacing-sm); }
+  .news-item h2 a { color: var(--text); }
+  .news-item h2 a:hover { color: var(--primary); text-decoration: none; }
+  .summary { color: var(--text-secondary); margin-bottom: var(--spacing-sm); }
+  .why-it-matters { font-size: 0.875rem; background: var(--bg-secondary); padding: var(--spacing-md); border-radius: 4px; margin-bottom: var(--spacing-md); }
+  .meta { display: flex; gap: var(--spacing-md); font-size: 0.75rem; color: var(--text-secondary); flex-wrap: wrap; }
+  .related-links { display: flex; gap: var(--spacing-sm); align-items: center; margin-top: var(--spacing-md); font-size: 0.875rem; }
+  .related-links a { color: var(--primary); }
+  .empty-state { text-align: center; padding: var(--spacing-xl); color: var(--text-secondary); }
+</style>

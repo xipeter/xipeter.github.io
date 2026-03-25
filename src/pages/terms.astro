@@ -1,0 +1,61 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+---
+
+<MainLayout title="Terms of Service" description="TechHub terms of service." pageType="terms" showAds={false}>
+  <article class="policy-page">
+    <h1>Terms of Service</h1>
+    <p class="last-updated">Last updated: March 2026</p>
+
+    <section>
+      <h2>Acceptance</h2>
+      <p>By using this website, you agree to these terms.</p>
+    </section>
+
+    <section>
+      <h2>Use License</h2>
+      <p>Permission is granted to temporarily use this site for personal, non-commercial use. You may not:</p>
+      <ul>
+        <li>Modify or copy materials</li>
+        <li>Use materials for commercial purposes</li>
+        <li>Attempt to reverse engineer any software</li>
+        <li>Remove copyright notices</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Disclaimer</h2>
+      <p>Materials are provided "as is" without warranties. We do not warrant accuracy or reliability.</p>
+    </section>
+
+    <section>
+      <h2>Limitations</h2>
+      <p>We are not liable for damages arising from use of this website.</p>
+    </section>
+
+    <section>
+      <h2>User Content</h2>
+      <p>You retain ownership of content you submit. By submitting, you grant us a license to use it for operating the service.</p>
+    </section>
+
+    <section>
+      <h2>Third-Party Content</h2>
+      <p>This site displays ads via Google AdSense. We don't control ad content.</p>
+    </section>
+
+    <section>
+      <h2>Changes</h2>
+      <p>We may revise these terms at any time without notice.</p>
+    </section>
+  </article>
+</MainLayout>
+
+<style>
+  .policy-page { max-width: 800px; margin: 0 auto; }
+  .policy-page h1 { margin-bottom: var(--spacing-sm); }
+  .last-updated { color: var(--text-secondary); font-size: 0.875rem; margin-bottom: var(--spacing-xl); }
+  .policy-page section { margin-bottom: var(--spacing-xl); }
+  .policy-page h2 { font-size: 1.25rem; margin-bottom: var(--spacing-md); color: var(--primary); }
+  .policy-page ul { padding-left: var(--spacing-lg); }
+  .policy-page li { margin-bottom: var(--spacing-sm); }
+</style>

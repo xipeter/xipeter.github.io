@@ -1,0 +1,95 @@
+{
+  "$ref": "#/definitions/news",
+  "definitions": {
+    "news": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "topic": {
+          "type": "string",
+          "enum": [
+            "ai",
+            "cloud",
+            "dev-tools",
+            "security",
+            "telecom",
+            "web",
+            "mobile",
+            "hardware",
+            "other"
+          ]
+        },
+        "sourceName": {
+          "type": "string"
+        },
+        "sourceUrl": {
+          "type": "string"
+        },
+        "sourcePublishedAt": {
+          "type": "string"
+        },
+        "reviewedAt": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "whyItMatters": {
+          "type": "string"
+        },
+        "relatedLinks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "title",
+              "url"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "seo": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "adEligible": {
+          "type": "boolean",
+          "default": true
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "topic",
+        "sourceName",
+        "sourceUrl",
+        "sourcePublishedAt",
+        "reviewedAt",
+        "summary",
+        "whyItMatters"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

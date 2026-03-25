@@ -1,0 +1,56 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+---
+
+<MainLayout title="Editorial Policy" description="TechHub editorial policy and content standards." pageType="editorial-policy" showAds={false}>
+  <article class="policy-page">
+    <h1>Editorial Policy</h1>
+    <p class="last-updated">Last updated: March 2026</p>
+
+    <section>
+      <h2>Our Commitment</h2>
+      <p>We are committed to providing accurate, useful, and trustworthy content. Here's how we maintain quality:</p>
+    </section>
+
+    <section>
+      <h2>Content Standards</h2>
+      <ul>
+        <li><strong>Accuracy:</strong> We verify technical details and update content when needed.</li>
+        <li><strong>Originality:</strong> We create original content or properly attribute sources.</li>
+        <li><strong>Clarity:</strong> We explain technical concepts in accessible language.</li>
+        <li><strong>Practicality:</strong> We focus on useful, actionable information.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Sources and References</h2>
+      <p>We reference official documentation, reputable sources, and practical experience. For news, we link to original sources and provide original analysis.</p>
+    </section>
+
+    <section>
+      <h2>Updates and Corrections</h2>
+      <p>We review content periodically and update when information changes. If you spot an error, please <a href="/contact">let us know</a>.</p>
+    </section>
+
+    <section>
+      <h2>Product Reviews and Recommendations</h2>
+      <p>Our tool recommendations are based on genuine utility and quality, not promotional considerations. We disclose relationships when they exist.</p>
+    </section>
+
+    <section>
+      <h2>News Curation</h2>
+      <p>We don't just aggregate news—we provide original summaries and explain why each story matters to developers and tech enthusiasts.</p>
+    </section>
+  </article>
+</MainLayout>
+
+<style>
+  .policy-page { max-width: 800px; margin: 0 auto; }
+  .policy-page h1 { margin-bottom: var(--spacing-sm); }
+  .last-updated { color: var(--text-secondary); font-size: 0.875rem; margin-bottom: var(--spacing-xl); }
+  .policy-page section { margin-bottom: var(--spacing-xl); }
+  .policy-page h2 { font-size: 1.25rem; margin-bottom: var(--spacing-md); color: var(--primary); }
+  .policy-page ul { padding-left: var(--spacing-lg); }
+  .policy-page li { margin-bottom: var(--spacing-sm); }
+  .policy-page a { color: var(--primary); }
+</style>

@@ -1,0 +1,153 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import { getCollection } from 'astro:content';
+
+const articles = await getCollection('articles');
+const sortedArticles = articles
+  .sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime());
+
+const categories = [...new Set(articles.map(a => a.data.category))];
+---
+
+<MainLayout title="Articles" description="Technical articles, tutorials, and guides for developers." pageType="articles">
+  <h1>Technical Articles</h1>
+  <p class="intro">In-depth tutorials, guides, and technical content for developers and tech enthusiasts.</p>
+
+  <div class="filters">
+    <span class="filter-label">Categories:</span>
+    <a href="/articles" class="filter-tag active">All</a>
+    {categories.map(cat => (
+      <a href={`/topics/${cat}`} class="filter-tag">{cat}</a>
+    ))}
+  </div>
+
+  <div class="articles-list">
+    {sortedArticles.map(article => (
+      <article class="article-item">
+        <a href={`/articles/${article.slug}`}>
+          <h2>{article.data.title}</h2>
+        </a>
+        <p class="excerpt">{article.data.excerpt}</p>
+        <div class="meta">
+          <span class="category-tag">{article.data.category}</span>
+          <span class="date">{new Date(article.data.publishedAt).toLocaleDateString()}</span>
+          <span class="reading-time">{article.data.readingTime}</span>
+        </div>
+        <div class="tags">
+          {article.data.tags.map(tag => (
+            <span class="tag">#{tag}</span>
+          ))}
+        </div>
+      </article>
+    ))}
+    {sortedArticles.length === 0 && (
+      <div class="empty-state">
+        <p>No articles yet. Check back soon!</p>
+      </div>
+    )}
+  </div>
+</MainLayout>
+
+<style>
+  h1 {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .intro {
+    color: var(--text-secondary);
+    font-size: 1.125rem;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .filters {
+    display: flex;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+    margin-bottom: var(--spacing-xl);
+    align-items: center;
+  }
+
+  .filter-label {
+    font-weight: 500;
+    margin-right: var(--spacing-sm);
+  }
+
+  .filter-tag {
+    background: var(--bg-secondary);
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+  }
+
+  .filter-tag.active, .filter-tag:hover {
+    background: var(--primary);
+    color: white;
+  }
+
+  .articles-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+  }
+
+  .article-item {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: var(--spacing-xl);
+  }
+
+  .article-item h2 {
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .article-item h2 a {
+    color: var(--text);
+  }
+
+  .article-item h2 a:hover {
+    color: var(--primary);
+    text-decoration: none;
+  }
+
+  .excerpt {
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .meta {
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: center;
+    font-size: 0.875rem;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .category-tag {
+    background: var(--primary);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+  }
+
+  .date, .reading-time {
+    color: var(--text-secondary);
+  }
+
+  .tags {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+
+  .tag {
+    color: var(--primary);
+    font-size: 0.875rem;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: var(--spacing-xl);
+    color: var(--text-secondary);
+  }
+</style>

@@ -1,0 +1,62 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import { getCollection } from 'astro:content';
+
+const tools = await getCollection('tools');
+const sortedTools = tools.sort((a, b) => a.data.title.localeCompare(b.data.title));
+
+const categories = [...new Set(tools.map(t => t.data.category))];
+---
+
+<MainLayout title="Developer Tools" description="Useful developer tools for productivity and workflow." pageType="tools">
+  <h1>Developer Tools</h1>
+  <p class="intro">Practical tools for developers to preview, validate, and work with various content formats.</p>
+
+  <div class="filters">
+    <span class="filter-label">Categories:</span>
+    <a href="/tools" class="filter-tag active">All</a>
+    {categories.map(cat => (
+      <a href={`/topics/${cat}`} class="filter-tag">{cat}</a>
+    ))}
+  </div>
+
+  <div class="tools-grid">
+    {sortedTools.map(tool => (
+      <a href={`/tools/${tool.slug}`} class="tool-card">
+        <h2>{tool.data.title}</h2>
+        <p class="intro">{tool.data.intro}</p>
+        <div class="features">
+          {tool.data.features.slice(0, 3).map(f => (
+            <span class="feature-tag">{f}</span>
+          ))}
+        </div>
+        <span class="category-tag">{tool.data.category}</span>
+      </a>
+    ))}
+    {sortedTools.length === 0 && (
+      <div class="empty-state">
+        <p>No tools available yet. We're working on adding more!</p>
+      </div>
+    )}
+  </div>
+</MainLayout>
+
+<style>
+  h1 { margin-bottom: var(--spacing-md); }
+  .intro { color: var(--text-secondary); font-size: 1.125rem; margin-bottom: var(--spacing-xl); }
+  
+  .filters { display: flex; gap: var(--spacing-sm); flex-wrap: wrap; margin-bottom: var(--spacing-xl); align-items: center; }
+  .filter-label { font-weight: 500; margin-right: var(--spacing-sm); }
+  .filter-tag { background: var(--bg-secondary); padding: 4px 12px; border-radius: 16px; font-size: 0.875rem; color: var(--text-secondary); }
+  .filter-tag.active, .filter-tag:hover { background: var(--primary); color: white; }
+  
+  .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--spacing-lg); }
+  .tool-card { border: 1px solid var(--border); border-radius: 8px; padding: var(--spacing-lg); display: block; text-decoration: none; color: inherit; transition: border-color 0.2s, box-shadow 0.2s; }
+  .tool-card:hover { border-color: var(--primary); text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+  .tool-card h2 { font-size: 1.25rem; margin-bottom: var(--spacing-sm); }
+  .tool-card .intro { color: var(--text-secondary); font-size: 0.875rem; margin-bottom: var(--spacing-md); }
+  .features { display: flex; gap: var(--spacing-sm); flex-wrap: wrap; margin-bottom: var(--spacing-md); }
+  .feature-tag { background: var(--bg-secondary); padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; color: var(--text-secondary); }
+  .category-tag { font-size: 0.75rem; color: var(--primary); }
+  .empty-state { grid-column: 1 / -1; text-align: center; padding: var(--spacing-xl); color: var(--text-secondary); }
+</style>

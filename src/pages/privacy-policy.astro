@@ -1,0 +1,71 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+---
+
+<MainLayout title="Privacy Policy" description="TechHub privacy policy - how we handle your data." pageType="privacy-policy" showAds={false}>
+  <article class="policy-page">
+    <h1>Privacy Policy</h1>
+    <p class="last-updated">Last updated: March 2026</p>
+
+    <section>
+      <h2>Information We Collect</h2>
+      <p>This website may collect limited information in the following ways:</p>
+      <ul>
+        <li><strong>Information you provide:</strong> If you contact us via email, we receive your email address and any content you provide.</li>
+        <li><strong>Automatically collected information:</strong> Basic non-personal data such as browser type, device information, referring pages may be collected for analytics and security purposes.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Cookies and Tracking</h2>
+      <p>This website uses:</p>
+      <ul>
+        <li><strong>Essential cookies:</strong> For basic site functionality and cookie consent preferences.</li>
+        <li><strong>Google AdSense:</strong> For advertising, Google and its partners may use cookies to serve ads based on your browsing history.</li>
+      </ul>
+      <p>You can control cookies through your browser settings.</p>
+    </section>
+
+    <section>
+      <h2>How We Use Information</h2>
+      <p>Information collected may be used to:</p>
+      <ul>
+        <li>Operate and improve the website</li>
+        <li>Respond to your inquiries</li>
+        <li>Display relevant advertising</li>
+        <li>Understand visitor behavior</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Third-Party Services</h2>
+      <p>We use third-party services including:</p>
+      <ul>
+        <li>Google AdSense for advertising</li>
+        <li>GitHub Pages for hosting</li>
+      </ul>
+      <p>These services have their own privacy policies.</p>
+    </section>
+
+    <section>
+      <h2>Data Security</h2>
+      <p>We take reasonable measures to protect your data, but no method of transmission over the internet is completely secure.</p>
+    </section>
+
+    <section>
+      <h2>Contact</h2>
+      <p>Questions about this policy? <a href="/contact">Contact us</a>.</p>
+    </section>
+  </article>
+</MainLayout>
+
+<style>
+  .policy-page { max-width: 800px; margin: 0 auto; }
+  .policy-page h1 { margin-bottom: var(--spacing-sm); }
+  .last-updated { color: var(--text-secondary); font-size: 0.875rem; margin-bottom: var(--spacing-xl); }
+  .policy-page section { margin-bottom: var(--spacing-xl); }
+  .policy-page h2 { font-size: 1.25rem; margin-bottom: var(--spacing-md); color: var(--primary); }
+  .policy-page ul { padding-left: var(--spacing-lg); }
+  .policy-page li { margin-bottom: var(--spacing-sm); }
+  .policy-page a { color: var(--primary); }
+</style>

@@ -1,0 +1,183 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import type { PageType } from '../utils/adEligibility';
+import { getAdEligibility } from '../utils/adEligibility';
+
+interface Props {
+  title: string;
+  description?: string;
+  pageType: PageType;
+  showAds?: boolean;
+}
+
+const { title, description, pageType, showAds = true } = Astro.props;
+const adConfig = getAdEligibility(pageType);
+---
+
+<BaseLayout 
+  title={title} 
+  description={description}
+  pageType={pageType}
+>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/" class="logo">TechHub</a>
+      <nav class="main-nav">
+        <a href="/articles">Articles</a>
+        <a href="/news">News</a>
+        <a href="/tools">Tools</a>
+        <a href="/promos">Promos</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Ad Slot - Top -->
+  {showAds && adConfig.eligible && adConfig.slotPositions.includes('top') && (
+    <div class="container">
+      <div class="ad-slot" id="adsense-top">
+        <span>Advertisement</span>
+      </div>
+    </div>
+  )}
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+      <slot />
+    </div>
+  </main>
+
+  <!-- Ad Slot - Bottom -->
+  {showAds && adConfig.eligible && adConfig.slotPositions.includes('bottom') && (
+    <div class="container">
+      <div class="ad-slot" id="adsense-bottom">
+        <span>Advertisement</span>
+      </div>
+    </div>
+  )}
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-links">
+        <div class="footer-section">
+          <h4>Content</h4>
+          <a href="/articles">Articles</a>
+          <a href="/news">News</a>
+          <a href="/tools">Tools</a>
+          <a href="/promos">Promos</a>
+        </div>
+        <div class="footer-section">
+          <h4>Company</h4>
+          <a href="/about">About</a>
+          <a href="/contact">Contact</a>
+        </div>
+        <div class="footer-section">
+          <h4>Legal</h4>
+          <a href="/privacy-policy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+          <a href="/editorial-policy">Editorial Policy</a>
+          <a href="/affiliate-disclosure">Affiliate Disclosure</a>
+        </div>
+      </div>
+      <p class="copyright">&copy; {new Date().getFullYear()} TechHub. All rights reserved.</p>
+    </div>
+  </footer>
+</BaseLayout>
+
+<style>
+  .site-header {
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: var(--spacing-md) 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    text-decoration: none;
+  }
+
+  .main-nav {
+    display: flex;
+    gap: var(--spacing-lg);
+  }
+
+  .main-nav a {
+    color: var(--text);
+    font-weight: 500;
+    padding: var(--spacing-sm) 0;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s;
+  }
+
+  .main-nav a:hover {
+    text-decoration: none;
+    border-bottom-color: var(--primary);
+  }
+
+  .main-content {
+    flex: 1;
+    padding: var(--spacing-xl) 0;
+    min-height: 60vh;
+  }
+
+  .site-footer {
+    background: var(--bg-secondary);
+    padding: var(--spacing-xl) 0;
+    margin-top: auto;
+  }
+
+  .footer-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .footer-section h4 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+    color: var(--text);
+  }
+
+  .footer-section a {
+    display: block;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .copyright {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 768px) {
+    .header-inner {
+      flex-direction: column;
+      gap: var(--spacing-md);
+    }
+
+    .main-nav {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--spacing-md);
+    }
+  }
+</style>

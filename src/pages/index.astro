@@ -1,0 +1,347 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import { getCollection } from 'astro:content';
+
+const articles = await getCollection('articles');
+const news = await getCollection('news');
+const tools = await getCollection('tools');
+const promos = await getCollection('promos');
+
+const featuredArticles = articles
+  .filter(a => a.data.adEligible)
+  .sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime())
+  .slice(0, 3);
+
+const recentNews = news
+  .filter(n => n.data.adEligible)
+  .sort((a, b) => new Date(b.data.reviewedAt).getTime() - new Date(a.data.reviewedAt).getTime())
+  .slice(0, 4);
+
+const featuredTools = tools
+  .filter(t => t.data.adEligible)
+  .slice(0, 3);
+
+const featuredPromos = promos
+  .filter(p => p.data.adEligible)
+  .slice(0, 2);
+---
+
+<MainLayout title="TechHub" pageType="homepage">
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>TechHub - Developer Tools & Technical Content</h1>
+    <p class="hero-subtitle">
+      A curated tech utility and content hub featuring developer tools, 
+      technical articles, curated tech news, and verified promotions.
+    </p>
+  </section>
+
+  <!-- Featured Tools -->
+  <section class="section">
+    <div class="section-header">
+      <h2>Popular Tools</h2>
+      <a href="/tools" class="view-all">View all tools &rarr;</a>
+    </div>
+    <div class="card-grid">
+      {featuredTools.map(tool => (
+        <a href={`/tools/${tool.slug}`} class="card tool-card">
+          <h3>{tool.data.title}</h3>
+          <p>{tool.data.intro}</p>
+          <span class="category-tag">{tool.data.category}</span>
+        </a>
+      ))}
+      {featuredTools.length === 0 && (
+        <div class="empty-state">
+          <p>Tools coming soon!</p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Latest Articles -->
+  <section class="section">
+    <div class="section-header">
+      <h2>Latest Articles</h2>
+      <a href="/articles" class="view-all">View all articles &rarr;</a>
+    </div>
+    <div class="card-grid">
+      {featuredArticles.map(article => (
+        <a href={`/articles/${article.slug}`} class="card article-card">
+          <h3>{article.data.title}</h3>
+          <p class="excerpt">{article.data.excerpt}</p>
+          <div class="meta">
+            <span class="category-tag">{article.data.category}</span>
+            <span class="reading-time">{article.data.readingTime}</span>
+          </div>
+        </a>
+      ))}
+      {featuredArticles.length === 0 && (
+        <div class="empty-state">
+          <p>Articles coming soon!</p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Tech News -->
+  <section class="section">
+    <div class="section-header">
+      <h2>Tech News</h2>
+      <a href="/news" class="view-all">View all news &rarr;</a>
+    </div>
+    <div class="news-list">
+      {recentNews.map(item => (
+        <a href={`/news/${item.slug}`} class="news-item">
+          <span class="topic-tag">{item.data.topic}</span>
+          <h3>{item.data.title}</h3>
+          <p>{item.data.summary}</p>
+          <div class="news-meta">
+            <span>{item.data.sourceName}</span>
+            <span>{new Date(item.data.sourcePublishedAt).toLocaleDateString()}</span>
+          </div>
+        </a>
+      ))}
+      {recentNews.length === 0 && (
+        <div class="empty-state">
+          <p>News updates coming soon!</p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Promos -->
+  <section class="section">
+    <div class="section-header">
+      <h2>Verified Promotions</h2>
+      <a href="/promos" class="view-all">View all promos &rarr;</a>
+    </div>
+    <div class="promo-grid">
+      {featuredPromos.map(promo => (
+        <a href={`/promos/${promo.slug}`} class="card promo-card">
+          <h3>{promo.data.brand}</h3>
+          <p class="reward">{promo.data.rewardSummary}</p>
+          <span class="region-tag">{promo.data.region}</span>
+        </a>
+      ))}
+      {featuredPromos.length === 0 && (
+        <div class="empty-state">
+          <p>Promotions coming soon!</p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Editorial Trust -->
+  <section class="trust-section">
+    <h2>About TechHub</h2>
+    <p>
+      TechHub is an independent tech resource focused on providing practical tools, 
+      quality technical content, and verified promotional offers. We prioritize 
+      accuracy, transparency, and usefulness for developers and tech enthusiasts.
+    </p>
+    <div class="trust-links">
+      <a href="/about">Learn more about us</a>
+      <a href="/editorial-policy">Read our editorial policy</a>
+      <a href="/affiliate-disclosure">Our affiliate disclosure</a>
+    </div>
+  </section>
+</MainLayout>
+
+<style>
+  .hero {
+    text-align: center;
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero-subtitle {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .section {
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .section-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .view-all {
+    font-size: 0.875rem;
+    color: var(--primary);
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+  }
+
+  .card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: var(--spacing-lg);
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .card:hover {
+    border-color: var(--primary);
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .card h3 {
+    font-size: 1.125rem;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .card p {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .category-tag {
+    display: inline-block;
+    background: var(--bg-secondary);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+  }
+
+  .excerpt {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .reading-time {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+  }
+
+  .news-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .news-item {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: var(--spacing-lg);
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .news-item:hover {
+    border-color: var(--primary);
+    text-decoration: none;
+  }
+
+  .news-item h3 {
+    font-size: 1.125rem;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .news-item p {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .news-meta {
+    display: flex;
+    gap: var(--spacing-md);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+  }
+
+  .topic-tag {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .promo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+  }
+
+  .promo-card .reward {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .region-tag {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+  }
+
+  .trust-section {
+    background: var(--bg-secondary);
+    padding: var(--spacing-xl);
+    border-radius: 8px;
+    text-align: center;
+    margin-top: var(--spacing-xl);
+  }
+
+  .trust-section h2 {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .trust-section p {
+    max-width: 600px;
+    margin: 0 auto var(--spacing-lg);
+    color: var(--text-secondary);
+  }
+
+  .trust-links {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-lg);
+    flex-wrap: wrap;
+  }
+
+  .empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: var(--spacing-xl);
+    color: var(--text-secondary);
+  }
+</style>

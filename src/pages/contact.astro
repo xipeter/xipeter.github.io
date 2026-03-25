@@ -1,0 +1,54 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+---
+
+<MainLayout title="Contact" description="Get in touch with TechHub." pageType="contact" showAds={false}>
+  <article class="policy-page">
+    <h1>Contact Us</h1>
+    
+    <section>
+      <h2>Get in Touch</h2>
+      <p>We welcome questions, feedback, and suggestions. Here's how you can reach us:</p>
+      <div class="contact-method">
+        <strong>Email:</strong> <a href="mailto:xipeter0907@gmail.com">xipeter0907@gmail.com</a>
+      </div>
+    </section>
+
+    <section>
+      <h2>What We Can Help With</h2>
+      <ul>
+        <li>Questions about our tools or content</li>
+        <li>Bug reports or technical issues</li>
+        <li>Content suggestions or topic requests</li>
+        <li>Partnership inquiries</li>
+        <li>General feedback</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>What We Can't Help With</h2>
+      <p>We may not be able to respond to:</p>
+      <ul>
+        <li>Technical support requests for third-party products</li>
+        <li>Requests for custom development or consulting</li>
+        <li>Promotional inquiries without a clear proposal</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Response Time</h2>
+      <p>We try to respond to all inquiries within a few days. Please note that this is a personal project, so response times may vary.</p>
+    </section>
+  </article>
+</MainLayout>
+
+<style>
+  .policy-page { max-width: 800px; margin: 0 auto; }
+  .policy-page h1 { margin-bottom: var(--spacing-xl); }
+  .policy-page section { margin-bottom: var(--spacing-xl); }
+  .policy-page h2 { font-size: 1.25rem; margin-bottom: var(--spacing-md); color: var(--primary); }
+  .policy-page ul { padding-left: var(--spacing-lg); margin-bottom: var(--spacing-md); }
+  .policy-page li { margin-bottom: var(--spacing-sm); }
+  .policy-page a { color: var(--primary); }
+  .contact-method { background: var(--bg-secondary); padding: var(--spacing-md); border-radius: 8px; margin-top: var(--spacing-md); }
+</style>

@@ -1,0 +1,116 @@
+{
+  "$ref": "#/definitions/promos",
+  "definitions": {
+    "promos": {
+      "type": "object",
+      "properties": {
+        "brand": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "referral",
+            "discount",
+            "trial",
+            "bundle"
+          ]
+        },
+        "region": {
+          "type": "string"
+        },
+        "eligibility": {
+          "type": "string"
+        },
+        "rewardSummary": {
+          "type": "string"
+        },
+        "lastVerified": {
+          "type": "string"
+        },
+        "stepsToRedeem": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "disclosure": {
+          "type": "string"
+        },
+        "faq": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "question": {
+                "type": "string"
+              },
+              "answer": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "question",
+              "answer"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "alternatives": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "brand": {
+                "type": "string"
+              },
+              "offer": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "brand",
+              "offer",
+              "url"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "seo": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "adEligible": {
+          "type": "boolean",
+          "default": true
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "brand",
+        "type",
+        "region",
+        "eligibility",
+        "rewardSummary",
+        "lastVerified",
+        "stepsToRedeem",
+        "disclosure"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

@@ -1,0 +1,58 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+---
+
+<MainLayout title="Affiliate Disclosure" description="TechHub affiliate disclosure and transparency." pageType="affiliate-disclosure" showAds={false}>
+  <article class="policy-page">
+    <h1>Affiliate Disclosure</h1>
+    <p class="last-updated">Last updated: March 2026</p>
+
+    <section>
+      <h2>Our Approach</h2>
+      <p>TechHub is transparent about how we monetize. This disclosure explains our relationships.</p>
+    </section>
+
+    <section>
+      <h2>Advertising</h2>
+      <p>This website displays Google AdSense advertisements. Google uses cookies to serve ads based on user interests. We have no control over ad content.</p>
+    </section>
+
+    <section>
+      <h2>Promotional Content</h2>
+      <p>When we publish promotional content (like referral programs or special offers):</p>
+      <ul>
+        <li>We only publish offers we've verified or trust</li>
+        <li>We clearly mark promotional content</li>
+        <li>Our editorial recommendations are independent of promotional relationships</li>
+        <li>We disclose when we receive compensation</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Our Promise</h2>
+      <p>We will never:</p>
+      <ul>
+        <li>Recommend products or services we haven't verified</li>
+        <li>Let promotional relationships influence our editorial decisions</li>
+        <li>Create misleading or low-quality promotional content</li>
+        <li>Hide material relationships</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Questions</h2>
+      <p>Questions about our practices? <a href="/contact">Contact us</a>.</p>
+    </section>
+  </article>
+</MainLayout>
+
+<style>
+  .policy-page { max-width: 800px; margin: 0 auto; }
+  .policy-page h1 { margin-bottom: var(--spacing-sm); }
+  .last-updated { color: var(--text-secondary); font-size: 0.875rem; margin-bottom: var(--spacing-xl); }
+  .policy-page section { margin-bottom: var(--spacing-xl); }
+  .policy-page h2 { font-size: 1.25rem; margin-bottom: var(--spacing-md); color: var(--primary); }
+  .policy-page ul { padding-left: var(--spacing-lg); }
+  .policy-page li { margin-bottom: var(--spacing-sm); }
+  .policy-page a { color: var(--primary); }
+</style>
