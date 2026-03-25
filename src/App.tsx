@@ -278,12 +278,17 @@ const App = observer((): React.JSX.Element => {
 
           {appStore.format === 'diff' ? (
             <DiffViewer />
-          ) : appStore.mode === 'edit' ? (
-            <ContentInput onContentChange={handleContentChange} />
-          ) : !appStore.hasContent ? (
-            renderWelcome()
           ) : (
-            renderPreview()
+            <>
+              {!appStore.hasContent && (
+                <Box sx={{ mb: 3 }}>{renderWelcome()}</Box>
+              )}
+              {appStore.mode === 'edit' ? (
+                <ContentInput onContentChange={handleContentChange} />
+              ) : (
+                renderPreview()
+              )}
+            </>
           )}
 
           <Box
