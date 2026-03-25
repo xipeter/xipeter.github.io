@@ -242,28 +242,25 @@ const App = observer((): React.JSX.Element => {
                 size="small"
                 sx={{ mr: 1 }}
               />
-              {appStore.hasContent && appStore.format !== 'diff' && (
-                <>
-                  <Button
-                    variant="outlined"
-                    startIcon={appStore.mode === 'edit' ? <PreviewIcon /> : <EditIcon />}
-                    onClick={() => appStore.setMode(appStore.mode === 'edit' ? 'preview' : 'edit')}
-                    size="small"
-                  >
-                    {appStore.mode === 'edit' ? t('preview') : t('editor')}
-                  </Button>
-                  {appStore.mode === 'preview' && (
-                    <Button
-                      variant="outlined"
-                      startIcon={copied ? null : <ContentCopyIcon />}
-                      onClick={handleCopy}
-                      size="small"
-                      color={copied ? 'success' : 'primary'}
-                    >
-                      {copied ? t('copied') || 'Copied!' : t('copy') || 'Copy'}
-                    </Button>
-                  )}
-                </>
+              <Button
+                variant="outlined"
+                startIcon={appStore.mode === 'edit' ? <PreviewIcon /> : <EditIcon />}
+                onClick={() => appStore.setMode(appStore.mode === 'edit' ? 'preview' : 'edit')}
+                size="small"
+                disabled={!appStore.hasContent && appStore.format !== 'diff'}
+              >
+                {appStore.mode === 'edit' ? t('preview') : t('editor')}
+              </Button>
+              {appStore.mode === 'preview' && appStore.hasContent && (
+                <Button
+                  variant="outlined"
+                  startIcon={copied ? null : <ContentCopyIcon />}
+                  onClick={handleCopy}
+                  size="small"
+                  color={copied ? 'success' : 'primary'}
+                >
+                  {copied ? t('copied') || 'Copied!' : t('copy') || 'Copy'}
+                </Button>
               )}
               {(appStore.hasContent || appStore.format === 'diff') && (
                 <Button
@@ -281,10 +278,10 @@ const App = observer((): React.JSX.Element => {
 
           {appStore.format === 'diff' ? (
             <DiffViewer />
-          ) : !appStore.hasContent ? (
-            renderWelcome()
           ) : appStore.mode === 'edit' ? (
             <ContentInput onContentChange={handleContentChange} />
+          ) : !appStore.hasContent ? (
+            renderWelcome()
           ) : (
             renderPreview()
           )}
