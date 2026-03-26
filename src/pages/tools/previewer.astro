@@ -1,6 +1,7 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
 import { StoreProvider } from '../../contexts/StoreContext';
+import { I18nProvider } from '../../contexts/I18nContext';
 import App from '../../App';
 ---
 
@@ -10,6 +11,8 @@ import App from '../../App';
   pageType="tool"
 >
   <StoreProvider client:load>
-    <App client:load />
+    <I18nProvider client:load>
+      <App client:load />
+    </I18nProvider>
   </StoreProvider>
 </MainLayout>
