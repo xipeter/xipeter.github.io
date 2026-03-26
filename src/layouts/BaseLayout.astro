@@ -22,13 +22,24 @@ const {
 const fullTitle = title === 'TechHub' ? title : `${title} | TechHub`;
 const siteUrl = 'https://xipeter.github.io';
 
-// Get path without locale prefix
+// Get the actual page path from Astro
 const rawPath = Astro.url.pathname;
-const pathWithoutLocale = rawPath.replace(/^\/(en|zh)\//, '/').replace(/\.html$/, '');
 
-// Build locale-specific URLs
-// EN uses directory format (/en/), ZH uses .html file format (zh.html)
-const enPath = pathWithoutLocale === '/' ? '/en/' : '/en' + pathWithoutLocale;
+// Determine what the path is without locale prefix
+// /en.html -> / (home)
+// /en/about.html -> /about
+// /en/tools/previewer.html -> this shouldn't happen with file format
+let pathWithoutLocale = rawPath
+  .replace(/^\/en(\.html)?$/, '/')  // /en or /en.html -> /
+  .replace(/^\/zh(\.html)?$/, '/')  // /zh or /zh.html -> /
+  .replace(/^\/en\//, '/')         // /en/path -> /path
+  .replace(/^\/zh\//, '/')         // /zh/path -> /path
+  .replace(/\.html$/, '');         // remove .html from end
+
+// Build locale-specific URLs - both use .html file format
+// For home page (path is /), output /en.html or /zh.html
+// For other pages, output /en/about.html or /zh/about.html
+const enPath = pathWithoutLocale === '/' ? '/en.html' : '/en' + pathWithoutLocale + '.html';
 const zhPath = pathWithoutLocale === '/' ? '/zh.html' : '/zh' + pathWithoutLocale + '.html';
 
 const enUrl = siteUrl + enPath;
@@ -53,7 +64,7 @@ const canonicalUrl = locale === 'en' ? enUrl : zhUrl;
     <!-- Alternate languages for hreflang -->
     <link rel="alternate" hreflang="en" href={enUrl} />
     <link rel="alternate" hreflang="zh" href={zhUrl} />
-    <link rel="alternate" hreflang="x-default" href={siteUrl + '/en/'} />
+    <link rel="alternate" hreflang="x-default" href={siteUrl + '/en.html'} />
     
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3992506272308291" crossorigin="anonymous"></script>

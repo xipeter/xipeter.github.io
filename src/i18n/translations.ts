@@ -34,18 +34,14 @@ export function getAlternateLocale(locale: string): string {
 }
 
 export function getLocalizedPath(basePath: string, locale: string): string {
-  // Astro build format: 
-  // - EN pages are in /en/ directory with index.html
-  // - ZH pages are .html files at root (zh.html, zh/tools.html)
+  // Both EN and ZH use .html file format
+  // Astro build outputs: /en.html, /zh.html, /en/about.html, /zh/about.html, etc.
   const path = basePath === '/' ? '' : basePath;
   
   if (locale === 'en') {
-    // EN uses directory format with index.html
-    return `/en${path || '/'}`;
+    return `/en${path ? path + '.html' : '.html'}`;
   } else {
-    // ZH uses .html file format (no index.html in /zh/)
-    const htmlFile = path ? `/zh${path}.html` : '/zh.html';
-    return htmlFile;
+    return `/zh${path ? path + '.html' : '.html'}`;
   }
 }
 
