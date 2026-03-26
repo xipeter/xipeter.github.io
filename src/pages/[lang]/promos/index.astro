@@ -1,0 +1,63 @@
+---
+import MainLayout from '../../../layouts/MainLayout.astro';
+import { getCollection } from 'astro:content';
+import { getTranslations, getAlternateLocale, getLocalizedPath } from '../../../i18n/translations';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'zh' } }
+  ];
+}
+
+const { lang } = Astro.params;
+const t = getTranslations(lang);
+
+const promos = await getCollection('promos');
+const sortedPromos = promos.sort((a, b) => b.data.lastVerified.localeCompare(a.data.lastVerified));
+---
+
+<MainLayout 
+  title={t.promos.title} 
+  description={t.promos.subtitle} 
+  pageType="promos" 
+  showAds={false}
+  locale={lang}
+>
+  <h1>{t.promos.title}</h1>
+  <p class="intro">{t.promos.subtitle}</p>
+
+  <div class="promos-grid">
+    {sortedPromos.map(promo => (
+      <a href={getLocalizedPath(`/promos/${promo.slug}`, lang)} class="promo-card">
+        <div class="brand-badge">{promo.data.brand}</div>
+        <h2>{promo.data.type}</h2>
+        <p class="reward">{promo.data.rewardSummary}</p>
+        <div class="meta">
+          <span class="region">{promo.data.region === 'United States' ? t.promos.regionUS : promo.data.region}</span>
+          <span class="verified">Verified: {promo.data.lastVerified}</span>
+        </div>
+        <p class="eligibility">{promo.data.eligibility}</p>
+      </a>
+    ))}
+    {sortedPromos.length === 0 && (
+      <div class="empty-state">
+        <p>{t.promos.noPromos}</p>
+      </div>
+    )}
+  </div>
+</MainLayout>
+
+<style>
+  h1 { margin-bottom: var(--spacing-sm); }
+  .intro { color: var(--text-secondary); margin-bottom: var(--spacing-xl); font-size: 1.125rem; }
+  .promos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: var(--spacing-lg); }
+  .promo-card { display: block; padding: var(--spacing-lg); background: var(--bg); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: inherit; transition: border-color 0.2s, box-shadow 0.2s; }
+  .promo-card:hover { border-color: var(--primary); box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-decoration: none; }
+  .brand-badge { display: inline-block; background: var(--primary); color: white; padding: 4px 12px; border-radius: 4px; font-size: 0.875rem; font-weight: 600; margin-bottom: var(--spacing-sm); }
+  .promo-card h2 { font-size: 1.125rem; margin-bottom: var(--spacing-sm); }
+  .reward { font-weight: 600; color: var(--primary); margin-bottom: var(--spacing-sm); }
+  .meta { display: flex; gap: var(--spacing-md); font-size: 0.75rem; color: var(--text-secondary); margin-bottom: var(--spacing-sm); }
+  .eligibility { font-size: 0.875rem; color: var(--text-secondary); }
+  .empty-state { grid-column: 1 / -1; text-align: center; padding: var(--spacing-xl); color: var(--text-secondary); }
+</style>

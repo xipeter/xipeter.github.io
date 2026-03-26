@@ -1,0 +1,72 @@
+---
+import MainLayout from '../../../layouts/MainLayout.astro';
+import { getCollection } from 'astro:content';
+import { getTranslations, getAlternateLocale, getLocalizedPath } from '../../../i18n/translations';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'zh' } }
+  ];
+}
+
+const { lang } = Astro.params;
+const t = getTranslations(lang);
+
+const tools = await getCollection('tools');
+const sortedTools = tools.sort((a, b) => a.data.title.localeCompare(b.data.title));
+---
+
+<MainLayout 
+  title={t.tools.title} 
+  description={t.tools.subtitle} 
+  pageType="tools" 
+  showAds={false}
+  locale={lang}
+>
+  <h1>{t.tools.title}</h1>
+  <p class="intro">{t.tools.subtitle}</p>
+
+  <div class="tools-grid">
+    <a href={getLocalizedPath('/tools/previewer', lang)} class="tool-card">
+      <h2>{t.toolsContent.previewer.title}</h2>
+      <p class="intro">{t.toolsContent.previewer.description}</p>
+      <div class="features">
+        <span class="feature-tag">Markdown</span>
+        <span class="feature-tag">JSON</span>
+        <span class="feature-tag">XML</span>
+        <span class="feature-tag">Diff</span>
+      </div>
+      <span class="category-tag">{t.tools.categoryDeveloper}</span>
+    </a>
+    {sortedTools.map(tool => (
+      <a href={getLocalizedPath(`/tools/${tool.slug}`, lang)} class="tool-card">
+        <h2>{tool.data.title}</h2>
+        <p class="intro">{tool.data.intro}</p>
+        <div class="features">
+          {tool.data.features.slice(0, 3).map(f => (
+            <span class="feature-tag">{f}</span>
+          ))}
+        </div>
+        <span class="category-tag">{tool.data.category === 'developer' ? t.tools.categoryDeveloper : t.tools.categoryUtilities}</span>
+      </a>
+    ))}
+    {sortedTools.length === 0 && (
+      <p class="empty-state">{t.tools.noTools}</p>
+    )}
+  </div>
+</MainLayout>
+
+<style>
+  h1 { margin-bottom: var(--spacing-sm); }
+  .intro { color: var(--text-secondary); margin-bottom: var(--spacing-xl); font-size: 1.125rem; }
+  .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--spacing-lg); }
+  .tool-card { display: block; padding: var(--spacing-lg); background: var(--bg); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: inherit; transition: border-color 0.2s, box-shadow 0.2s; }
+  .tool-card:hover { border-color: var(--primary); box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-decoration: none; }
+  .tool-card h2 { font-size: 1.25rem; margin-bottom: var(--spacing-sm); }
+  .tool-card .intro { color: var(--text-secondary); font-size: 0.875rem; margin-bottom: var(--spacing-md); }
+  .features { display: flex; gap: var(--spacing-sm); flex-wrap: wrap; margin-bottom: var(--spacing-md); }
+  .feature-tag { background: var(--bg-secondary); padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; color: var(--text-secondary); }
+  .category-tag { display: inline-block; background: var(--primary); color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; }
+  .empty-state { grid-column: 1 / -1; text-align: center; padding: var(--spacing-xl); color: var(--text-secondary); }
+</style>

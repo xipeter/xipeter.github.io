@@ -7,6 +7,7 @@ interface Props {
   pageType: PageType;
   canonical?: string;
   noindex?: boolean;
+  locale?: string;
 }
 
 const { 
@@ -14,21 +15,42 @@ const {
   description = 'A tech utility and content hub featuring developer tools, technical articles, curated tech news, and verified promotions.',
   pageType,
   canonical,
-  noindex = false
+  noindex = false,
+  locale = 'en'
 } = Astro.props;
 
 const fullTitle = title === 'TechHub' ? title : `${title} | TechHub`;
+const siteUrl = 'https://xipeter.github.io';
+
+// Get path without locale prefix, add .html extension
+const rawPath = Astro.url.pathname;
+const pathWithoutLocale = rawPath.replace(/^\/(en|zh)\//, '/').replace(/\.html$/, '');
+const htmlSuffix = '.html';
+
+// Build locale-specific URLs
+const enUrl = siteUrl + '/en' + pathWithoutLocale + (pathWithoutLocale === '/' ? htmlSuffix : '');
+const zhUrl = siteUrl + '/zh' + pathWithoutLocale + (pathWithoutLocale === '/' ? htmlSuffix : '');
+
+// For canonical, prefer the current locale URL
+const canonicalUrl = locale === 'en' ? enUrl : zhUrl;
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang={locale}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex, follow" />}
-    {canonical && <link rel="canonical" href={canonical} />}
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalUrl} />
+    
+    <!-- Alternate languages for hreflang -->
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="zh" href={zhUrl} />
+    <link rel="alternate" hreflang="x-default" href={enUrl} />
     
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3992506272308291" crossorigin="anonymous"></script>
@@ -42,7 +64,7 @@ const fullTitle = title === 'TechHub' ? title : `${title} | TechHub`;
   <body>
     <slot />
   </body>
-</html>
+</style>
 
 <style is:global>
   :root {

@@ -1,0 +1,66 @@
+---
+import MainLayout from '../../../layouts/MainLayout.astro';
+import { getCollection } from 'astro:content';
+import { getTranslations, getLocalizedPath } from '../../../i18n/translations';
+import { StoreProvider } from '../../../contexts/StoreContext';
+import { I18nProvider } from '../../../contexts/I18nContext';
+import { ToolWorkspace } from '../../../components/tools/ToolWorkspace';
+
+export async function getStaticPaths() {
+  const tools = await getCollection('tools');
+  const locales = ['en', 'zh'];
+  
+  const paths = [];
+  
+  // Add tool from content collection
+  for (const tool of tools) {
+    for (const locale of locales) {
+      paths.push({ params: { lang: locale, slug: tool.slug }, props: { tool: null, isPreviewer: false } });
+    }
+  }
+  
+  // Add special previewer route for each locale
+  for (const locale of locales) {
+    paths.push({ params: { lang: locale, slug: 'previewer' }, props: { tool: null, isPreviewer: true } });
+  }
+  
+  return paths;
+}
+
+const { lang, slug } = Astro.props;
+const t = getTranslations(lang);
+
+const isPreviewer = Astro.props.isPreviewer;
+const toolTitle = isPreviewer ? t.toolsContent.previewer.title : (Astro.props.tool?.data.title || 'Tool');
+const toolDesc = isPreviewer ? t.toolsContent.previewer.description : (Astro.props.tool?.data.intro || '');
+---
+
+<MainLayout 
+  title={lang === 'en' ? 'Content Previewer - Markdown JSON XML Diff Tool' : '内容预览器 - Markdown JSON XML Diff 工具'}
+  description={toolDesc}
+  pageType="tool"
+  locale={lang}
+>
+  {isPreviewer ? (
+    <StoreProvider client:load>
+      <I18nProvider client:load locale={lang}>
+        <ToolWorkspace client:load locale={lang} />
+      </I18nProvider>
+    </StoreProvider>
+  ) : (
+    <div class="tool-page">
+      <a href={getLocalizedPath('/tools', lang)} class="back-link">← {t.tools.backToHub}</a>
+      <h1>{toolTitle}</h1>
+      <p class="intro">{toolDesc}</p>
+    </div>
+  )}
+</MainLayout>
+
+{!isPreviewer && (
+<style>
+  .tool-page { max-width: 800px; margin: 0 auto; }
+  .back-link { display: inline-block; margin-bottom: var(--spacing-md); color: var(--primary); }
+  h1 { margin-bottom: var(--spacing-md); }
+  .intro { color: var(--text-secondary); font-size: 1.125rem; margin-bottom: var(--spacing-lg); }
+</style>
+)}

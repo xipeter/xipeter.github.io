@@ -1,0 +1,121 @@
+{
+  "nav": {
+    "home": "Home",
+    "articles": "Articles",
+    "tools": "Tools",
+    "promos": "Promos",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "home": {
+    "heroTitle": "Developer Tools & Technical Content",
+    "heroSubtitle": "A curated selection of browser-based developer tools, practical technical articles, and verified promotions. Everything runs locally on your device—nothing is sent to external servers.",
+    "popularTools": "Popular Tools",
+    "viewAllTools": "View all tools →",
+    "latestArticles": "Latest Articles",
+    "viewAllArticles": "View all articles →",
+    "verifiedPromos": "Verified Promotions",
+    "viewAllPromos": "View all promos →",
+    "aboutTitle": "About TechHub",
+    "aboutText": "TechHub is an independent tech resource focused on providing practical tools, quality technical content, and verified promotional offers. We prioritize accuracy, transparency, and usefulness for developers and tech enthusiasts.",
+    "learnMore": "Learn more about us",
+    "editorialPolicy": "Read our editorial policy",
+    "affiliateDisclosure": "Our affiliate disclosure"
+  },
+  "articles": {
+    "title": "Technical Articles",
+    "subtitle": "In-depth tutorials, guides, and technical content for developers and tech enthusiasts.",
+    "noArticles": "No articles available yet.",
+    "allArticles": "All Articles",
+    "backToHub": "Back to Articles"
+  },
+  "tools": {
+    "title": "Developer Tools",
+    "subtitle": "Browser-based tools for developers. All tools run locally—no data is sent to external servers.",
+    "noTools": "No tools available yet.",
+    "categoryDeveloper": "Developer",
+    "categoryUtilities": "Utilities",
+    "backToHub": "Back to Tools"
+  },
+  "promos": {
+    "title": "Verified Promotions",
+    "subtitle": "Tested and verified promotional offers. We only recommend products and services we believe in.",
+    "noPromos": "No promotions available yet.",
+    "regionUS": "United States",
+    "rewardLabel": "Reward",
+    "regionLabel": "Region",
+    "backToHub": "Back to Promos"
+  },
+  "about": {
+    "title": "About TechHub",
+    "missionTitle": "Our Mission",
+    "missionText": "TechHub was created to help developers and tech enthusiasts find practical tools, quality content, and honest recommendations. We believe in transparency, accuracy, and usefulness in everything we do.",
+    "focusTitle": "What We Focus On",
+    "focusItems": [
+      "Browser-based developer tools that protect your privacy",
+      "In-depth technical articles and tutorials",
+      "Verified promotional offers from trusted sources"
+    ]
+  },
+  "contact": {
+    "title": "Contact Us",
+    "intro": "Have questions or suggestions? We'd love to hear from you.",
+    "emailLabel": "Email",
+    "email": "contact@techhub.example",
+    "note": "We typically respond within 2-3 business days."
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated: March 2026",
+    "intro": "Your privacy is important to us. This policy explains what information we collect and how we use it."
+  },
+  "terms": {
+    "title": "Terms of Service",
+    "lastUpdated": "Last updated: March 2026",
+    "intro": "By using TechHub, you agree to these terms. Please read them carefully."
+  },
+  "editorial": {
+    "title": "Editorial Policy",
+    "intro": "Our editorial policy outlines our commitment to quality, accuracy, and transparency.",
+    "standardsTitle": "Our Standards",
+    "standards": [
+      "All content is reviewed for accuracy before publication",
+      "We disclose any conflicts of interest",
+      "We prioritize genuine usefulness over affiliate revenue",
+      "We update content when new information becomes available"
+    ]
+  },
+  "affiliate": {
+    "title": "Affiliate Disclosure",
+    "intro": "TechHub participates in affiliate programs. This means we may earn a commission when you click links to products or services.",
+    "transparency": "We only recommend products and services we genuinely believe in.",
+    "noCost": "This doesn't cost you anything extra."
+  },
+  "common": {
+    "readMore": "Read more →",
+    "learnMore": "Learn more →",
+    "viewAll": "View all →",
+    "minRead": "min read"
+  },
+  "toolsContent": {
+    "previewer": {
+      "title": "Content Previewer",
+      "description": "Preview Markdown, validate JSON, format XML, and compare text differences—all in your browser with no data transmission.",
+      "features": {
+        "markdown": "Live Markdown preview with GitHub-flavored support",
+        "json": "Validate and format JSON with syntax highlighting",
+        "xml": "Format and validate XML documents",
+        "diff": "Compare two texts and highlight differences"
+      }
+    },
+    "passport": {
+      "title": "Passport Photo Sizer",
+      "description": "A tool to help you crop and resize passport photos to meet official dimension requirements. Get your photo ready for submission to passport agencies.",
+      "features": {
+        "resize": "Resize photos to official dimensions",
+        "crop": "Crop to perfect passport ratio",
+        "preview": "Live preview before download"
+      }
+    }
+  }
+}

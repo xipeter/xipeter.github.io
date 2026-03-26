@@ -1,0 +1,71 @@
+---
+import MainLayout from '../../../layouts/MainLayout.astro';
+import { getCollection } from 'astro:content';
+import { getTranslations, getAlternateLocale, getLocalizedPath } from '../../../i18n/translations';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'zh' } }
+  ];
+}
+
+const { lang } = Astro.params;
+const t = getTranslations(lang);
+
+const articles = await getCollection('articles');
+const sortedArticles = articles
+  .sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime());
+---
+
+<MainLayout 
+  title={t.articles.title} 
+  description={t.articles.subtitle} 
+  pageType="articles" 
+  showAds={false}
+  locale={lang}
+>
+  <h1>{t.articles.title}</h1>
+  <p class="intro">{t.articles.subtitle}</p>
+
+  <div class="articles-list">
+    {sortedArticles.map(article => (
+      <article class="article-item">
+        <a href={getLocalizedPath(`/articles/${article.slug}`, lang)}>
+          <h2>{article.data.title}</h2>
+        </a>
+        <p class="excerpt">{article.data.excerpt}</p>
+        <div class="meta">
+          <span class="category-tag">{article.data.category}</span>
+          <span class="date">{new Date(article.data.publishedAt).toLocaleDateString()}</span>
+          <span class="reading-time">{article.data.readingTime}</span>
+        </div>
+        <div class="tags">
+          {article.data.tags.map(tag => (
+            <span class="tag">#{tag}</span>
+          ))}
+        </div>
+      </article>
+    ))}
+    {sortedArticles.length === 0 && (
+      <p class="empty-state">{t.articles.noArticles}</p>
+    )}
+  </div>
+</MainLayout>
+
+<style>
+  h1 { margin-bottom: var(--spacing-sm); }
+  .intro { color: var(--text-secondary); margin-bottom: var(--spacing-xl); font-size: 1.125rem; }
+  .articles-list { display: flex; flex-direction: column; gap: var(--spacing-xl); }
+  .article-item { padding: var(--spacing-lg); background: var(--bg); border: 1px solid var(--border); border-radius: 8px; }
+  .article-item h2 { font-size: 1.5rem; margin-bottom: var(--spacing-sm); }
+  .article-item a { color: var(--text); text-decoration: none; }
+  .article-item a:hover { color: var(--primary); }
+  .excerpt { color: var(--text-secondary); margin-bottom: var(--spacing-md); }
+  .meta { display: flex; gap: var(--spacing-md); margin-bottom: var(--spacing-sm); font-size: 0.875rem; }
+  .category-tag { background: var(--bg-secondary); padding: 2px 8px; border-radius: 4px; }
+  .date, .reading-time { color: var(--text-secondary); }
+  .tags { display: flex; gap: var(--spacing-sm); flex-wrap: wrap; }
+  .tag { color: var(--primary); font-size: 0.875rem; }
+  .empty-state { text-align: center; padding: var(--spacing-xl); color: var(--text-secondary); }
+</style>

@@ -1,0 +1,61 @@
+---
+import MainLayout from '../../../layouts/MainLayout.astro';
+import { getCollection } from 'astro:content';
+import { getTranslations, getLocalizedPath } from '../../../i18n/translations';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles');
+  const locales = ['en', 'zh'];
+  
+  const paths = [];
+  for (const article of articles) {
+    for (const locale of locales) {
+      paths.push({ params: { lang: locale, slug: article.slug }, props: { article } });
+    }
+  }
+  return paths;
+}
+
+const { lang, slug } = Astro.params;
+const { article } = Astro.props;
+const t = getTranslations(lang);
+const { Content } = await article.render();
+---
+
+<MainLayout 
+  title={article.data.title}
+  description={article.data.excerpt}
+  pageType="article"
+  locale={lang}
+>
+  <article class="article-page">
+    <a href={getLocalizedPath('/articles', lang)} class="back-link">← {t.articles.backToHub}</a>
+    
+    <header>
+      <h1>{article.data.title}</h1>
+      <div class="meta">
+        <span class="category-tag">{article.data.category}</span>
+        <span class="date">{new Date(article.data.publishedAt).toLocaleDateString()}</span>
+        <span class="reading-time">{article.data.readingTime}</span>
+      </div>
+    </header>
+    
+    <div class="content">
+      <Content />
+    </div>
+  </article>
+</MainLayout>
+
+<style>
+  .article-page { max-width: 800px; margin: 0 auto; }
+  .back-link { display: inline-block; margin-bottom: var(--spacing-md); color: var(--primary); }
+  header { margin-bottom: var(--spacing-xl); }
+  h1 { margin-bottom: var(--spacing-md); }
+  .meta { display: flex; gap: var(--spacing-md); font-size: 0.875rem; color: var(--text-secondary); }
+  .category-tag { background: var(--bg-secondary); padding: 2px 8px; border-radius: 4px; }
+  .content { line-height: 1.7; }
+  .content :global(h2) { margin-top: var(--spacing-xl); margin-bottom: var(--spacing-md); }
+  .content :global(p) { margin-bottom: var(--spacing-md); color: var(--text-secondary); }
+  .content :global(code) { background: var(--bg-secondary); padding: 2px 6px; border-radius: 4px; font-size: 0.875rem; }
+  .content :global(pre) { background: var(--bg-secondary); padding: var(--spacing-md); border-radius: 8px; overflow-x: auto; margin-bottom: var(--spacing-md); }
+</style>

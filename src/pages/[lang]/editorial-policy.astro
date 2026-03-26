@@ -1,0 +1,49 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import { getTranslations, getLocalizedPath } from '../../i18n/translations';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'zh' } }
+  ];
+}
+
+const { lang } = Astro.params;
+const t = getTranslations(lang);
+---
+
+<MainLayout 
+  title={t.editorial.title} 
+  description={t.editorial.intro} 
+  pageType="editorial-policy"
+  showAds={false}
+  locale={lang}
+>
+  <article class="policy-page">
+    <h1>{t.editorial.title}</h1>
+
+    <section>
+      <p>{t.editorial.intro}</p>
+    </section>
+
+    <section>
+      <h2>{t.editorial.standardsTitle}</h2>
+      <ul>
+        {t.editorial.standards.map(item => (
+          <li>{item}</li>
+        ))}
+      </ul>
+    </section>
+  </article>
+</MainLayout>
+
+<style>
+  .policy-page { max-width: 800px; margin: 0 auto; }
+  h1 { margin-bottom: var(--spacing-xl); }
+  section { margin-bottom: var(--spacing-xl); }
+  section h2 { font-size: 1.5rem; margin-bottom: var(--spacing-md); }
+  section p { color: var(--text-secondary); line-height: 1.7; }
+  ul { list-style: disc; margin-left: var(--spacing-lg); color: var(--text-secondary); }
+  li { margin-bottom: var(--spacing-sm); line-height: 1.7; }
+</style>

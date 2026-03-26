@@ -1,0 +1,121 @@
+{
+  "nav": {
+    "home": "首页",
+    "articles": "文章",
+    "tools": "工具",
+    "promos": "优惠",
+    "about": "关于",
+    "contact": "联系"
+  },
+  "home": {
+    "heroTitle": "开发者工具与技术内容",
+    "heroSubtitle": "精心挑选的浏览器端开发者工具、实用技术文章和经过验证的促销活动。所有功能都在本地设备上运行——不会发送到外部服务器。",
+    "popularTools": "热门工具",
+    "viewAllTools": "查看全部工具 →",
+    "latestArticles": "最新文章",
+    "viewAllArticles": "查看全部文章 →",
+    "verifiedPromos": "已验证的优惠",
+    "viewAllPromos": "查看全部优惠 →",
+    "aboutTitle": "关于 TechHub",
+    "aboutText": "TechHub 是一个独立的科技资源网站，专注于提供实用的工具、优质的技术内容和经过验证的促销活动。我们优先考虑准确性、透明性和对开发者的实用性。",
+    "learnMore": "了解更多关于我们",
+    "editorialPolicy": "阅读我们的编辑政策",
+    "affiliateDisclosure": "我们的联盟披露"
+  },
+  "articles": {
+    "title": "技术文章",
+    "subtitle": "面向开发者和科技爱好者的深度教程、指南和技术内容。",
+    "noArticles": "暂无可用文章。",
+    "allArticles": "全部文章",
+    "backToHub": "返回文章"
+  },
+  "tools": {
+    "title": "开发者工具",
+    "subtitle": "浏览器端工具，面向开发者。所有工具在本地运行——数据不会发送到外部服务器。",
+    "noTools": "暂无可用工具。",
+    "categoryDeveloper": "开发者",
+    "categoryUtilities": "实用工具",
+    "backToHub": "返回工具"
+  },
+  "promos": {
+    "title": "已验证的优惠",
+    "subtitle": "经过测试和验证的促销活动。我们只推荐我们信任的产品和服务。",
+    "noPromos": "暂无可用优惠。",
+    "regionUS": "美国",
+    "rewardLabel": "奖励",
+    "regionLabel": "地区",
+    "backToHub": "返回优惠"
+  },
+  "about": {
+    "title": "关于 TechHub",
+    "missionTitle": "我们的使命",
+    "missionText": "TechHub 的创建是为了帮助开发者和科技爱好者找到实用的工具、优质的内容和诚实的推荐。我们相信透明、准确和实用。",
+    "focusTitle": "我们的重点",
+    "focusItems": [
+      "保护隐私的浏览器端开发者工具",
+      "深度技术文章和教程",
+      "来自可信来源的验证促销活动"
+    ]
+  },
+  "contact": {
+    "title": "联系我们",
+    "intro": "有问题或建议？我们很想听到您的声音。",
+    "emailLabel": "邮箱",
+    "email": "contact@techhub.example",
+    "note": "我们通常会在 2-3 个工作日内回复。"
+  },
+  "privacy": {
+    "title": "隐私政策",
+    "lastUpdated": "最后更新：2026年3月",
+    "intro": "您的隐私对我们很重要。本政策解释我们收集什么信息以及如何使用它。"
+  },
+  "terms": {
+    "title": "服务条款",
+    "lastUpdated": "最后更新：2026年3月",
+    "intro": "使用 TechHub 即表示您同意这些条款。请仔细阅读。"
+  },
+  "editorial": {
+    "title": "编辑政策",
+    "intro": "我们的编辑政策概述了我们对质量、准确性和透明性的承诺。",
+    "standardsTitle": "我们的标准",
+    "standards": [
+      "所有内容在发布前都会经过准确性审查",
+      "我们披露任何利益冲突",
+      "我们优先考虑真正的实用性而非联盟收入",
+      "当新信息可用时我们会更新内容"
+    ]
+  },
+  "affiliate": {
+    "title": "联盟披露",
+    "intro": "TechHub 参与联盟计划。这意味着当您点击产品或服务的链接时，我们可能会获得佣金。",
+    "transparency": "我们只推荐我们真正相信的产品和服务。",
+    "noCost": "这不会给您带来任何额外费用。"
+  },
+  "common": {
+    "readMore": "阅读更多 →",
+    "learnMore": "了解更多 →",
+    "viewAll": "查看全部 →",
+    "minRead": "分钟阅读"
+  },
+  "toolsContent": {
+    "previewer": {
+      "title": "内容预览器",
+      "description": "预览 Markdown、验证 JSON、格式化 XML 和比较文本差异——全部在浏览器中完成，无需数据传输。",
+      "features": {
+        "markdown": "实时 Markdown 预览，支持 GitHub 风格",
+        "json": "验证和格式化 JSON，带语法高亮",
+        "xml": "格式化和验证 XML 文档",
+        "diff": "比较两个文本并突出显示差异"
+      }
+    },
+    "passport": {
+      "title": "护照照片调整器",
+      "description": "帮助您裁剪和调整护照照片以符合官方尺寸要求。让您的照片准备好提交给护照机构。",
+      "features": {
+        "resize": "将照片调整到官方尺寸",
+        "crop": "裁剪到完美的护照比例",
+        "preview": "下载前实时预览"
+      }
+    }
+  }
+}

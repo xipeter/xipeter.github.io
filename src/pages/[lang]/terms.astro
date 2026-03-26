@@ -1,0 +1,51 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import { getTranslations, getLocalizedPath } from '../../i18n/translations';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'zh' } }
+  ];
+}
+
+const { lang } = Astro.params;
+const t = getTranslations(lang);
+---
+
+<MainLayout 
+  title={t.terms.title} 
+  description={t.terms.intro} 
+  pageType="terms"
+  showAds={false}
+  locale={lang}
+>
+  <article class="policy-page">
+    <h1>{t.terms.title}</h1>
+    <p class="last-updated">{t.terms.lastUpdated}</p>
+
+    <section>
+      <h2>{lang === 'en' ? 'Acceptance of Terms' : '接受条款'}</h2>
+      <p>{lang === 'en' ? 'By using this website, you agree to these terms. If you do not agree, please do not use this site.' : '使用本网站即表示您同意这些条款。如果您不同意，请不要使用本网站。'}</p>
+    </section>
+
+    <section>
+      <h2>{lang === 'en' ? 'Use of Content' : '内容使用'}</h2>
+      <p>{lang === 'en' ? 'All content on this website is for informational purposes only. We strive for accuracy but cannot guarantee all information is current or correct.' : '本网站上所有内容仅供信息参考。我们努力确保准确性，但不能保证所有信息都是最新的或正确的。'}</p>
+    </section>
+
+    <section>
+      <h2>{lang === 'en' ? 'User Responsibility' : '用户责任'}</h2>
+      <p>{lang === 'en' ? 'You are responsible for any actions taken based on information from this website.' : '您对根据本网站信息采取的任何行动负责。'}</p>
+    </section>
+  </article>
+</MainLayout>
+
+<style>
+  .policy-page { max-width: 800px; margin: 0 auto; }
+  h1 { margin-bottom: var(--spacing-sm); }
+  .last-updated { color: var(--text-secondary); margin-bottom: var(--spacing-xl); }
+  section { margin-bottom: var(--spacing-xl); }
+  section h2 { font-size: 1.5rem; margin-bottom: var(--spacing-md); }
+  section p { color: var(--text-secondary); line-height: 1.7; }
+</style>

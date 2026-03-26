@@ -2,6 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import type { PageType } from '../utils/adEligibility';
 import { getAdEligibility } from '../utils/adEligibility';
+import { getTranslations, getAlternateLocale, getLocalizedPath } from '../i18n/translations';
 
 interface Props {
   title: string;
@@ -9,10 +10,13 @@ interface Props {
   pageType: PageType;
   showAds?: boolean;
   noindex?: boolean;
+  locale?: string;
 }
 
-const { title, description, pageType, showAds = true, noindex = false } = Astro.props;
+const { title, description, pageType, showAds = true, noindex = false, locale = 'en' } = Astro.props;
 const adConfig = getAdEligibility(pageType);
+const t = getTranslations(locale);
+const alternateLocale = getAlternateLocale(locale);
 ---
 
 <BaseLayout 
@@ -20,16 +24,22 @@ const adConfig = getAdEligibility(pageType);
   description={description}
   pageType={pageType}
   noindex={noindex}
+  locale={locale}
 >
   <!-- Header -->
   <header class="site-header">
     <div class="container header-inner">
-      <a href="/" class="logo">TechHub</a>
+      <a href={getLocalizedPath('/', locale)} class="logo">TechHub</a>
       <nav class="main-nav">
-        <a href="/articles">Articles</a>
-        <a href="/tools">Tools</a>
-        <a href="/promos">Promos</a>
+        <a href={getLocalizedPath('/articles', locale)}>{t.nav.articles}</a>
+        <a href={getLocalizedPath('/tools', locale)}>{t.nav.tools}</a>
+        <a href={getLocalizedPath('/promos', locale)}>{t.nav.promos}</a>
       </nav>
+      <div class="lang-switch">
+        <a href={getLocalizedPath('/', alternateLocale)} class={locale === 'en' ? '' : ''}>
+          {alternateLocale === 'en' ? 'EN' : '中'}
+        </a>
+      </div>
     </div>
   </header>
 
@@ -63,22 +73,21 @@ const adConfig = getAdEligibility(pageType);
     <div class="container">
       <div class="footer-links">
         <div class="footer-section">
-          <h4>Content</h4>
-          <a href="/articles">Articles</a>
-          <a href="/tools">Tools</a>
-          <a href="/promos">Promos</a>
+          <h4>{t.nav.home}</h4>
+          <a href={getLocalizedPath('/articles', locale)}>{t.nav.articles}</a>
+          <a href={getLocalizedPath('/tools', locale)}>{t.nav.tools}</a>
+          <a href={getLocalizedPath('/promos', locale)}>{t.nav.promos}</a>
         </div>
         <div class="footer-section">
-          <h4>Company</h4>
-          <a href="/about">About</a>
-          <a href="/contact">Contact</a>
+          <h4>{t.nav.about}</h4>
+          <a href={getLocalizedPath('/contact', locale)}>{t.nav.contact}</a>
         </div>
         <div class="footer-section">
           <h4>Legal</h4>
-          <a href="/privacy-policy">Privacy Policy</a>
-          <a href="/terms">Terms of Service</a>
-          <a href="/editorial-policy">Editorial Policy</a>
-          <a href="/affiliate-disclosure">Affiliate Disclosure</a>
+          <a href={getLocalizedPath('/privacy-policy', locale)}>{t.privacy.title}</a>
+          <a href={getLocalizedPath('/terms', locale)}>{t.terms.title}</a>
+          <a href={getLocalizedPath('/editorial-policy', locale)}>{t.editorial.title}</a>
+          <a href={getLocalizedPath('/affiliate-disclosure', locale)}>{t.affiliate.title}</a>
         </div>
       </div>
       <p class="copyright">&copy; {new Date().getFullYear()} TechHub. All rights reserved.</p>
@@ -179,5 +188,24 @@ const adConfig = getAdEligibility(pageType);
       justify-content: center;
       gap: var(--spacing-md);
     }
+  }
+
+  .lang-switch {
+    margin-left: var(--spacing-md);
+  }
+
+  .lang-switch a {
+    padding: 4px 8px;
+    background: var(--bg-secondary);
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+  }
+
+  .lang-switch a:hover {
+    background: var(--primary);
+    color: white;
+    text-decoration: none;
   }
 </style>
