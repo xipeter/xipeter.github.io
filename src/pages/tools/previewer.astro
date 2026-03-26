@@ -1,5 +1,6 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
+import { StoreProvider } from '../../contexts/StoreContext';
 import App from '../../App';
 ---
 
@@ -8,5 +9,7 @@ import App from '../../App';
   description="Preview and validate Markdown, JSON, and XML content in your browser. Compare differences between two versions with the built-in diff viewer."
   pageType="tool"
 >
-  <App client:only="react" />
+  <StoreProvider client:load>
+    <App client:load />
+  </StoreProvider>
 </MainLayout>
