@@ -2,7 +2,7 @@
 import MainLayout from '../../layouts/MainLayout.astro';
 import { StoreProvider } from '../../contexts/StoreContext';
 import { I18nProvider } from '../../contexts/I18nContext';
-import App from '../../App';
+import { ToolWorkspace } from '../../components/tools/ToolWorkspace';
 ---
 
 <MainLayout 
@@ -12,7 +12,7 @@ import App from '../../App';
 >
   <StoreProvider client:load>
     <I18nProvider client:load>
-      <App client:load />
+      <ToolWorkspace client:load />
     </I18nProvider>
   </StoreProvider>
 </MainLayout>
