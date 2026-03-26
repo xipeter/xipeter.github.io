@@ -1,5 +1,6 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
+import { getCollection } from 'astro:content';
 import { getTranslations, getAlternateLocale, getLocalizedPath } from '../../i18n/translations';
 
 export function getStaticPaths() {
@@ -12,6 +13,24 @@ export function getStaticPaths() {
 const { lang } = Astro.params;
 const t = getTranslations(lang);
 const alternateLocale = getAlternateLocale(lang);
+
+// Get featured content from collections
+const articles = await getCollection('articles');
+const tools = await getCollection('tools');
+const promos = await getCollection('promos');
+
+const featuredArticles = articles
+  .filter(a => a.data.adEligible)
+  .sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime())
+  .slice(0, 3);
+
+const featuredTools = tools
+  .filter(t => t.data.adEligible)
+  .slice(0, 3);
+
+const featuredPromos = promos
+  .filter(p => p.data.adEligible)
+  .slice(0, 2);
 ---
 
 <MainLayout 
@@ -20,6 +39,11 @@ const alternateLocale = getAlternateLocale(lang);
   pageType="homepage"
   locale={lang}
 >
+  <!-- Language Switcher -->
+  <div class="lang-switch">
+    <a href={getLocalizedPath('/', alternateLocale)} class="lang-btn">{alternateLocale === 'en' ? '中文' : 'English'}</a>
+  </div>
+
   <!-- Hero Section -->
   <section class="hero">
     <h1>{t.home.heroTitle}</h1>
@@ -40,6 +64,20 @@ const alternateLocale = getAlternateLocale(lang);
           <span class="category-tag">{t.tools.categoryDeveloper}</span>
         </div>
       </a>
+      {featuredTools.map(tool => (
+        <a href={getLocalizedPath(`/tools/${tool.slug}`, lang)} class="card tool-card">
+          <h3>{tool.data.title}</h3>
+          <p class="card-excerpt">{tool.data.intro}</p>
+          <div class="card-footer">
+            <span class="category-tag">{tool.data.category === 'developer' ? t.tools.categoryDeveloper : t.tools.categoryUtilities}</span>
+          </div>
+        </a>
+      ))}
+      {featuredTools.length === 0 && (
+        <div class="empty-state">
+          <p>{t.tools.noTools}</p>
+        </div>
+      )}
     </div>
   </section>
 
@@ -49,6 +87,23 @@ const alternateLocale = getAlternateLocale(lang);
       <h2>{t.home.latestArticles}</h2>
       <a href={getLocalizedPath('/articles', lang)} class="view-all">{t.home.viewAllArticles}</a>
     </div>
+    <div class="card-grid">
+      {featuredArticles.map(article => (
+        <a href={getLocalizedPath(`/articles/${article.slug}`, lang)} class="card article-card">
+          <h3>{article.data.title}</h3>
+          <p class="excerpt">{article.data.excerpt}</p>
+          <div class="meta">
+            <span class="category-tag">{article.data.category}</span>
+            <span class="reading-time">{article.data.readingTime}</span>
+          </div>
+        </a>
+      ))}
+      {featuredArticles.length === 0 && (
+        <div class="empty-state">
+          <p>{t.articles.noArticles}</p>
+        </div>
+      )}
+    </div>
   </section>
 
   <!-- Verified Promotions -->
@@ -56,6 +111,20 @@ const alternateLocale = getAlternateLocale(lang);
     <div class="section-header">
       <h2>{t.home.verifiedPromos}</h2>
       <a href={getLocalizedPath('/promos', lang)} class="view-all">{t.home.viewAllPromos}</a>
+    </div>
+    <div class="promo-grid">
+      {featuredPromos.map(promo => (
+        <a href={getLocalizedPath(`/promos/${promo.slug}`, lang)} class="card promo-card">
+          <h3>{promo.data.brand}</h3>
+          <p class="reward">{promo.data.rewardSummary}</p>
+          <span class="region-tag">{promo.data.region}</span>
+        </a>
+      ))}
+      {featuredPromos.length === 0 && (
+        <div class="empty-state">
+          <p>{t.promos.noPromos}</p>
+        </div>
+      )}
     </div>
   </section>
 
@@ -72,6 +141,8 @@ const alternateLocale = getAlternateLocale(lang);
 </MainLayout>
 
 <style>
+  .lang-switch { text-align: right; margin-bottom: var(--spacing-md); }
+  .lang-btn { padding: 4px 12px; background: var(--bg-secondary); border-radius: 4px; font-size: 0.875rem; }
   .hero { text-align: center; padding: var(--spacing-xl) 0; border-bottom: 1px solid var(--border); margin-bottom: var(--spacing-xl); }
   .hero h1 { font-size: 2.5rem; margin-bottom: var(--spacing-md); }
   .hero-subtitle { font-size: 1.125rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
@@ -86,8 +157,15 @@ const alternateLocale = getAlternateLocale(lang);
   .card p, .card-excerpt { color: var(--text-secondary); font-size: 0.875rem; margin-bottom: var(--spacing-md); line-height: 1.5; }
   .card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
   .category-tag { display: inline-block; background: var(--bg-secondary); padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; color: var(--text-secondary); }
+  .excerpt { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .meta { display: flex; justify-content: space-between; align-items: center; }
+  .reading-time { font-size: 0.75rem; color: var(--text-secondary); }
+  .promo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--spacing-lg); }
+  .promo-card .reward { font-weight: 600; color: var(--primary); }
+  .region-tag { font-size: 0.75rem; color: var(--text-secondary); }
   .trust-section { background: var(--bg-secondary); padding: var(--spacing-xl); border-radius: 8px; text-align: center; margin-top: var(--spacing-xl); }
   .trust-section h2 { margin-bottom: var(--spacing-md); }
   .trust-section p { max-width: 600px; margin: 0 auto var(--spacing-lg); color: var(--text-secondary); }
   .trust-links { display: flex; justify-content: center; gap: var(--spacing-lg); flex-wrap: wrap; }
+  .empty-state { grid-column: 1 / -1; text-align: center; padding: var(--spacing-xl); color: var(--text-secondary); }
 </style>
