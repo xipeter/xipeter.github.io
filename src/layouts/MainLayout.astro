@@ -17,6 +17,10 @@ const { title, description, pageType, showAds = true, noindex = false, locale = 
 const adConfig = getAdEligibility(pageType);
 const t = getTranslations(locale);
 const alternateLocale = getAlternateLocale(locale);
+
+// For logo: use / for root page, localized path for other pages
+const isRootPage = Astro.url.pathname === '/' || Astro.url.pathname === '/index.html';
+const logoHref = isRootPage ? '/' : getLocalizedPath('/', locale);
 ---
 
 <BaseLayout 
@@ -29,14 +33,14 @@ const alternateLocale = getAlternateLocale(locale);
   <!-- Header -->
   <header class="site-header">
     <div class="container header-inner">
-      <a href={getLocalizedPath('/', locale)} class="logo">TechHub</a>
+      <a href={logoHref} class="logo">TechHub</a>
       <nav class="main-nav">
         <a href={getLocalizedPath('/articles', locale)}>{t.nav.articles}</a>
         <a href={getLocalizedPath('/tools', locale)}>{t.nav.tools}</a>
         <a href={getLocalizedPath('/promos', locale)}>{t.nav.promos}</a>
       </nav>
       <div class="lang-switch">
-        <a href={getLocalizedPath('/', alternateLocale)} class={locale === 'en' ? '' : ''}>
+        <a href={isRootPage ? getLocalizedPath('/', alternateLocale) : getLocalizedPath('/', alternateLocale)}>
           {alternateLocale === 'en' ? 'EN' : '中'}
         </a>
       </div>
