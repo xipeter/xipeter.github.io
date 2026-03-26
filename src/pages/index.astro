@@ -3,7 +3,6 @@ import MainLayout from '../layouts/MainLayout.astro';
 import { getCollection } from 'astro:content';
 
 const articles = await getCollection('articles');
-const news = await getCollection('news');
 const tools = await getCollection('tools');
 const promos = await getCollection('promos');
 
@@ -11,11 +10,6 @@ const featuredArticles = articles
   .filter(a => a.data.adEligible)
   .sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime())
   .slice(0, 3);
-
-const recentNews = news
-  .filter(n => n.data.adEligible)
-  .sort((a, b) => new Date(b.data.reviewedAt).getTime() - new Date(a.data.reviewedAt).getTime())
-  .slice(0, 4);
 
 const featuredTools = tools
   .filter(t => t.data.adEligible)
@@ -43,6 +37,11 @@ const featuredPromos = promos
       <a href="/tools" class="view-all">View all tools &rarr;</a>
     </div>
     <div class="card-grid">
+      <a href="/tools/previewer/" class="card tool-card">
+        <h3>Content Previewer</h3>
+        <p>Preview and validate Markdown, JSON, and XML content in your browser.</p>
+        <span class="category-tag">developer</span>
+      </a>
       {featuredTools.map(tool => (
         <a href={`/tools/${tool.slug}`} class="card tool-card">
           <h3>{tool.data.title}</h3>
@@ -78,32 +77,6 @@ const featuredPromos = promos
       {featuredArticles.length === 0 && (
         <div class="empty-state">
           <p>Articles coming soon!</p>
-        </div>
-      )}
-    </div>
-  </section>
-
-  <!-- Tech News -->
-  <section class="section">
-    <div class="section-header">
-      <h2>Tech News</h2>
-      <a href="/news" class="view-all">View all news &rarr;</a>
-    </div>
-    <div class="news-list">
-      {recentNews.map(item => (
-        <a href={`/news/${item.slug}`} class="news-item">
-          <span class="topic-tag">{item.data.topic}</span>
-          <h3>{item.data.title}</h3>
-          <p>{item.data.summary}</p>
-          <div class="news-meta">
-            <span>{item.data.sourceName}</span>
-            <span>{new Date(item.data.sourcePublishedAt).toLocaleDateString()}</span>
-          </div>
-        </a>
-      ))}
-      {recentNews.length === 0 && (
-        <div class="empty-state">
-          <p>News updates coming soon!</p>
         </div>
       )}
     </div>

@@ -6,7 +6,7 @@ const promos = await getCollection('promos');
 const sortedPromos = promos.sort((a, b) => b.data.lastVerified.localeCompare(a.data.lastVerified));
 ---
 
-<MainLayout title="Promotions" description="Verified tech promotions, referral programs, and special offers." pageType="promos">
+<MainLayout title="Promotions" description="Verified tech promotions, referral programs, and special offers." pageType="promos" showAds={false}>
   <h1>Verified Promotions</h1>
   <p class="intro">Curated promotional offers and referral programs for tech services. We verify these offers and provide clear disclosure.</p>
 

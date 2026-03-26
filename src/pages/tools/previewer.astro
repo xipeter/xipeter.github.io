@@ -1,0 +1,12 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import App from '../../App';
+---
+
+<MainLayout 
+  title="Content Previewer - Markdown JSON XML Diff Tool" 
+  description="Preview and validate Markdown, JSON, and XML content in your browser. Compare differences between two versions with the built-in diff viewer."
+  pageType="tool"
+>
+  <App client:only="react" />
+</MainLayout>

@@ -5,21 +5,13 @@ import { getCollection } from 'astro:content';
 const news = await getCollection('news');
 const sortedNews = news
   .sort((a, b) => new Date(b.data.reviewedAt).getTime() - new Date(a.data.reviewedAt).getTime());
-
-const topics = [...new Set(news.map(n => n.data.topic))];
 ---
 
-<MainLayout title="Tech News" description="Curated tech news with analysis and context." pageType="news">
+<MainLayout title="Tech News" description="Curated tech news with analysis and context." pageType="news" showAds={false} noindex={true}>
   <h1>Tech News</h1>
   <p class="intro">Curated tech news with original summaries and analysis. We don't just aggregate—we explain why it matters.</p>
 
-  <div class="filters">
-    <span class="filter-label">Topics:</span>
-    <a href="/news" class="filter-tag active">All</a>
-    {topics.map(topic => (
-      <a href={`/news/${topic}`} class="filter-tag">{topic}</a>
-    ))}
-  </div>
+
 
   <div class="news-list">
     {sortedNews.map(item => (
