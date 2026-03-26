@@ -9,18 +9,18 @@ const lightTheme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: '#0071e3',
+      main: '#1976d2',
     },
     secondary: {
-      main: '#86868b',
+      main: '#666',
     },
     background: {
-      default: '#f5f5f7',
+      default: '#fff',
       paper: '#ffffff',
     },
     text: {
-      primary: '#1d1d1f',
-      secondary: '#86868b',
+      primary: '#333',
+      secondary: '#666',
     },
   },
   typography: {

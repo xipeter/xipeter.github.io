@@ -18,7 +18,8 @@ import {
   useTheme,
   Menu,
   MenuItem,
-  Divider
+  Divider,
+  Chip
 } from '@mui/material';
 
 // Icons
@@ -106,62 +107,7 @@ export const Navigation = ({ currentFormat, onFormatChange }: NavigationProps): 
       <List>
         <ListItem disablePadding>
           <ListItemButton
-            component="a"
-            href="/"
-          >
-            <ListItemIcon sx={{ color: 'text.secondary' }}>
-              <HomeIcon />
-            </ListItemIcon>
-            <ListItemText primary="Home" />
-          </ListItemButton>
-        </ListItem>
-      </List>
-      <Divider />
-      <List>
-        <ListItem disablePadding>
-          <ListItemButton
-            selected={true}
-            disabled
-          >
-            <ListItemIcon sx={{ color: 'text.secondary' }}>
-              <MarkEmailReadIcon />
-            </ListItemIcon>
-            <ListItemText primary={t('app.title')} />
-          </ListItemButton>
-        </ListItem>
-        {formats.map((format) => (
-          <ListItem key={format.id} disablePadding>
-            <ListItemButton
-              selected={currentFormat === format.id}
-              onClick={() => {
-                onFormatChange(format.id);
-                if (isMobile) setMobileOpen(false);
-              }}
-              sx={{
-                '&.Mui-selected': {
-                  bgcolor: 'primary.main',
-                  color: 'white',
-                  '&:hover': {
-                    bgcolor: 'primary.dark',
-                  },
-                  '& .MuiListItemIcon-root': {
-                    color: 'white',
-                  },
-                },
-              }}
-            >
-              <ListItemIcon sx={{ color: currentFormat === format.id ? 'inherit' : 'text.secondary' }}>
-                {format.icon}
-              </ListItemIcon>
-              <ListItemText primary={t(format.labelKey)} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-        <ListItem disablePadding sx={{ mt: 2 }}>
-          <ListItemButton
-            component="a"
-            href="/about.html"
-            target="_blank"
+            href="/about"
           >
             <ListItemIcon sx={{ color: 'text.secondary' }}>
               <InfoIcon />
@@ -171,9 +117,7 @@ export const Navigation = ({ currentFormat, onFormatChange }: NavigationProps): 
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton
-            component="a"
-            href="/contact.html"
-            target="_blank"
+            href="/contact"
           >
             <ListItemIcon sx={{ color: 'text.secondary' }}>
               <ContactPageIcon />
@@ -183,9 +127,7 @@ export const Navigation = ({ currentFormat, onFormatChange }: NavigationProps): 
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton
-            component="a"
-            href="/privacy-policy.html"
-            target="_blank"
+            href="/privacy-policy"
           >
             <ListItemIcon sx={{ color: 'text.secondary' }}>
               <PrivacyTipIcon />
@@ -195,21 +137,7 @@ export const Navigation = ({ currentFormat, onFormatChange }: NavigationProps): 
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton
-            component="a"
-            href="/faq.html"
-            target="_blank"
-          >
-            <ListItemIcon sx={{ color: 'text.secondary' }}>
-              <HelpOutlineIcon />
-            </ListItemIcon>
-            <ListItemText primary="FAQ" />
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton
-            component="a"
-            href="/terms-of-service.html"
-            target="_blank"
+            href="/terms"
           >
             <ListItemIcon sx={{ color: 'text.secondary' }}>
               <PolicyIcon />
@@ -218,6 +146,24 @@ export const Navigation = ({ currentFormat, onFormatChange }: NavigationProps): 
           </ListItemButton>
         </ListItem>
       </List>
+      <Divider />
+      <Box sx={{ p: 2 }}>
+        <Typography variant="caption" color="text.secondary" sx={{ mb: 1, display: 'block' }}>
+          {t('nav.language')}
+        </Typography>
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+          {languages.map((lang) => (
+            <Chip
+              key={lang.code}
+              label={lang.flag}
+              size="small"
+              onClick={() => handleLanguageChange(lang.code)}
+              variant={i18n.language === lang.code ? 'filled' : 'outlined'}
+              sx={{ cursor: 'pointer' }}
+            />
+          ))}
+        </Box>
+      </Box>
     </Box>
   );
 
@@ -239,42 +185,9 @@ export const Navigation = ({ currentFormat, onFormatChange }: NavigationProps): 
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-            {t('app.title')}
+          <Typography variant="h6" noWrap component="a" href="/" sx={{ flexGrow: 1, color: 'inherit', textDecoration: 'none', fontWeight: 700 }}>
+            TechHub
           </Typography>
-          
-          {/* Language Switcher */}
-          <IconButton
-            color="inherit"
-            onClick={handleLanguageOpen}
-            title={t('nav.language')}
-          >
-            <LanguageIcon />
-          </IconButton>
-          <Menu
-            anchorEl={langAnchor}
-            open={Boolean(langAnchor)}
-            onClose={handleLanguageClose}
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'right',
-            }}
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-          >
-            {languages.map((lang) => (
-              <MenuItem
-                key={lang.code}
-                onClick={() => handleLanguageChange(lang.code)}
-                selected={i18n.language === lang.code}
-              >
-                <Typography variant="body2" sx={{ mr: 1 }}>{lang.flag}</Typography>
-                {lang.name}
-              </MenuItem>
-            ))}
-          </Menu>
         </Toolbar>
       </AppBar>
       <Box
