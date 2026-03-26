@@ -17,17 +17,13 @@ import {
   useMediaQuery,
   useTheme,
   Menu,
-  MenuItem
+  MenuItem,
+  Divider
 } from '@mui/material';
-
-// 2. MobX (none needed)
-
-// 3. External libraries (none needed)
-
-// 4. Internal modules (none needed)
 
 // Icons
 import MenuIcon from '@mui/icons-material/Menu';
+import HomeIcon from '@mui/icons-material/Home';
 import DescriptionIcon from '@mui/icons-material/Description';
 import CodeIcon from '@mui/icons-material/Code';
 import DataObjectIcon from '@mui/icons-material/DataObject';
@@ -91,11 +87,48 @@ export const Navigation = ({ currentFormat, onFormatChange }: NavigationProps): 
     <Box sx={{ bgcolor: 'background.paper', minHeight: '100%' }}>
       <Toolbar>
         <MarkEmailReadIcon sx={{ mr: 1, color: 'primary.main' }} />
-        <Typography variant="h6" noWrap>
-          {t('app.title')}
+        <Typography 
+          variant="h6" 
+          noWrap 
+          component="a" 
+          href="/" 
+          sx={{ 
+            textDecoration: 'none', 
+            color: 'inherit',
+            fontWeight: 700,
+            '&:hover': { color: 'primary.main' }
+          }}
+        >
+          TechHub
         </Typography>
       </Toolbar>
+      <Divider />
       <List>
+        <ListItem disablePadding>
+          <ListItemButton
+            component="a"
+            href="/"
+          >
+            <ListItemIcon sx={{ color: 'text.secondary' }}>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText primary="Home" />
+          </ListItemButton>
+        </ListItem>
+      </List>
+      <Divider />
+      <List>
+        <ListItem disablePadding>
+          <ListItemButton
+            selected={true}
+            disabled
+          >
+            <ListItemIcon sx={{ color: 'text.secondary' }}>
+              <MarkEmailReadIcon />
+            </ListItemIcon>
+            <ListItemText primary={t('app.title')} />
+          </ListItemButton>
+        </ListItem>
         {formats.map((format) => (
           <ListItem key={format.id} disablePadding>
             <ListItemButton
