@@ -31,6 +31,29 @@ const sortedPromos = promos.sort((a, b) => b.data.lastVerified.localeCompare(a.d
     )}
   </div>
 
+  <section class="supporting-content">
+    <h2>How We Verify Promotions</h2>
+    <p>Each promotion on this page goes through our verification process:</p>
+    <ul>
+      <li>We check that the offer terms are clearly stated on the provider's official website</li>
+      <li>We verify the referral link or promo code is valid and accessible</li>
+      <li>We note the date of last verification for transparency</li>
+      <li>We include clear disclosure when we may receive compensation</li>
+    </ul>
+  </section>
+
+  <section class="supporting-content">
+    <h2>About Our Promotional Content</h2>
+    <p>We focus on referral programs and promotions that we believe provide genuine value to our readers. We don't publish every offer we find—we curate based on:</p>
+    <ul>
+      <li>Clarity of terms and eligibility requirements</li>
+      <li>Reputation and reliability of the provider</li>
+      <li>Realistic reward values (no exaggerated claims)</li>
+      <li>Availability to general users (not invitation-only)</li>
+    </ul>
+    <p>Promotions can change at any time. Always verify current terms on the provider's official site before signing up.</p>
+  </section>
+
   <div class="disclosure-box">
     <h3>Our Promise</h3>
     <p>We only publish promotions we've verified or that come from trusted sources. All promotional content includes clear disclosure. Learn more in our <a href="/affiliate-disclosure">Affiliate Disclosure</a>.</p>
@@ -54,6 +77,12 @@ const sortedPromos = promos.sort((a, b) => b.data.lastVerified.localeCompare(a.d
   .disclosure-box h3 { font-size: 1rem; margin-bottom: var(--spacing-sm); }
   .disclosure-box p { font-size: 0.875rem; color: var(--text-secondary); }
   .disclosure-box a { color: var(--primary); }
+  
+  .supporting-content { margin-top: var(--spacing-xl); padding-top: var(--spacing-xl); border-top: 1px solid var(--border); }
+  .supporting-content h2 { font-size: 1.5rem; margin-bottom: var(--spacing-md); }
+  .supporting-content p { color: var(--text-secondary); margin-bottom: var(--spacing-md); line-height: 1.7; }
+  .supporting-content ul { padding-left: var(--spacing-lg); margin-bottom: var(--spacing-md); }
+  .supporting-content li { margin-bottom: var(--spacing-sm); color: var(--text-secondary); }
   
   .empty-state { grid-column: 1 / -1; text-align: center; padding: var(--spacing-xl); color: var(--text-secondary); }
   .empty-state .disclaimer { font-size: 0.875rem; margin-top: var(--spacing-md); }

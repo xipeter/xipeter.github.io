@@ -77,6 +77,25 @@ That means you can earn up to $300 in a single referral (1 internet + 5 mobile l
 - Referral program terms can change—always check Xfinity's official sources for current details
 - This offer is only available in areas where Xfinity services are provided
 - Rewards are considered taxable income in some circumstances—consult a tax professional if you have questions
+- Existing Xfinity customers cannot earn rewards by adding a line to their current plan
+
+## Situations Where Rewards May Not Apply
+
+- If the referred person already has existing Xfinity service
+- If the referral doesn't complete all required steps within 30 days
+- If either party cancels service before the 90-day waiting period ends
+- If the referred person doesn't pass credit check or meet eligibility requirements
+- If the referral is for business account instead of residential service (certain plans excluded)
+- If the referred person is located outside Xfinity serviceable areas
+
+## What Happens After Sign-Up
+
+After your referral signs up and installation is complete:
+
+1. **Waiting period begins** - Both parties must remain active with Xfinity in good standing for 90 days
+2. **Eligibility check** - Xfinity verifies both parties meet all program requirements
+3. **Reward delivery** - If eligibility is confirmed, both parties receive an email with reward details in 4-6 weeks
+4. **Credit application** - Rewards appear as bill credits on future Xfinity statements
 
 ## Use Our Referral Link
 

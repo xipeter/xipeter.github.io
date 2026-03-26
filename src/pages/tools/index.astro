@@ -70,6 +70,29 @@ const sortedTools = tools.sort((a, b) => a.data.title.localeCompare(b.data.title
       </div>
     </div>
   </section>
+
+  <section class="supporting-content">
+    <h2>When Browser-Based Tools Are the Right Fit</h2>
+    <p>These tools work best when you need quick validation or preview without setting up a local development environment. They're ideal for:</p>
+    <ul>
+      <li>Quick JSON or XML validation during development</li>
+      <li>Previewing Markdown documentation before committing</li>
+      <li>Comparing two versions of configuration or text</li>
+      <li>Working with sensitive data that shouldn't leave your machine</li>
+      <li>One-time tasks where installing a tool would be overkill</li>
+    </ul>
+  </section>
+
+  <section class="supporting-content">
+    <h2>When You Might Need Something Else</h2>
+    <p>For larger projects or continuous workflows, consider using dedicated local tools or IDE extensions:</p>
+    <ul>
+      <li>Working with very large files (browser memory limits apply)</li>
+      <li>Automated build pipelines that require programmatic validation</li>
+      <li>Advanced syntax checking or linting beyond basic validation</li>
+      <li>When you need to process many files in batch</li>
+    </ul>
+  </section>
 </MainLayout>
 
 <style>

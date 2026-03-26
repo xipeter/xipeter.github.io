@@ -23,10 +23,10 @@ const featuredPromos = promos
 <MainLayout title="TechHub" pageType="homepage">
   <!-- Hero Section -->
   <section class="hero">
-    <h1>TechHub - Developer Tools & Technical Content</h1>
+    <h1>Developer Tools & Technical Content</h1>
     <p class="hero-subtitle">
-      A curated tech utility and content hub featuring developer tools, 
-      technical articles, curated tech news, and verified promotions.
+      A curated selection of browser-based developer tools, practical technical articles, 
+      and verified promotions. Everything runs locally on your device—nothing is sent to external servers.
     </p>
   </section>
 
@@ -39,14 +39,18 @@ const featuredPromos = promos
     <div class="card-grid">
       <a href="/tools/previewer" class="card tool-card">
         <h3>Content Previewer</h3>
-        <p>Preview and validate Markdown, JSON, and XML content in your browser.</p>
-        <span class="category-tag">developer</span>
+        <p class="card-excerpt">Preview Markdown, validate JSON, format XML, and compare text differences—all in your browser with no data transmission.</p>
+        <div class="card-footer">
+          <span class="category-tag">developer</span>
+        </div>
       </a>
       {featuredTools.map(tool => (
         <a href={`/tools/${tool.slug}`} class="card tool-card">
           <h3>{tool.data.title}</h3>
-          <p>{tool.data.intro}</p>
-          <span class="category-tag">{tool.data.category}</span>
+          <p class="card-excerpt">{tool.data.intro}</p>
+          <div class="card-footer">
+            <span class="category-tag">{tool.data.category}</span>
+          </div>
         </a>
       ))}
       {featuredTools.length === 0 && (
@@ -188,10 +192,18 @@ const featuredPromos = promos
     margin-bottom: var(--spacing-sm);
   }
 
-  .card p {
+  .card p, .card-excerpt {
     color: var(--text-secondary);
     font-size: 0.875rem;
     margin-bottom: var(--spacing-md);
+    line-height: 1.5;
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
   }
 
   .category-tag {
