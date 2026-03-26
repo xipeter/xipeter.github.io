@@ -226,8 +226,7 @@ const App = observer((): React.JSX.Element => {
         sx={{
           flexGrow: 1,
           p: 3,
-          width: { md: `calc(100% - ${drawerWidth}px)` },
-          mt: '64px'
+          width: { md: `calc(100% - ${drawerWidth}px)` }
         }}
       >
         <Container maxWidth="lg">

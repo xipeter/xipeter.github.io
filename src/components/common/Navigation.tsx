@@ -10,27 +10,21 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  AppBar,
-  Toolbar,
   Typography,
-  IconButton,
+  Toolbar,
   useMediaQuery,
   useTheme,
-  Menu,
-  MenuItem,
   Divider,
   Chip
 } from '@mui/material';
 
 // Icons
-import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
 import DescriptionIcon from '@mui/icons-material/Description';
 import CodeIcon from '@mui/icons-material/Code';
 import DataObjectIcon from '@mui/icons-material/DataObject';
 import MarkEmailReadIcon from '@mui/icons-material/MarkEmailRead';
 import DifferenceIcon from '@mui/icons-material/Difference';
-import LanguageIcon from '@mui/icons-material/Language';
 import InfoIcon from '@mui/icons-material/Info';
 import ContactPageIcon from '@mui/icons-material/ContactPage';
 import PrivacyTipIcon from '@mui/icons-material/PrivacyTip';
@@ -63,26 +57,17 @@ const languages = [
 export const Navigation = ({ currentFormat, onFormatChange }: NavigationProps): React.JSX.Element => {
   const { t, i18n } = useTranslation();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [langAnchor, setLangAnchor] = useState<null | HTMLElement>(null);
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
-  const handleLanguageOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setLangAnchor(event.currentTarget);
-  };
-
-  const handleLanguageClose = () => {
-    setLangAnchor(null);
-  };
-
   const handleLanguageChange = (langCode: string) => {
     i18n.changeLanguage(langCode);
-    handleLanguageClose();
   };
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   const drawer = (
     <Box sx={{ bgcolor: 'background.paper', minHeight: '100%' }}>
@@ -169,27 +154,6 @@ export const Navigation = ({ currentFormat, onFormatChange }: NavigationProps): 
 
   return (
     <>
-      <AppBar
-        position="fixed"
-        sx={{
-          width: { md: `calc(100% - ${drawerWidth}px)` },
-          ml: { md: `${drawerWidth}px` },
-        }}
-      >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { md: 'none' } }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="a" href="/" sx={{ flexGrow: 1, color: 'inherit', textDecoration: 'none', fontWeight: 700 }}>
-            TechHub
-          </Typography>
-        </Toolbar>
-      </AppBar>
       <Box
         component="nav"
         sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}
