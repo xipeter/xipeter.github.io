@@ -74,7 +74,7 @@ export function getAdEligibility(pageType: PageType, hasContent: boolean = true)
 
 function getSlotPositions(pageType: PageType): string[] {
   const positions: Record<PageType, string[]> = {
-    homepage: ['top', 'sidebar', 'bottom'],
+    homepage: ['sidebar', 'bottom'],
     articles: ['sidebar', 'bottom'],
     article: ['sidebar', 'bottom', 'in-article'],
     news: ['sidebar', 'bottom'],

@@ -191,6 +191,48 @@ export const ToolWorkspace = observer((): React.JSX.Element => {
             </Paper>
           )}
         </Box>
+
+        <Box sx={{ mt: 4, pt: 3, borderTop: '1px solid', borderColor: 'divider' }}>
+          <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
+            What Each Format Does
+          </Typography>
+          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)' }, gap: 2, mb: 3 }}>
+            <Paper elevation={0} sx={{ p: 2, bgcolor: 'action.hover', borderRadius: 2 }}>
+              <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1 }}>Markdown</Typography>
+              <Typography variant="body2" color="text.secondary">Preview rendered Markdown with syntax-highlighted code blocks. Great for documentation, notes, and README files.</Typography>
+            </Paper>
+            <Paper elevation={0} sx={{ p: 2, bgcolor: 'action.hover', borderRadius: 2 }}>
+              <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1 }}>JSON</Typography>
+              <Typography variant="body2" color="text.secondary">Validate and pretty-print JSON. Spot syntax errors instantly and explore nested data structures.</Typography>
+            </Paper>
+            <Paper elevation={0} sx={{ p: 2, bgcolor: 'action.hover', borderRadius: 2 }}>
+              <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1 }}>XML</Typography>
+              <Typography variant="body2" color="text.secondary">Parse and validate XML documents. Check well-formedness and view hierarchical structure.</Typography>
+            </Paper>
+            <Paper elevation={0} sx={{ p: 2, bgcolor: 'action.hover', borderRadius: 2 }}>
+              <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1 }}>Diff</Typography>
+              <Typography variant="body2" color="text.secondary">Compare two versions of text side-by-side. Highlight additions, deletions, and changes with color-coded diffs.</Typography>
+            </Paper>
+          </Box>
+
+          <Paper elevation={0} sx={{ p: 2, bgcolor: 'background.paper', border: '1px solid', borderColor: 'divider', borderRadius: 2, mb: 3 }}>
+            <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1 }}>Privacy Note</Typography>
+            <Typography variant="body2" color="text.secondary">
+              All processing happens locally in your browser. Your content is never sent to any server, stored, or logged. 
+              When you refresh the page, your data is cleared automatically.
+            </Typography>
+          </Paper>
+
+          <Box>
+            <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1 }}>Tips for Effective Previewing</Typography>
+            <Box component="ul" sx={{ pl: 2, color: 'text.secondary' }}>
+              <li><Typography variant="body2">Use the format toggle to switch between Markdown, JSON, XML, and Diff modes</Typography></li>
+              <li><Typography variant="body2">Click "Copy" to copy the raw content to your clipboard</Typography></li>
+              <li><Typography variant="body2">Switch between Edit and Preview modes to see how your content will render</Typography></li>
+              <li><Typography variant="body2">For large files, the preview updates in real-time as you type</Typography></li>
+            </Box>
+          </Box>
+        </Box>
       </Container>
     </Box>
   );
