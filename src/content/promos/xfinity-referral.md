@@ -3,7 +3,7 @@ brand: "Xfinity"
 type: "referral"
 region: "United States"
 eligibility: "Existing Xfinity Internet customers can refer friends. Referred person must be a new Xfinity Internet and/or Xfinity Mobile customer. Cannot refer existing mobile lines."
-rewardSummary: "$50 for Xfinity Internet + $50 per mobile line (up to 5 lines)"
+rewardSummary: "Get $50 off Internet + $50 off each mobile line"
 lastVerified: "2026-03-26"
 stepsToRedeem:
   - "Review and accept the Refer-a-Friend program Terms and Conditions"

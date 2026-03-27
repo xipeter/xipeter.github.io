@@ -90,13 +90,19 @@ const featuredPromos = promos
       <a href={getLocalizedPath('/promos', locale)} class="view-all">{t.home.viewAllPromos}</a>
     </div>
     <div class="promo-grid">
-      {featuredPromos.map(promo => (
-        <a href={getLocalizedPath(`/promos/${promo.slug}`, locale)} class="card promo-card">
-          <h3>{promo.data.brand}</h3>
-          <p class="reward">{promo.data.rewardSummary}</p>
-          <span class="region-tag">{promo.data.region}</span>
-        </a>
-      ))}
+      {featuredPromos.map(promo => {
+        const isXfinity = promo.slug === 'xfinity-referral';
+        const cardTitle = isXfinity
+          ? 'Get $50 Off Xfinity Internet'
+          : promo.data.brand;
+        return (
+          <a href={getLocalizedPath(`/promos/${promo.slug}`, locale)} class="card promo-card">
+            <span class="promo-brand">{promo.data.brand}</span>
+            <h3>{cardTitle}</h3>
+            <p class="reward">{promo.data.rewardSummary}</p>
+          </a>
+        );
+      })}
       {featuredPromos.length === 0 && (
         <div class="empty-state">
           <p>{t.promos.noPromos}</p>
@@ -135,8 +141,8 @@ const featuredPromos = promos
   .meta { display: flex; justify-content: space-between; align-items: center; }
   .reading-time { font-size: 0.75rem; color: var(--text-secondary); }
   .promo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--spacing-lg); }
+  .promo-brand { display: inline-block; background: var(--primary); color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; margin-bottom: var(--spacing-sm); }
   .promo-card .reward { font-weight: 600; color: var(--primary); }
-  .region-tag { font-size: 0.75rem; color: var(--text-secondary); }
   .trust-section { background: var(--bg-secondary); padding: var(--spacing-xl); border-radius: 8px; text-align: center; margin-top: var(--spacing-xl); }
   .trust-section h2 { margin-bottom: var(--spacing-md); }
   .trust-section p { max-width: 600px; margin: 0 auto var(--spacing-lg); color: var(--text-secondary); }
