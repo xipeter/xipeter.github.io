@@ -47,11 +47,14 @@ export function getLocalizedPath(basePath: string, locale: string): string {
 
 export function getPathWithoutLocale(path: string): string {
   // Handle locale root pages (/en.html, /zh.html)
-  if (path === '/en.html') return '/';
-  if (path === '/zh.html') return '/';
+  if (path === '/en.html' || path === '/en' || path === '/en/') return '/';
+  if (path === '/zh.html' || path === '/zh' || path === '/zh/') return '/';
   
   // Remove trailing slash
   let cleanPath = path.endsWith('/') ? path.slice(0, -1) : path;
+  
+  // Remove .html extension if present
+  cleanPath = cleanPath.replace(/\.html$/, '');
   
   const segments = cleanPath.split('/').filter(Boolean);
   
