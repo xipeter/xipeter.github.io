@@ -27,7 +27,8 @@
     "subtitle": "面向开发者和科技爱好者的深度教程、指南和技术内容。",
     "noArticles": "暂无可用文章。",
     "allArticles": "全部文章",
-    "backToHub": "返回文章"
+    "backToHub": "返回文章",
+    "translationPending": "中文版本整理中，当前提供英文原文。"
   },
   "tools": {
     "title": "开发者工具",
