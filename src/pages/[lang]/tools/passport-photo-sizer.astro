@@ -12,6 +12,78 @@ export function getStaticPaths() {
 
 const { lang } = Astro.params;
 const t = getTranslations(lang);
+
+const siteUrl = 'https://xipeter.github.io';
+const pageUrl = `${siteUrl}/${lang}/tools/passport-photo-sizer/`;
+
+const appJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": lang === 'en' ? "Passport Photo Maker" : "在线证件照制作工具",
+  "description": t.toolsContent.passport.description,
+  "url": pageUrl,
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any (Web Browser)",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Remove photo background automatically",
+    "Resize to official passport dimensions",
+    "US, UK, EU, Canada, Australia, China presets",
+    "Arrange on paper for printing",
+    "300 DPI print-ready output",
+    "No upload required — browser-based"
+  ]
+});
+
+const faqItems = [
+  {
+    q: lang === 'en' ? "Is this passport photo tool really free?" : "这个证件照工具真的免费吗？",
+    a: lang === 'en'
+      ? "Yes, completely free. No registration, no watermark, no hidden fees."
+      : "是的，完全免费。无需注册，无水印，无隐藏费用。"
+  },
+  {
+    q: lang === 'en' ? "Do you upload or store my photos?" : "你们会上传或保存我的照片吗？",
+    a: lang === 'en'
+      ? "No. Everything runs locally in your browser. Your photos never leave your device."
+      : "不会。所有处理都在您的浏览器中本地完成。您的照片不会离开您的设备。"
+  },
+  {
+    q: lang === 'en' ? "Can I use this for visa photos and ID photos?" : "可以用来制作签证照和身份证照吗？",
+    a: lang === 'en'
+      ? "Yes. The dimension presets cover the most common passport, visa, and ID photo sizes."
+      : "可以。尺寸预设涵盖了最常见的护照、签证和身份证照片尺寸。"
+  },
+  {
+    q: lang === 'en' ? "How do I print the passport photos?" : "如何打印证件照？",
+    a: lang === 'en'
+      ? "Choose your paper size, set the number of copies, and download the print-ready PNG. Print at actual size on photo paper."
+      : "选择纸张大小，设置份数，下载打印就绪的 PNG。在照片纸上按实际尺寸打印即可。"
+  },
+  {
+    q: lang === 'en' ? "What passport photo sizes are supported?" : "支持哪些护照照片尺寸？",
+    a: lang === 'en'
+      ? "US (2x2 inch), UK (35x45mm), EU/Schengen (35x45mm), Canada (50x70mm), Australia (35x45mm), and China (33x48mm)."
+      : "美国 (2x2英寸)、英国 (35x45mm)、欧盟/申根 (35x45mm)、加拿大 (50x70mm)、澳大利亚 (35x45mm)、中国 (33x48mm)。"
+  }
+];
+
+const faqJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map(item => ({
+    "@type": "Question",
+    "name": item.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.a
+    }
+  }))
+});
 ---
 
 <MainLayout
@@ -20,5 +92,63 @@ const t = getTranslations(lang);
   pageType="tool"
   locale={lang}
 >
+  <script type="application/ld+json" set:html={appJsonLd} />
+  <script type="application/ld+json" set:html={faqJsonLd} />
+
   <PassportPhotoTool client:load locale={lang} />
+
+  <section class="seo-content">
+    <h2>{lang === 'en' ? 'Free Online Passport Photo Maker' : '免费在线证件照制作'}</h2>
+    <p>{lang === 'en'
+      ? 'Make passport photos at home for free. This online passport photo tool removes your background, resizes to the exact dimensions required by your country, and arranges copies on a sheet ready to print — all without uploading your photo to any server.'
+      : '免费在家制作证件照。这款在线证件照工具可自动去除背景换白底，按您所在国家的要求调整到精确尺寸，并将多张照片排列在一张纸上方便打印——全程无需上传照片到任何服务器。'}</p>
+
+    <h3>{lang === 'en' ? 'Supported Countries & Sizes' : '支持的国家和尺寸'}</h3>
+    <ul>
+      <li><strong>{lang === 'en' ? 'US Passport Photo' : '美国护照照片'}</strong> — 2×2 {lang === 'en' ? 'inch' : '英寸'} (600×600 px)</li>
+      <li><strong>{lang === 'en' ? 'UK Passport Photo' : '英国护照照片'}</strong> — 35×45 mm (413×531 px)</li>
+      <li><strong>{lang === 'en' ? 'EU / Schengen Visa Photo' : '欧盟/申根签证照片'}</strong> — 35×45 mm (413×531 px)</li>
+      <li><strong>{lang === 'en' ? 'Canada Passport Photo' : '加拿大护照照片'}</strong> — 50×70 mm (591×827 px)</li>
+      <li><strong>{lang === 'en' ? 'Australia Passport Photo' : '澳大利亚护照照片'}</strong> — 35×45 mm (413×531 px)</li>
+      <li><strong>{lang === 'en' ? 'China Passport / ID Photo' : '中国护照/身份证照片'}</strong> — 33×48 mm (390×567 px)</li>
+    </ul>
+
+    <h3>{lang === 'en' ? 'Why Make Passport Photos Online?' : '为什么在线制作证件照？'}</h3>
+    <p>{lang === 'en'
+      ? 'Photo shops charge $10-15 for passport photos. With this free tool, you can make them at home in minutes. Take a photo with your phone, upload it here, and the tool handles the rest — background removal, resizing, and print layout. Download the result and print at home or at any photo kiosk.'
+      : '照相馆通常收费 30-50 元制作证件照。使用这款免费工具，您可以在家几分钟内完成。用手机拍照，上传到这里，工具会自动处理——去除背景、调整尺寸、排版打印。下载结果后在家打印或到照片冲印店打印即可。'}</p>
+
+    <h3>{lang === 'en' ? 'Frequently Asked Questions' : '常见问题'}</h3>
+    <div class="faq-list">
+      {faqItems.map(item => (
+        <details class="faq-item">
+          <summary>{item.q}</summary>
+          <p>{item.a}</p>
+        </details>
+      ))}
+    </div>
+  </section>
 </MainLayout>
+
+<style>
+  .seo-content {
+    max-width: 800px;
+    margin: var(--spacing-xl) auto 0;
+    padding-top: var(--spacing-xl);
+    border-top: 1px solid var(--border);
+  }
+  .seo-content h2 { font-size: 1.5rem; margin-bottom: var(--spacing-md); }
+  .seo-content h3 { font-size: 1.25rem; margin-top: var(--spacing-xl); margin-bottom: var(--spacing-md); }
+  .seo-content p { color: var(--text-secondary); line-height: 1.7; margin-bottom: var(--spacing-md); }
+  .seo-content ul { list-style: none; padding: 0; margin-bottom: var(--spacing-md); }
+  .seo-content li { padding: var(--spacing-sm) 0; color: var(--text-secondary); border-bottom: 1px solid var(--border); }
+  .seo-content li strong { color: var(--text); }
+  .faq-list { display: flex; flex-direction: column; gap: var(--spacing-sm); }
+  .faq-item { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .faq-item summary { padding: var(--spacing-md) var(--spacing-lg); font-weight: 600; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after { content: '+'; font-size: 1.25rem; color: var(--text-secondary); }
+  .faq-item[open] summary::after { content: '-'; }
+  .faq-item[open] summary { border-bottom: 1px solid var(--border); }
+  .faq-item p { padding: var(--spacing-md) var(--spacing-lg); color: var(--text-secondary); line-height: 1.7; margin: 0; }
+</style>
