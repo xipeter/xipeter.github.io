@@ -100,8 +100,8 @@ const faqJsonLd = promo.data.faq && promo.data.faq.length > 0 ? JSON.stringify({
       </div>
       <h1>{isXfinity ? (lang === 'en' ? 'Xfinity Refer-a-Friend Program' : 'Xfinity 推荐好友计划') : promo.data.brand}</h1>
       <p class="hero-subtitle">{lang === 'en'
-        ? 'Both you and your friend get rewarded when they sign up for Xfinity Internet or Mobile.'
-        : '当好友注册 Xfinity 互联网或移动服务时，您和好友都将获得奖励。'}</p>
+        ? 'Sign up for Xfinity Internet or Mobile through this referral link and get a $50 bill credit. I get one too — win-win.'
+        : '通过此推荐链接注册 Xfinity 互联网或移动服务，即可获得 $50 账单抵免。我也能获得一份——双赢。'}</p>
     </header>
 
     {isXfinity && (
@@ -109,18 +109,18 @@ const faqJsonLd = promo.data.faq && promo.data.faq.length > 0 ? JSON.stringify({
         <div class="reward-cards">
           <div class="reward-card">
             <span class="reward-amount">$50</span>
-            <span class="reward-label">{lang === 'en' ? 'Internet Referral' : '互联网推荐'}</span>
-            <span class="reward-detail">{lang === 'en' ? 'Per new Internet sign-up' : '每位新互联网注册用户'}</span>
+            <span class="reward-label">{lang === 'en' ? 'You Get' : '您获得'}</span>
+            <span class="reward-detail">{lang === 'en' ? 'Bill credit for signing up for Internet' : '注册互联网服务获得账单抵免'}</span>
           </div>
           <div class="reward-card">
             <span class="reward-amount">$50</span>
             <span class="reward-label">{lang === 'en' ? 'Per Mobile Line' : '每条移动线路'}</span>
-            <span class="reward-detail">{lang === 'en' ? 'Up to 5 lines ($250 max)' : '最多 5 条线路（最高 $250）'}</span>
+            <span class="reward-detail">{lang === 'en' ? 'Add mobile and save more (up to 5 lines)' : '添加移动服务享更多优惠（最多 5 条线路）'}</span>
           </div>
           <div class="reward-card accent">
             <span class="reward-amount">{lang === 'en' ? 'Up to $300' : '最高 $300'}</span>
-            <span class="reward-label">{lang === 'en' ? 'Total Savings' : '总节省金额'}</span>
-            <span class="reward-detail">{lang === 'en' ? 'Internet + 5 mobile lines' : '互联网 + 5 条移动线路'}</span>
+            <span class="reward-label">{lang === 'en' ? 'Your Total Savings' : '您的总节省金额'}</span>
+            <span class="reward-detail">{lang === 'en' ? 'Internet + mobile lines combined' : '互联网 + 移动线路合计'}</span>
           </div>
         </div>
       </section>
