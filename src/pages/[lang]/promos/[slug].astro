@@ -25,11 +25,11 @@ const isXfinity = slug === 'xfinity-referral';
 const referralLink = 'https://referafriend.xfinity.com/ZONGFEI!cbb4bae738!a';
 
 const zhSteps: Record<number, string> = {
-  0: '查看并接受推荐计划条款和条件',
-  1: '从您的 Xfinity 仪表板分享您的推荐链接',
-  2: '朋友有 30 天时间接受邀请并添加符合条件的服务',
-  3: '双方必须保持良好信誉 90 天',
-  4: '符合资格后 4-6 周内通过电子邮件发送奖励'
+  0: '点击本页的推荐链接，前往 Xfinity 官方注册页面',
+  1: '选择您的 Xfinity 互联网或移动套餐并完成注册',
+  2: '安装并激活您的服务',
+  3: '保持服务正常使用 90 天',
+  4: '90 天后 4-6 周内通过电子邮件收到 $50 账单抵免'
 };
 
 function getStepText(step: string, index: number): string {
@@ -134,7 +134,7 @@ const faqJsonLd = promo.data.faq && promo.data.faq.length > 0 ? JSON.stringify({
     )}
 
     <section class="how-it-works">
-      <h2>{t.promos.howItWorksTitle}</h2>
+      <h2>{isXfinity ? (lang === 'en' ? 'How to Get Your $50 Credit' : '如何获得您的 $50 抵免') : t.promos.howItWorksTitle}</h2>
       <div class="steps">
         {(promo.data.stepsToRedeem || []).map((step: string, i: number) => (
           <div class="step">
@@ -157,7 +157,7 @@ const faqJsonLd = promo.data.faq && promo.data.faq.length > 0 ? JSON.stringify({
     )}
 
     <section class="eligibility">
-      <h2>{t.promos.eligibilityTitle}</h2>
+      <h2>{isXfinity ? (lang === 'en' ? 'Are You Eligible?' : '您符合条件吗？') : t.promos.eligibilityTitle}</h2>
       <p>{promo.data.eligibility}</p>
     </section>
 
