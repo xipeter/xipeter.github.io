@@ -139,7 +139,8 @@
     },
     "passport": {
       "title": "Passport Photo Sizer",
-      "description": "A tool to help you crop and resize passport photos to meet official dimension requirements. Get your photo ready for submission to passport agencies.",
+      "pageTitle": "Passport Photo Sizer — Crop & Print for Any Country",
+      "description": "Upload a photo, remove the background, resize to official passport dimensions, and arrange on paper for printing. Free, runs entirely in your browser.",
       "features": {
         "resize": "Resize photos to official dimensions",
         "crop": "Crop to perfect passport ratio",

@@ -1,0 +1,24 @@
+---
+import MainLayout from '../../../layouts/MainLayout.astro';
+import { getTranslations } from '../../../i18n/index';
+import { PassportPhotoTool } from '../../../components/tools/PassportPhotoTool';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'zh' } }
+  ];
+}
+
+const { lang } = Astro.params;
+const t = getTranslations(lang);
+---
+
+<MainLayout
+  title={t.toolsContent.passport.pageTitle}
+  description={t.toolsContent.passport.description}
+  pageType="tool"
+  locale={lang}
+>
+  <PassportPhotoTool client:load locale={lang} />
+</MainLayout>
