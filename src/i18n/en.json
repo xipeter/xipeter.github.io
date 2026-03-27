@@ -44,7 +44,13 @@
     "regionUS": "United States",
     "rewardLabel": "Reward",
     "regionLabel": "Region",
-    "backToHub": "Back to Promos"
+    "backToHub": "Back to Promos",
+    "referralCtaTitle": "Use This Referral Link",
+    "referralCtaText": "Ready to sign up for Xfinity? Use our referral link to get started and support TechHub at no extra cost to you.",
+    "referralCtaButton": "Open Official Referral Page",
+    "referralCtaNote": "Check eligibility and terms on the official Xfinity referral page.",
+    "disclosureLabel": "Disclosure",
+    "disclosureText": "This page contains a referral link. We may receive compensation for successful referrals. Final terms and eligibility are determined by Xfinity."
   },
   "about": {
     "title": "About TechHub",

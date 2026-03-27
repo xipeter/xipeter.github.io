@@ -19,9 +19,10 @@ export async function getStaticPaths() {
 const { lang, slug } = Astro.params;
 const { promo } = Astro.props;
 const t = getTranslations(lang);
+const { Content } = await promo.render();
 
 const isXfinity = slug === 'xfinity-referral';
-const title = isXfinity ? (lang === 'en' ? 'Xfinity Referral Program' : 'Xfinity 推荐计划') : promo.data.brand;
+const referralLink = 'https://referafriend.xfinity.com/ZONGFEI!cbb4bae738!a';
 
 const zhSteps = [
   '查看并接受推荐计划条款和条件',
@@ -38,35 +39,48 @@ function getStepText(step: string, index: number): string {
 ---
 
 <MainLayout 
-  title={title}
+  title={isXfinity ? (lang === 'en' ? 'Xfinity Referral Program' : 'Xfinity 推荐计划') : promo.data.brand}
   description={promo.data.eligibility}
   pageType="promo"
   locale={lang}
 >
-  <div class="promo-page">
+  <article class="promo-page">
     <a href={getLocalizedPath('/promos', lang)} class="back-link">← {t.promos.backToHub}</a>
     
-    <div class="brand-badge">{promo.data.brand}</div>
-    <h1>{title}</h1>
-    
-    <div class="reward-box">
-      <span class="label">{t.promos.rewardLabel}:</span>
-      <span class="value">{promo.data.rewardSummary}</span>
-    </div>
-    
-    <div class="meta">
-      <span class="region">{promo.data.region === 'United States' ? t.promos.regionUS : promo.data.region}</span>
-      <span class="verified">Verified: {promo.data.lastVerified}</span>
-    </div>
-    
-    <section>
+    <header class="promo-header">
+      <span class="brand-badge">{promo.data.brand}</span>
+      <h1>{isXfinity ? (lang === 'en' ? 'Xfinity Referral Program' : 'Xfinity 推荐计划') : promo.data.brand}</h1>
+      
+      <div class="reward-box">
+        <span class="label">{t.promos.rewardLabel}:</span>
+        <span class="value">{promo.data.rewardSummary}</span>
+      </div>
+      
+      <div class="meta">
+        <span class="region">{promo.data.region === 'United States' ? t.promos.regionUS : promo.data.region}</span>
+        <span class="verified">Verified: {promo.data.lastVerified}</span>
+      </div>
+    </header>
+
+    {isXfinity && (
+      <section class="referral-cta">
+        <h2>{t.promos.referralCtaTitle}</h2>
+        <p>{t.promos.referralCtaText}</p>
+        <a href={referralLink} class="cta-button" target="_blank" rel="noopener noreferrer">
+          {t.promos.referralCtaButton}
+        </a>
+        <p class="cta-note">{t.promos.referralCtaNote}</p>
+      </section>
+    )}
+
+    <section class="eligibility">
       <h2>{lang === 'en' ? 'Eligibility' : '资格要求'}</h2>
       <p>{promo.data.eligibility}</p>
     </section>
-    
+
     {isXfinity && (
       <>
-      <section>
+      <section class="how-it-works">
         <h2>{lang === 'en' ? 'How It Works' : '运作方式'}</h2>
         <ol>
           {(promo.data.stepsToRedeem || []).map((step, i) => (
@@ -74,29 +88,56 @@ function getStepText(step: string, index: number): string {
           ))}
         </ol>
       </section>
-      
+
+      <div class="content-body">
+        <Content />
+      </div>
+
       <section class="disclosure">
-        <p>{promo.data.disclosure}</p>
+        <h3>{t.promos.disclosureLabel}</h3>
+        <p>{t.promos.disclosureText}</p>
       </section>
       </>
     )}
-  </div>
+  </article>
 </MainLayout>
 
 <style>
   .promo-page { max-width: 800px; margin: 0 auto; }
   .back-link { display: inline-block; margin-bottom: var(--spacing-md); color: var(--primary); }
+  
+  .promo-header { margin-bottom: var(--spacing-xl); }
   .brand-badge { display: inline-block; background: var(--primary); color: white; padding: 4px 12px; border-radius: 4px; font-size: 0.875rem; font-weight: 600; margin-bottom: var(--spacing-sm); }
-  h1 { margin-bottom: var(--spacing-lg); }
+  .promo-header h1 { margin-bottom: var(--spacing-lg); }
   .reward-box { background: var(--bg-secondary); padding: var(--spacing-lg); border-radius: 8px; margin-bottom: var(--spacing-lg); }
   .reward-box .label { color: var(--text-secondary); margin-right: var(--spacing-sm); }
   .reward-box .value { font-weight: 600; color: var(--primary); font-size: 1.125rem; }
-  .meta { display: flex; gap: var(--spacing-md); font-size: 0.875rem; color: var(--text-secondary); margin-bottom: var(--spacing-xl); }
-  section { margin-bottom: var(--spacing-xl); }
-  section h2 { font-size: 1.25rem; margin-bottom: var(--spacing-md); }
-  section p { color: var(--text-secondary); line-height: 1.7; }
-  ol { list-style: decimal; margin-left: var(--spacing-lg); color: var(--text-secondary); }
-  li { margin-bottom: var(--spacing-sm); line-height: 1.7; }
-  .disclosure { background: #fff3cd; padding: var(--spacing-md); border-radius: 4px; font-size: 0.875rem; }
-  .disclosure p { color: #856404; }
+  .meta { display: flex; gap: var(--spacing-md); font-size: 0.875rem; color: var(--text-secondary); }
+  
+  .referral-cta { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: var(--spacing-xl); border-radius: 12px; margin-bottom: var(--spacing-xl); text-align: center; }
+  .referral-cta h2 { color: white; margin-bottom: var(--spacing-md); font-size: 1.5rem; }
+  .referral-cta p { color: rgba(255,255,255,0.9); margin-bottom: var(--spacing-lg); line-height: 1.6; }
+  .cta-button { display: inline-block; background: #e1402a; color: white; padding: 12px 24px; border-radius: 8px; font-weight: 600; font-size: 1rem; text-decoration: none; transition: background 0.2s, transform 0.2s; }
+  .cta-button:hover { background: #c73a24; transform: translateY(-2px); text-decoration: none; }
+  .cta-note { font-size: 0.875rem; color: rgba(255,255,255,0.7); margin-top: var(--spacing-md); margin-bottom: 0; }
+  
+  .eligibility, .how-it-works { margin-bottom: var(--spacing-xl); }
+  .eligibility h2, .how-it-works h2 { font-size: 1.25rem; margin-bottom: var(--spacing-md); }
+  .eligibility p, .how-it-works li { color: var(--text-secondary); line-height: 1.7; }
+  .how-it-works ol { list-style: decimal; margin-left: var(--spacing-lg); }
+  .how-it-works li { margin-bottom: var(--spacing-sm); }
+  
+  .content-body { margin-bottom: var(--spacing-xl); line-height: 1.7; }
+  .content-body :global(h2) { font-size: 1.25rem; margin-top: var(--spacing-xl); margin-bottom: var(--spacing-md); }
+  .content-body :global(h3) { font-size: 1.125rem; margin-top: var(--spacing-lg); margin-bottom: var(--spacing-sm); }
+  .content-body :global(p) { color: var(--text-secondary); margin-bottom: var(--spacing-md); }
+  .content-body :global(ul), .content-body :global(ol) { color: var(--text-secondary); margin-bottom: var(--spacing-md); padding-left: var(--spacing-lg); }
+  .content-body :global(li) { margin-bottom: var(--spacing-sm); }
+  .content-body :global(strong) { color: var(--text); }
+  .content-body :global(a) { color: var(--primary); }
+  .content-body :global(a:hover) { text-decoration: underline; }
+  
+  .disclosure { background: #fff3cd; padding: var(--spacing-lg); border-radius: 8px; margin-top: var(--spacing-xl); }
+  .disclosure h3 { font-size: 0.875rem; color: #856404; margin-bottom: var(--spacing-sm); text-transform: uppercase; letter-spacing: 0.5px; }
+  .disclosure p { color: #856404; font-size: 0.875rem; line-height: 1.6; margin-bottom: 0; }
 </style>

@@ -44,7 +44,13 @@
     "regionUS": "美国",
     "rewardLabel": "奖励",
     "regionLabel": "地区",
-    "backToHub": "返回优惠"
+    "backToHub": "返回优惠",
+    "referralCtaTitle": "使用此推荐链接",
+    "referralCtaText": "准备注册 Xfinity？使用我们的推荐链接开始注册，无需您支付任何额外费用，同时支持 TechHub。",
+    "referralCtaButton": "打开官方推荐页面",
+    "referralCtaNote": "请在官方 Xfinity 推荐页面上查看资格和条款。",
+    "disclosureLabel": "披露",
+    "disclosureText": "本页包含推荐链接。成功推荐后我们可能会获得报酬。最终条款和资格由 Xfinity 决定。"
   },
   "about": {
     "title": "关于 TechHub",
