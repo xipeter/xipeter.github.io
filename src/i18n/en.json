@@ -11,11 +11,11 @@
     "heroTitle": "Developer Tools & Technical Content",
     "heroSubtitle": "A curated selection of browser-based developer tools, practical technical articles, and verified promotions. Everything runs locally on your device—nothing is sent to external servers.",
     "popularTools": "Popular Tools",
-    "viewAllTools": "View all tools →",
+    "viewAllTools": "View all tools",
     "latestArticles": "Latest Articles",
-    "viewAllArticles": "View all articles →",
+    "viewAllArticles": "View all articles",
     "verifiedPromos": "Verified Promotions",
-    "viewAllPromos": "View all promos →",
+    "viewAllPromos": "View all promos",
     "aboutTitle": "About TechHub",
     "aboutText": "TechHub is an independent tech resource focused on providing practical tools, quality technical content, and verified promotional offers. We prioritize accuracy, transparency, and usefulness for developers and tech enthusiasts.",
     "learnMore": "Learn more about us",
@@ -46,6 +46,9 @@
     "rewardLabel": "Reward",
     "regionLabel": "Region",
     "backToHub": "Back to Promos",
+    "eligibilityTitle": "Eligibility",
+    "howItWorksTitle": "How It Works",
+    "verifiedLabel": "Verified",
     "referralCtaTitle": "Use This Referral Link",
     "referralCtaText": "Ready to sign up for Xfinity? Use our referral link to get started and support TechHub at no extra cost to you.",
     "referralCtaButton": "Open Official Referral Page",
@@ -68,18 +71,35 @@
     "title": "Contact Us",
     "intro": "Have questions or suggestions? We'd love to hear from you.",
     "emailLabel": "Email",
-    "email": "contact@techhub.example",
     "note": "We typically respond within 2-3 business days."
   },
   "privacy": {
     "title": "Privacy Policy",
     "lastUpdated": "Last updated: March 2026",
-    "intro": "Your privacy is important to us. This policy explains what information we collect and how we use it."
+    "intro": "Your privacy is important to us. This policy explains what information we collect and how we use it.",
+    "collectTitle": "Information We Collect",
+    "collectIntro": "This website may collect limited information in the following ways:",
+    "collectProvide": "Information you provide",
+    "collectProvideText": "If you contact us via email, we receive your email address and any content you provide.",
+    "collectAuto": "Automatically collected information",
+    "collectAutoText": "Basic non-personal data such as browser type, device information, referring pages may be collected for analytics and security purposes.",
+    "cookiesTitle": "Cookies and Tracking",
+    "cookiesText": "This website may use cookies for analytics purposes. You can disable cookies in your browser settings.",
+    "thirdPartyTitle": "Third-Party Services",
+    "thirdPartyText": "We may use third-party services such as Google Analytics. These services have their own privacy policies.",
+    "contactTitle": "Contact",
+    "contactText": "If you have questions about this policy, please contact us."
   },
   "terms": {
     "title": "Terms of Service",
     "lastUpdated": "Last updated: March 2026",
-    "intro": "By using TechHub, you agree to these terms. Please read them carefully."
+    "intro": "By using TechHub, you agree to these terms. Please read them carefully.",
+    "acceptTitle": "Acceptance of Terms",
+    "acceptText": "By using this website, you agree to these terms. If you do not agree, please do not use this site.",
+    "useTitle": "Use of Content",
+    "useText": "All content on this website is for informational purposes only. We strive for accuracy but cannot guarantee all information is current or correct.",
+    "responsibilityTitle": "User Responsibility",
+    "responsibilityText": "You are responsible for any actions taken based on information from this website."
   },
   "editorial": {
     "title": "Editorial Policy",
@@ -99,15 +119,17 @@
     "noCost": "This doesn't cost you anything extra."
   },
   "common": {
-    "readMore": "Read more →",
-    "learnMore": "Learn more →",
-    "viewAll": "View all →",
-    "minRead": "min read"
+    "readMore": "Read more",
+    "learnMore": "Learn more",
+    "viewAll": "View all",
+    "minRead": "min read",
+    "legal": "Legal"
   },
   "toolsContent": {
     "previewer": {
       "title": "Content Previewer",
       "description": "Preview Markdown, validate JSON, format XML, and compare text differences—all in your browser with no data transmission.",
+      "pageTitle": "Content Previewer - Markdown JSON XML Diff Tool",
       "features": {
         "markdown": "Live Markdown preview with GitHub-flavored support",
         "json": "Validate and format JSON with syntax highlighting",

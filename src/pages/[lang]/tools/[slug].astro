@@ -1,66 +1,94 @@
 ---
 import MainLayout from '../../../layouts/MainLayout.astro';
 import { getCollection } from 'astro:content';
-import { getTranslations, getLocalizedPath } from '../../../i18n/translations';
-import { StoreProvider } from '../../../contexts/StoreContext';
-import { I18nProvider } from '../../../contexts/I18nContext';
-import { ToolWorkspace } from '../../../components/tools/ToolWorkspace';
+import { getTranslations, getLocalizedPath } from '../../../i18n/index';
 
 export async function getStaticPaths() {
   const tools = await getCollection('tools');
   const locales = ['en', 'zh'];
-  
+
   const paths = [];
-  
-  // Add tool from content collection
   for (const tool of tools) {
     for (const locale of locales) {
-      paths.push({ params: { lang: locale, slug: tool.slug }, props: { tool: null, isPreviewer: false } });
+      paths.push({ params: { lang: locale, slug: tool.slug }, props: { tool } });
     }
   }
-  
-  // Add special previewer route for each locale
-  for (const locale of locales) {
-    paths.push({ params: { lang: locale, slug: 'previewer' }, props: { tool: null, isPreviewer: true } });
-  }
-  
   return paths;
 }
 
-const { lang, slug } = Astro.props;
+const { lang } = Astro.params;
+const { tool } = Astro.props;
 const t = getTranslations(lang);
-
-const isPreviewer = Astro.props.isPreviewer;
-const toolTitle = isPreviewer ? t.toolsContent.previewer.title : (Astro.props.tool?.data.title || 'Tool');
-const toolDesc = isPreviewer ? t.toolsContent.previewer.description : (Astro.props.tool?.data.intro || '');
+const { Content } = await tool.render();
 ---
 
-<MainLayout 
-  title={lang === 'en' ? 'Content Previewer - Markdown JSON XML Diff Tool' : '内容预览器 - Markdown JSON XML Diff 工具'}
-  description={toolDesc}
+<MainLayout
+  title={tool.data.seo?.title || tool.data.title}
+  description={tool.data.seo?.description || tool.data.intro}
   pageType="tool"
   locale={lang}
 >
-  {isPreviewer ? (
-    <StoreProvider client:load>
-      <I18nProvider client:load locale={lang}>
-        <ToolWorkspace client:load locale={lang} />
-      </I18nProvider>
-    </StoreProvider>
-  ) : (
-    <div class="tool-page">
-      <a href={getLocalizedPath('/tools', lang)} class="back-link">← {t.tools.backToHub}</a>
-      <h1>{toolTitle}</h1>
-      <p class="intro">{toolDesc}</p>
+  <article class="tool-page">
+    <a href={getLocalizedPath('/tools', lang)} class="back-link">&larr; {t.tools.backToHub}</a>
+
+    <header>
+      <h1>{tool.data.title}</h1>
+      <p class="intro">{tool.data.intro}</p>
+      <span class="category-tag">{tool.data.category === 'developer' ? t.tools.categoryDeveloper : t.tools.categoryUtilities}</span>
+    </header>
+
+    <div class="content">
+      <Content />
     </div>
-  )}
+
+    {tool.data.faq && tool.data.faq.length > 0 && (
+      <section class="faq">
+        <h2>FAQ</h2>
+        {tool.data.faq.map(item => (
+          <div class="faq-item">
+            <h3>{item.question}</h3>
+            <p>{item.answer}</p>
+          </div>
+        ))}
+      </section>
+    )}
+
+    {tool.data.limitations && tool.data.limitations.length > 0 && (
+      <section class="limitations">
+        <h2>{lang === 'en' ? 'Limitations' : '限制'}</h2>
+        <ul>
+          {tool.data.limitations.map(item => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </section>
+    )}
+  </article>
 </MainLayout>
 
-{!isPreviewer && (
 <style>
   .tool-page { max-width: 800px; margin: 0 auto; }
   .back-link { display: inline-block; margin-bottom: var(--spacing-md); color: var(--primary); }
+  header { margin-bottom: var(--spacing-xl); }
   h1 { margin-bottom: var(--spacing-md); }
-  .intro { color: var(--text-secondary); font-size: 1.125rem; margin-bottom: var(--spacing-lg); }
+  .intro { color: var(--text-secondary); font-size: 1.125rem; margin-bottom: var(--spacing-md); }
+  .category-tag { display: inline-block; background: var(--primary); color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; }
+  .content { line-height: 1.7; margin-bottom: var(--spacing-xl); }
+  .content :global(h2) { margin-top: var(--spacing-xl); margin-bottom: var(--spacing-md); }
+  .content :global(h3) { margin-top: var(--spacing-lg); margin-bottom: var(--spacing-sm); }
+  .content :global(p) { margin-bottom: var(--spacing-md); color: var(--text-secondary); }
+  .content :global(ul), .content :global(ol) { margin-bottom: var(--spacing-md); padding-left: var(--spacing-lg); color: var(--text-secondary); }
+  .content :global(li) { margin-bottom: var(--spacing-sm); }
+  .content :global(table) { width: 100%; border-collapse: collapse; margin-bottom: var(--spacing-md); }
+  .content :global(th), .content :global(td) { border: 1px solid var(--border); padding: var(--spacing-sm) var(--spacing-md); text-align: left; }
+  .content :global(th) { background: var(--bg-secondary); font-weight: 600; }
+  .content :global(code) { background: var(--bg-secondary); padding: 2px 6px; border-radius: 4px; font-size: 0.875rem; }
+  .content :global(strong) { color: var(--text); }
+  .faq, .limitations { margin-bottom: var(--spacing-xl); }
+  .faq h2, .limitations h2 { font-size: 1.5rem; margin-bottom: var(--spacing-lg); }
+  .faq-item { margin-bottom: var(--spacing-lg); }
+  .faq-item h3 { font-size: 1.125rem; margin-bottom: var(--spacing-sm); }
+  .faq-item p { color: var(--text-secondary); line-height: 1.7; }
+  .limitations ul { list-style: disc; margin-left: var(--spacing-lg); color: var(--text-secondary); }
+  .limitations li { margin-bottom: var(--spacing-sm); }
 </style>
-)}

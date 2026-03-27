@@ -1,12 +1,12 @@
 ---
 import MainLayout from '../../../layouts/MainLayout.astro';
 import { getCollection } from 'astro:content';
-import { getTranslations, getLocalizedPath } from '../../../i18n/translations';
+import { getTranslations, getLocalizedPath } from '../../../i18n/index';
 
 export async function getStaticPaths() {
   const articles = await getCollection('articles');
   const locales = ['en', 'zh'];
-  
+
   const paths = [];
   for (const article of articles) {
     for (const locale of locales) {
@@ -26,15 +26,15 @@ const zhArticleExists = allArticles.some(a => a.slug === `${slug}.zh` || a.slug 
 const showFallbackNotice = lang === 'zh' && !zhArticleExists;
 ---
 
-<MainLayout 
+<MainLayout
   title={article.data.title}
   description={article.data.excerpt}
   pageType="article"
   locale={lang}
 >
   <article class="article-page">
-    <a href={getLocalizedPath('/articles', lang)} class="back-link">← {t.articles.backToHub}</a>
-    
+    <a href={getLocalizedPath('/articles', lang)} class="back-link">&larr; {t.articles.backToHub}</a>
+
     <header>
       <h1>{article.data.title}</h1>
       <div class="meta">
@@ -49,7 +49,7 @@ const showFallbackNotice = lang === 'zh' && !zhArticleExists;
         <p>{t.articles.translationPending}</p>
       </div>
     )}
-    
+
     <div class="content">
       <Content />
     </div>
@@ -78,4 +78,7 @@ const showFallbackNotice = lang === 'zh' && !zhArticleExists;
   .content :global(a) { color: var(--primary); }
   .content :global(a:hover) { text-decoration: underline; }
   .content :global(img) { max-width: 100%; height: auto; border-radius: 8px; margin: var(--spacing-md) 0; }
+  .content :global(table) { width: 100%; border-collapse: collapse; margin-bottom: var(--spacing-md); }
+  .content :global(th), .content :global(td) { border: 1px solid var(--border); padding: var(--spacing-sm) var(--spacing-md); text-align: left; }
+  .content :global(th) { background: var(--bg-secondary); font-weight: 600; }
 </style>

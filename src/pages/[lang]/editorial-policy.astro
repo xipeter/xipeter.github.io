@@ -1,6 +1,6 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
-import { getTranslations, getLocalizedPath } from '../../i18n/translations';
+import { getTranslations } from '../../i18n/index';
 
 export function getStaticPaths() {
   return [
@@ -13,9 +13,9 @@ const { lang } = Astro.params;
 const t = getTranslations(lang);
 ---
 
-<MainLayout 
-  title={t.editorial.title} 
-  description={t.editorial.intro} 
+<MainLayout
+  title={t.editorial.title}
+  description={t.editorial.intro}
   pageType="editorial-policy"
   showAds={false}
   locale={lang}
@@ -30,7 +30,7 @@ const t = getTranslations(lang);
     <section>
       <h2>{t.editorial.standardsTitle}</h2>
       <ul>
-        {t.editorial.standards.map(item => (
+        {t.editorial.standards.map((item: string) => (
           <li>{item}</li>
         ))}
       </ul>

@@ -1,6 +1,6 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
-import { getTranslations, getLocalizedPath } from '../../i18n/translations';
+import { getTranslations } from '../../i18n/index';
 
 export function getStaticPaths() {
   return [
@@ -13,9 +13,9 @@ const { lang } = Astro.params;
 const t = getTranslations(lang);
 ---
 
-<MainLayout 
-  title={t.terms.title} 
-  description={t.terms.intro} 
+<MainLayout
+  title={t.terms.title}
+  description={t.terms.intro}
   pageType="terms"
   showAds={false}
   locale={lang}
@@ -25,18 +25,18 @@ const t = getTranslations(lang);
     <p class="last-updated">{t.terms.lastUpdated}</p>
 
     <section>
-      <h2>{lang === 'en' ? 'Acceptance of Terms' : '接受条款'}</h2>
-      <p>{lang === 'en' ? 'By using this website, you agree to these terms. If you do not agree, please do not use this site.' : '使用本网站即表示您同意这些条款。如果您不同意，请不要使用本网站。'}</p>
+      <h2>{t.terms.acceptTitle}</h2>
+      <p>{t.terms.acceptText}</p>
     </section>
 
     <section>
-      <h2>{lang === 'en' ? 'Use of Content' : '内容使用'}</h2>
-      <p>{lang === 'en' ? 'All content on this website is for informational purposes only. We strive for accuracy but cannot guarantee all information is current or correct.' : '本网站上所有内容仅供信息参考。我们努力确保准确性，但不能保证所有信息都是最新的或正确的。'}</p>
+      <h2>{t.terms.useTitle}</h2>
+      <p>{t.terms.useText}</p>
     </section>
 
     <section>
-      <h2>{lang === 'en' ? 'User Responsibility' : '用户责任'}</h2>
-      <p>{lang === 'en' ? 'You are responsible for any actions taken based on information from this website.' : '您对根据本网站信息采取的任何行动负责。'}</p>
+      <h2>{t.terms.responsibilityTitle}</h2>
+      <p>{t.terms.responsibilityText}</p>
     </section>
   </article>
 </MainLayout>

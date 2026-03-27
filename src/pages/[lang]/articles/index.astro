@@ -1,7 +1,7 @@
 ---
 import MainLayout from '../../../layouts/MainLayout.astro';
 import { getCollection } from 'astro:content';
-import { getTranslations, getAlternateLocale, getLocalizedPath } from '../../../i18n/translations';
+import { getTranslations, getLocalizedPath } from '../../../i18n/index';
 
 export function getStaticPaths() {
   return [
@@ -18,10 +18,10 @@ const sortedArticles = articles
   .sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime());
 ---
 
-<MainLayout 
-  title={t.articles.title} 
-  description={t.articles.subtitle} 
-  pageType="articles" 
+<MainLayout
+  title={t.articles.title}
+  description={t.articles.subtitle}
+  pageType="articles"
   showAds={false}
   locale={lang}
 >
@@ -37,7 +37,7 @@ const sortedArticles = articles
         <p class="excerpt">{article.data.excerpt}</p>
         <div class="meta">
           <span class="category-tag">{article.data.category}</span>
-          <span class="date">{new Date(article.data.publishedAt).toLocaleDateString()}</span>
+          <span class="date">{new Date(article.data.publishedAt).toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US')}</span>
           <span class="reading-time">{article.data.readingTime}</span>
         </div>
         <div class="tags">

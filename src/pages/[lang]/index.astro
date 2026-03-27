@@ -1,7 +1,7 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
 import { getCollection } from 'astro:content';
-import { getTranslations, getAlternateLocale, getLocalizedPath } from '../../i18n/translations';
+import { getTranslations, getLocalizedPath } from '../../i18n/index';
 
 export function getStaticPaths() {
   return [
@@ -12,9 +12,7 @@ export function getStaticPaths() {
 
 const { lang } = Astro.params;
 const t = getTranslations(lang);
-const alternateLocale = getAlternateLocale(lang);
 
-// Get featured content from collections
 const articles = await getCollection('articles');
 const tools = await getCollection('tools');
 const promos = await getCollection('promos');
@@ -33,19 +31,17 @@ const featuredPromos = promos
   .slice(0, 2);
 ---
 
-<MainLayout 
-  title={t.home.heroTitle} 
-  description={t.home.heroSubtitle} 
+<MainLayout
+  title={t.home.heroTitle}
+  description={t.home.heroSubtitle}
   pageType="homepage"
   locale={lang}
 >
-  <!-- Hero Section -->
   <section class="hero">
     <h1>{t.home.heroTitle}</h1>
     <p class="hero-subtitle">{t.home.heroSubtitle}</p>
   </section>
 
-  <!-- Featured Tools -->
   <section class="section">
     <div class="section-header">
       <h2>{t.home.popularTools}</h2>
@@ -68,15 +64,9 @@ const featuredPromos = promos
           </div>
         </a>
       ))}
-      {featuredTools.length === 0 && (
-        <div class="empty-state">
-          <p>{t.tools.noTools}</p>
-        </div>
-      )}
     </div>
   </section>
 
-  <!-- Latest Articles -->
   <section class="section">
     <div class="section-header">
       <h2>{t.home.latestArticles}</h2>
@@ -101,7 +91,6 @@ const featuredPromos = promos
     </div>
   </section>
 
-  <!-- Verified Promotions -->
   <section class="section">
     <div class="section-header">
       <h2>{t.home.verifiedPromos}</h2>
@@ -123,7 +112,6 @@ const featuredPromos = promos
     </div>
   </section>
 
-  <!-- Trust Section -->
   <section class="trust-section">
     <h2>{t.home.aboutTitle}</h2>
     <p>{t.home.aboutText}</p>

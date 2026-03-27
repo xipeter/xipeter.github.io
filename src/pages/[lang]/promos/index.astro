@@ -1,7 +1,7 @@
 ---
 import MainLayout from '../../../layouts/MainLayout.astro';
 import { getCollection } from 'astro:content';
-import { getTranslations, getAlternateLocale, getLocalizedPath } from '../../../i18n/translations';
+import { getTranslations, getLocalizedPath } from '../../../i18n/index';
 
 export function getStaticPaths() {
   return [
@@ -17,10 +17,10 @@ const promos = await getCollection('promos');
 const sortedPromos = promos.sort((a, b) => b.data.lastVerified.localeCompare(a.data.lastVerified));
 ---
 
-<MainLayout 
-  title={t.promos.title} 
-  description={t.promos.subtitle} 
-  pageType="promos" 
+<MainLayout
+  title={t.promos.title}
+  description={t.promos.subtitle}
+  pageType="promos"
   showAds={false}
   locale={lang}
 >
@@ -35,7 +35,7 @@ const sortedPromos = promos.sort((a, b) => b.data.lastVerified.localeCompare(a.d
         <p class="reward">{promo.data.rewardSummary}</p>
         <div class="meta">
           <span class="region">{promo.data.region === 'United States' ? t.promos.regionUS : promo.data.region}</span>
-          <span class="verified">Verified: {promo.data.lastVerified}</span>
+          <span class="verified">{t.promos.verifiedLabel}: {promo.data.lastVerified}</span>
         </div>
         <p class="eligibility">{promo.data.eligibility}</p>
       </a>

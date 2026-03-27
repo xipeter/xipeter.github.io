@@ -1,0 +1,27 @@
+---
+import MainLayout from '../../../layouts/MainLayout.astro';
+import { getTranslations } from '../../../i18n/index';
+import { StoreProvider } from '../../../contexts/StoreContext';
+import { ToolWorkspace } from '../../../components/tools/ToolWorkspace';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'zh' } }
+  ];
+}
+
+const { lang } = Astro.params;
+const t = getTranslations(lang);
+---
+
+<MainLayout
+  title={t.toolsContent.previewer.pageTitle}
+  description={t.toolsContent.previewer.description}
+  pageType="tool"
+  locale={lang}
+>
+  <StoreProvider client:load>
+    <ToolWorkspace client:load locale={lang} />
+  </StoreProvider>
+</MainLayout>

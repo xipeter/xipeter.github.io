@@ -1,6 +1,6 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
-import { getTranslations, getLocalizedPath } from '../../i18n/translations';
+import { getTranslations } from '../../i18n/index';
 
 export function getStaticPaths() {
   return [
@@ -13,9 +13,9 @@ const { lang } = Astro.params;
 const t = getTranslations(lang);
 ---
 
-<MainLayout 
-  title={t.affiliate.title} 
-  description={t.affiliate.intro} 
+<MainLayout
+  title={t.affiliate.title}
+  description={t.affiliate.intro}
   pageType="affiliate-disclosure"
   showAds={false}
   locale={lang}

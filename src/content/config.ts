@@ -26,29 +26,6 @@ const articles = defineCollection({
   })
 });
 
-const news = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    topic: z.enum(['ai', 'cloud', 'dev-tools', 'security', 'telecom', 'web', 'mobile', 'hardware', 'other']),
-    sourceName: z.string(),
-    sourceUrl: z.string(),
-    sourcePublishedAt: z.string(),
-    reviewedAt: z.string(),
-    summary: z.string(),
-    whyItMatters: z.string(),
-    relatedLinks: z.array(z.object({
-      title: z.string(),
-      url: z.string()
-    })).optional(),
-    seo: z.object({
-      title: z.string().optional(),
-      description: z.string().optional()
-    }).optional(),
-    adEligible: z.boolean().default(true)
-  })
-});
-
 const tools = defineCollection({
   type: 'content',
   schema: z.object({
@@ -105,7 +82,6 @@ const promos = defineCollection({
 
 export const collections = {
   articles,
-  news,
   tools,
   promos
 };

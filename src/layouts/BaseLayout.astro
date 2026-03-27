@@ -10,8 +10,8 @@ interface Props {
   locale?: string;
 }
 
-const { 
-  title, 
+const {
+  title,
   description = 'A tech utility and content hub featuring developer tools, technical articles, curated tech news, and verified promotions.',
   pageType,
   canonical,
@@ -22,30 +22,24 @@ const {
 const fullTitle = title === 'TechHub' ? title : `${title} | TechHub`;
 const siteUrl = 'https://xipeter.github.io';
 
-// Get the actual page path from Astro
 const rawPath = Astro.url.pathname;
 
-// Determine what the path is without locale prefix
-// /en.html -> / (home)
-// /en/about.html -> /about
-// /en/tools/previewer.html -> this shouldn't happen with file format
 let pathWithoutLocale = rawPath
-  .replace(/^\/en(\.html)?$/, '/')  // /en or /en.html -> /
-  .replace(/^\/zh(\.html)?$/, '/')  // /zh or /zh.html -> /
-  .replace(/^\/en\//, '/')         // /en/path -> /path
-  .replace(/^\/zh\//, '/')         // /zh/path -> /path
-  .replace(/\.html$/, '');         // remove .html from end
+  .replace(/^\/en\/?$/, '/')
+  .replace(/^\/zh\/?$/, '/')
+  .replace(/^\/en\//, '/')
+  .replace(/^\/zh\//, '/')
+  .replace(/\/$/, '');
 
-// Build locale-specific URLs - both use .html file format
-// For home page (path is /), output /en.html or /zh.html
-// For other pages, output /en/about.html or /zh/about.html
-const enPath = pathWithoutLocale === '/' ? '/en.html' : '/en' + pathWithoutLocale + '.html';
-const zhPath = pathWithoutLocale === '/' ? '/zh.html' : '/zh' + pathWithoutLocale + '.html';
+const enPath = pathWithoutLocale === '/' || pathWithoutLocale === ''
+  ? '/en/'
+  : `/en${pathWithoutLocale}/`;
+const zhPath = pathWithoutLocale === '/' || pathWithoutLocale === ''
+  ? '/zh/'
+  : `/zh${pathWithoutLocale}/`;
 
 const enUrl = siteUrl + enPath;
 const zhUrl = siteUrl + zhPath;
-
-// For canonical, prefer the current locale URL
 const canonicalUrl = locale === 'en' ? enUrl : zhUrl;
 ---
 
@@ -57,28 +51,22 @@ const canonicalUrl = locale === 'en' ? enUrl : zhUrl;
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex, follow" />}
-    
-    <!-- Canonical URL -->
+
     <link rel="canonical" href={canonicalUrl} />
-    
-    <!-- Alternate languages for hreflang -->
+
     <link rel="alternate" hreflang="en" href={enUrl} />
     <link rel="alternate" hreflang="zh" href={zhUrl} />
-    <link rel="alternate" hreflang="x-default" href={siteUrl + '/en.html'} />
-    
-    <!-- Google AdSense -->
+    <link rel="alternate" hreflang="x-default" href={siteUrl + '/en/'} />
+
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3992506272308291" crossorigin="anonymous"></script>
-    
-    <!-- Favicon -->
+
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    
-    <!-- Theme -->
     <meta name="theme-color" content="#1976d2" />
   </head>
   <body>
     <slot />
   </body>
-</style>
+</html>
 
 <style is:global>
   :root {
@@ -150,7 +138,6 @@ const canonicalUrl = locale === 'en' ? enUrl : zhUrl;
     padding: 0 var(--spacing-md);
   }
 
-  /* Ad slot placeholders - only visible on eligible pages */
   .ad-slot {
     min-height: 100px;
     background: var(--bg-secondary);

@@ -11,11 +11,11 @@
     "heroTitle": "开发者工具与技术内容",
     "heroSubtitle": "精心挑选的浏览器端开发者工具、实用技术文章和经过验证的促销活动。所有功能都在本地设备上运行——不会发送到外部服务器。",
     "popularTools": "热门工具",
-    "viewAllTools": "查看全部工具 →",
+    "viewAllTools": "查看全部工具",
     "latestArticles": "最新文章",
-    "viewAllArticles": "查看全部文章 →",
+    "viewAllArticles": "查看全部文章",
     "verifiedPromos": "已验证的优惠",
-    "viewAllPromos": "查看全部优惠 →",
+    "viewAllPromos": "查看全部优惠",
     "aboutTitle": "关于 TechHub",
     "aboutText": "TechHub 是一个独立的科技资源网站，专注于提供实用的工具、优质的技术内容和经过验证的促销活动。我们优先考虑准确性、透明性和对开发者的实用性。",
     "learnMore": "了解更多关于我们",
@@ -46,6 +46,9 @@
     "rewardLabel": "奖励",
     "regionLabel": "地区",
     "backToHub": "返回优惠",
+    "eligibilityTitle": "资格要求",
+    "howItWorksTitle": "运作方式",
+    "verifiedLabel": "已验证",
     "referralCtaTitle": "使用此推荐链接",
     "referralCtaText": "准备注册 Xfinity？使用我们的推荐链接开始注册，无需您支付任何额外费用，同时支持 TechHub。",
     "referralCtaButton": "打开官方推荐页面",
@@ -68,18 +71,35 @@
     "title": "联系我们",
     "intro": "有问题或建议？我们很想听到您的声音。",
     "emailLabel": "邮箱",
-    "email": "contact@techhub.example",
     "note": "我们通常会在 2-3 个工作日内回复。"
   },
   "privacy": {
     "title": "隐私政策",
     "lastUpdated": "最后更新：2026年3月",
-    "intro": "您的隐私对我们很重要。本政策解释我们收集什么信息以及如何使用它。"
+    "intro": "您的隐私对我们很重要。本政策解释我们收集什么信息以及如何使用它。",
+    "collectTitle": "我们收集的信息",
+    "collectIntro": "此网站可能通过以下方式收集有限信息：",
+    "collectProvide": "您提供的信息",
+    "collectProvideText": "如果您通过电子邮件联系我们，我们会收到您的电子邮件地址和您提供的任何内容。",
+    "collectAuto": "自动收集的信息",
+    "collectAutoText": "可能会收集基本的非个人数据，如浏览器类型、设备信息、引用页面，用于分析和安全目的。",
+    "cookiesTitle": "Cookies 和追踪",
+    "cookiesText": "此网站可能使用 cookies 进行分析。您可以在浏览器设置中禁用 cookies。",
+    "thirdPartyTitle": "第三方服务",
+    "thirdPartyText": "我们可能使用第三方服务，如 Google Analytics。这些服务有自己的隐私政策。",
+    "contactTitle": "联系我们",
+    "contactText": "如果您对此政策有疑问，请联系我们。"
   },
   "terms": {
     "title": "服务条款",
     "lastUpdated": "最后更新：2026年3月",
-    "intro": "使用 TechHub 即表示您同意这些条款。请仔细阅读。"
+    "intro": "使用 TechHub 即表示您同意这些条款。请仔细阅读。",
+    "acceptTitle": "接受条款",
+    "acceptText": "使用本网站即表示您同意这些条款。如果您不同意，请不要使用本网站。",
+    "useTitle": "内容使用",
+    "useText": "本网站上所有内容仅供信息参考。我们努力确保准确性，但不能保证所有信息都是最新的或正确的。",
+    "responsibilityTitle": "用户责任",
+    "responsibilityText": "您对根据本网站信息采取的任何行动负责。"
   },
   "editorial": {
     "title": "编辑政策",
@@ -99,15 +119,17 @@
     "noCost": "这不会给您带来任何额外费用。"
   },
   "common": {
-    "readMore": "阅读更多 →",
-    "learnMore": "了解更多 →",
-    "viewAll": "查看全部 →",
-    "minRead": "分钟阅读"
+    "readMore": "阅读更多",
+    "learnMore": "了解更多",
+    "viewAll": "查看全部",
+    "minRead": "分钟阅读",
+    "legal": "法律"
   },
   "toolsContent": {
     "previewer": {
       "title": "内容预览器",
       "description": "预览 Markdown、验证 JSON、格式化 XML 和比较文本差异——全部在浏览器中完成，无需数据传输。",
+      "pageTitle": "内容预览器 - Markdown JSON XML Diff 工具",
       "features": {
         "markdown": "实时 Markdown 预览，支持 GitHub 风格",
         "json": "验证和格式化 JSON，带语法高亮",

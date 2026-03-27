@@ -1,6 +1,6 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
-import { getTranslations, getLocalizedPath } from '../../i18n/translations';
+import { getTranslations } from '../../i18n/index';
 
 export function getStaticPaths() {
   return [
@@ -13,9 +13,9 @@ const { lang } = Astro.params;
 const t = getTranslations(lang);
 ---
 
-<MainLayout 
-  title={t.privacy.title} 
-  description={t.privacy.intro} 
+<MainLayout
+  title={t.privacy.title}
+  description={t.privacy.intro}
   pageType="privacy-policy"
   showAds={false}
   locale={lang}
@@ -25,27 +25,27 @@ const t = getTranslations(lang);
     <p class="last-updated">{t.privacy.lastUpdated}</p>
 
     <section>
-      <h2>{lang === 'en' ? 'Information We Collect' : '我们收集的信息'}</h2>
-      <p>{lang === 'en' ? 'This website may collect limited information in the following ways:' : '此网站可能通过以下方式收集有限信息：'}</p>
+      <h2>{t.privacy.collectTitle}</h2>
+      <p>{t.privacy.collectIntro}</p>
       <ul>
-        <li><strong>{lang === 'en' ? 'Information you provide' : '您提供的信息'}:</strong> {lang === 'en' ? 'If you contact us via email, we receive your email address and any content you provide.' : '如果您通过电子邮件联系我们，我们会收到您的电子邮件地址和您提供的任何内容。'}</li>
-        <li><strong>{lang === 'en' ? 'Automatically collected information' : '自动收集的信息'}:</strong> {lang === 'en' ? 'Basic non-personal data such as browser type, device information, referring pages may be collected for analytics and security purposes.' : '可能会收集基本的非个人数据，如浏览器类型、设备信息、引用页面，用于分析和安全目的。'}</li>
+        <li><strong>{t.privacy.collectProvide}:</strong> {t.privacy.collectProvideText}</li>
+        <li><strong>{t.privacy.collectAuto}:</strong> {t.privacy.collectAutoText}</li>
       </ul>
     </section>
 
     <section>
-      <h2>{lang === 'en' ? 'Cookies and Tracking' : 'Cookies 和追踪'}</h2>
-      <p>{lang === 'en' ? 'This website may use cookies for analytics purposes. You can disable cookies in your browser settings.' : '此网站可能使用 cookies 进行分析。您可以在浏览器设置中禁用 cookies。'}</p>
+      <h2>{t.privacy.cookiesTitle}</h2>
+      <p>{t.privacy.cookiesText}</p>
     </section>
 
     <section>
-      <h2>{lang === 'en' ? 'Third-Party Services' : '第三方服务'}</h2>
-      <p>{lang === 'en' ? 'We may use third-party services such as Google Analytics. These services have their own privacy policies.' : '我们可能使用第三方服务，如 Google Analytics。这些服务有自己的隐私政策。'}</p>
+      <h2>{t.privacy.thirdPartyTitle}</h2>
+      <p>{t.privacy.thirdPartyText}</p>
     </section>
 
     <section>
-      <h2>{lang === 'en' ? 'Contact' : '联系我们'}</h2>
-      <p>{lang === 'en' ? 'If you have questions about this policy, please contact us.' : '如果您对此政策有疑问，请联系我们。'}</p>
+      <h2>{t.privacy.contactTitle}</h2>
+      <p>{t.privacy.contactText}</p>
     </section>
   </article>
 </MainLayout>

@@ -1,7 +1,7 @@
 ---
 import MainLayout from '../../../layouts/MainLayout.astro';
 import { getCollection } from 'astro:content';
-import { getTranslations, getAlternateLocale, getLocalizedPath } from '../../../i18n/translations';
+import { getTranslations, getLocalizedPath } from '../../../i18n/index';
 
 export function getStaticPaths() {
   return [
@@ -17,10 +17,10 @@ const tools = await getCollection('tools');
 const sortedTools = tools.sort((a, b) => a.data.title.localeCompare(b.data.title));
 ---
 
-<MainLayout 
-  title={t.tools.title} 
-  description={t.tools.subtitle} 
-  pageType="tools" 
+<MainLayout
+  title={t.tools.title}
+  description={t.tools.subtitle}
+  pageType="tools"
   showAds={false}
   locale={lang}
 >
@@ -30,7 +30,7 @@ const sortedTools = tools.sort((a, b) => a.data.title.localeCompare(b.data.title
   <div class="tools-grid">
     <a href={getLocalizedPath('/tools/previewer', lang)} class="tool-card">
       <h2>{t.toolsContent.previewer.title}</h2>
-      <p class="intro">{t.toolsContent.previewer.description}</p>
+      <p class="desc">{t.toolsContent.previewer.description}</p>
       <div class="features">
         <span class="feature-tag">Markdown</span>
         <span class="feature-tag">JSON</span>
@@ -42,7 +42,7 @@ const sortedTools = tools.sort((a, b) => a.data.title.localeCompare(b.data.title
     {sortedTools.map(tool => (
       <a href={getLocalizedPath(`/tools/${tool.slug}`, lang)} class="tool-card">
         <h2>{tool.data.title}</h2>
-        <p class="intro">{tool.data.intro}</p>
+        <p class="desc">{tool.data.intro}</p>
         <div class="features">
           {tool.data.features.slice(0, 3).map(f => (
             <span class="feature-tag">{f}</span>
@@ -51,9 +51,6 @@ const sortedTools = tools.sort((a, b) => a.data.title.localeCompare(b.data.title
         <span class="category-tag">{tool.data.category === 'developer' ? t.tools.categoryDeveloper : t.tools.categoryUtilities}</span>
       </a>
     ))}
-    {sortedTools.length === 0 && (
-      <p class="empty-state">{t.tools.noTools}</p>
-    )}
   </div>
 </MainLayout>
 
@@ -64,9 +61,8 @@ const sortedTools = tools.sort((a, b) => a.data.title.localeCompare(b.data.title
   .tool-card { display: block; padding: var(--spacing-lg); background: var(--bg); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: inherit; transition: border-color 0.2s, box-shadow 0.2s; }
   .tool-card:hover { border-color: var(--primary); box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-decoration: none; }
   .tool-card h2 { font-size: 1.25rem; margin-bottom: var(--spacing-sm); }
-  .tool-card .intro { color: var(--text-secondary); font-size: 0.875rem; margin-bottom: var(--spacing-md); }
+  .desc { color: var(--text-secondary); font-size: 0.875rem; margin-bottom: var(--spacing-md); }
   .features { display: flex; gap: var(--spacing-sm); flex-wrap: wrap; margin-bottom: var(--spacing-md); }
   .feature-tag { background: var(--bg-secondary); padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; color: var(--text-secondary); }
   .category-tag { display: inline-block; background: var(--primary); color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; }
-  .empty-state { grid-column: 1 / -1; text-align: center; padding: var(--spacing-xl); color: var(--text-secondary); }
 </style>

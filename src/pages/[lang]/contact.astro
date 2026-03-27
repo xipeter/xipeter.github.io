@@ -1,6 +1,6 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
-import { getTranslations, getLocalizedPath } from '../../i18n/translations';
+import { getTranslations } from '../../i18n/index';
 
 export function getStaticPaths() {
   return [
@@ -13,18 +13,17 @@ const { lang } = Astro.params;
 const t = getTranslations(lang);
 ---
 
-<MainLayout 
-  title={t.contact.title} 
-  description={t.contact.intro} 
+<MainLayout
+  title={t.contact.title}
+  description={t.contact.intro}
   pageType="contact"
   showAds={false}
   locale={lang}
 >
   <article class="policy-page">
     <h1>{t.contact.title}</h1>
-    
+
     <section>
-      <h2>{t.contact.title}</h2>
       <p>{t.contact.intro}</p>
       <div class="contact-method">
         <strong>{t.contact.emailLabel}:</strong> <a href="mailto:xipeter0907@gmail.com">xipeter0907@gmail.com</a>
@@ -41,7 +40,6 @@ const t = getTranslations(lang);
   .policy-page { max-width: 800px; margin: 0 auto; }
   h1 { margin-bottom: var(--spacing-xl); }
   section { margin-bottom: var(--spacing-xl); }
-  section h2 { font-size: 1.5rem; margin-bottom: var(--spacing-md); }
   section p { color: var(--text-secondary); line-height: 1.7; }
   .contact-method { margin-top: var(--spacing-md); }
   .contact-method a { color: var(--primary); }

@@ -2,7 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import type { PageType } from '../utils/adEligibility';
 import { getAdEligibility } from '../utils/adEligibility';
-import { getTranslations, getAlternateLocale, getLocalizedPath, getPathWithoutLocale } from '../i18n/translations';
+import { getTranslations, getAlternateLocale, getLocalizedPath, getPathWithoutLocale } from '../i18n/index';
 
 interface Props {
   title: string;
@@ -18,24 +18,19 @@ const adConfig = getAdEligibility(pageType);
 const t = getTranslations(locale);
 const alternateLocale = getAlternateLocale(locale);
 
-// For logo: use / for root page, localized path for other pages
-const isRootPage = Astro.url.pathname === '/' || Astro.url.pathname === '/index.html';
-const logoHref = isRootPage ? '/' : getLocalizedPath('/', locale);
-
-// Language switcher: preserve current page context
+const logoHref = getLocalizedPath('/', locale);
 const currentPathname = Astro.url.pathname;
 const pathWithoutLocale = getPathWithoutLocale(currentPathname);
 const langSwitchHref = getLocalizedPath(pathWithoutLocale, alternateLocale);
 ---
 
-<BaseLayout 
-  title={title} 
+<BaseLayout
+  title={title}
   description={description}
   pageType={pageType}
   noindex={noindex}
   locale={locale}
 >
-  <!-- Header -->
   <header class="site-header">
     <div class="container header-inner">
       <a href={logoHref} class="logo">TechHub</a>
@@ -46,13 +41,12 @@ const langSwitchHref = getLocalizedPath(pathWithoutLocale, alternateLocale);
       </nav>
       <div class="lang-switch">
         <a href={langSwitchHref}>
-          {alternateLocale === 'en' ? 'EN' : '中'}
+          {alternateLocale === 'en' ? 'EN' : '中文'}
         </a>
       </div>
     </div>
   </header>
 
-  <!-- Ad Slot - Top -->
   {showAds && adConfig.eligible && adConfig.slotPositions.includes('top') && (
     <div class="container">
       <div class="ad-slot" id="adsense-top">
@@ -61,14 +55,12 @@ const langSwitchHref = getLocalizedPath(pathWithoutLocale, alternateLocale);
     </div>
   )}
 
-  <!-- Main Content -->
   <main class="main-content">
     <div class="container">
       <slot />
     </div>
   </main>
 
-  <!-- Ad Slot - Bottom -->
   {showAds && adConfig.eligible && adConfig.slotPositions.includes('bottom') && (
     <div class="container">
       <div class="ad-slot" id="adsense-bottom">
@@ -77,7 +69,6 @@ const langSwitchHref = getLocalizedPath(pathWithoutLocale, alternateLocale);
     </div>
   )}
 
-  <!-- Footer -->
   <footer class="site-footer">
     <div class="container">
       <div class="footer-links">
@@ -89,10 +80,11 @@ const langSwitchHref = getLocalizedPath(pathWithoutLocale, alternateLocale);
         </div>
         <div class="footer-section">
           <h4>{t.nav.about}</h4>
+          <a href={getLocalizedPath('/about', locale)}>{t.nav.about}</a>
           <a href={getLocalizedPath('/contact', locale)}>{t.nav.contact}</a>
         </div>
         <div class="footer-section">
-          <h4>Legal</h4>
+          <h4>{t.common.legal}</h4>
           <a href={getLocalizedPath('/privacy-policy', locale)}>{t.privacy.title}</a>
           <a href={getLocalizedPath('/terms', locale)}>{t.terms.title}</a>
           <a href={getLocalizedPath('/editorial-policy', locale)}>{t.editorial.title}</a>
@@ -186,19 +178,6 @@ const langSwitchHref = getLocalizedPath(pathWithoutLocale, alternateLocale);
     border-top: 1px solid var(--border);
   }
 
-  @media (max-width: 768px) {
-    .header-inner {
-      flex-direction: column;
-      gap: var(--spacing-md);
-    }
-
-    .main-nav {
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: var(--spacing-md);
-    }
-  }
-
   .lang-switch {
     margin-left: var(--spacing-md);
   }
@@ -216,5 +195,18 @@ const langSwitchHref = getLocalizedPath(pathWithoutLocale, alternateLocale);
     background: var(--primary);
     color: white;
     text-decoration: none;
+  }
+
+  @media (max-width: 768px) {
+    .header-inner {
+      flex-direction: column;
+      gap: var(--spacing-md);
+    }
+
+    .main-nav {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--spacing-md);
+    }
   }
 </style>
