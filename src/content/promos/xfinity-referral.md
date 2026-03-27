@@ -25,7 +25,7 @@ faq:
     answer: "No. You pay the same price as signing up directly. The referral credit is a bonus on top of whatever plan you choose."
 seo:
   title: "Xfinity Refer-a-Friend: Get $50 Off Internet + $50/Line Mobile (2026)"
-  description: "Save up to $300 with the Xfinity Refer-a-Friend program. Get $50 off Internet and $50 per mobile line for both you and your friend. Verified March 2026."
+  description: "Get $50 off your first Xfinity Internet bill, plus $50 per mobile line. Use this referral link — costs you nothing extra. Verified March 2026."
 adEligible: true
 ---
 
