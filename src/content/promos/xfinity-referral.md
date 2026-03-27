@@ -27,18 +27,7 @@ seo:
 adEligible: true
 ---
 
-# Xfinity Referral Program
-
 Xfinity (Comcast) offers a Refer-a-Friend program where you can earn bill credits by referring friends and family to Xfinity services.
-
-## Current Offer
-
-When your friend signs up for Xfinity Internet and/or adds Xfinity Mobile using your referral link, you both can earn credits:
-
-- **Xfinity Internet:** $50 credit
-- **Xfinity Mobile:** $50 per line (up to 5 lines)
-
-That means you can earn up to $300 in a single referral (1 internet + 5 mobile lines).
 
 ## Who This Offer Is Best For
 
@@ -46,38 +35,12 @@ That means you can earn up to $300 in a single referral (1 internet + 5 mobile l
 - Those with contacts in the market for internet or mobile services
 - Anyone who prefers to support friends through referral over finding their own deals
 
-## Eligibility Requirements
-
-**To refer someone:**
-- Must be an existing Xfinity Internet customer in good standing
-
-**To receive the referral reward:**
-- Referred person must be a new Xfinity Internet and/or Xfinity Mobile customer
-- Cannot refer existing Xfinity customers (adding a line to existing service doesn't qualify)
-- Both parties must remain in good standing for 90 days
-
-## Limits and Restrictions
-
-- Maximum 5 mobile lines per referral
-- Cannot earn more than $500 in rewards per calendar year
-- Referred person has 30 days to accept the invite and add services
-- Rewards subject to Xfinity Refer-a-Friend program Terms and Conditions
-
-## How It Works
-
-1. **Get your link** - Sign in to your Xfinity account and access the Refer-a-Friend Dashboard
-2. **Share** - Select your preferred sharing method (email, text, social, or copy link)
-3. **Friend signs up** - Your referral clicks the link and signs up within 30 days
-4. **Wait period** - Both parties must remain active in good standing for 90 days
-5. **Receive reward** - If eligibility is met, you'll receive an email with your reward in 4-6 weeks
-
 ## Important Notes
 
 - Credits are applied to Xfinity bills, not given as cash
 - Referral program terms can change—always check Xfinity's official sources for current details
 - This offer is only available in areas where Xfinity services are provided
 - Rewards are considered taxable income in some circumstances—consult a tax professional if you have questions
-- Existing Xfinity customers cannot earn rewards by adding a line to their current plan
 
 ## Situations Where Rewards May Not Apply
 
@@ -96,15 +59,3 @@ After your referral signs up and installation is complete:
 2. **Eligibility check** - Xfinity verifies both parties meet all program requirements
 3. **Reward delivery** - If eligibility is confirmed, both parties receive an email with reward details in 4-6 weeks
 4. **Credit application** - Rewards appear as bill credits on future Xfinity statements
-
-## Use Our Referral Link
-
-If you're interested in signing up for Xfinity services, you can use our referral link to get started:
-
-**[Sign up with Xfinity and earn rewards](https://referafriend.xfinity.com/ZONGFEI!cbb4bae738!a)**
-
-## Disclosure
-
-This page contains a referral link. We may receive compensation when someone signs up through our link. This does not affect the pricing for either party—all Xfinity customers receive the same service at the same price.
-
-**Offer details updated:** March 2026. Referral programs can change at any time. Please confirm final terms on the [Xfinity Refer-a-Friend page](https://referafriend.xfinity.com) before signing up.
