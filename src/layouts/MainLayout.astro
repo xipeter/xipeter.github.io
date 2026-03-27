@@ -2,7 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import type { PageType } from '../utils/adEligibility';
 import { getAdEligibility } from '../utils/adEligibility';
-import { getTranslations, getAlternateLocale, getLocalizedPath } from '../i18n/translations';
+import { getTranslations, getAlternateLocale, getLocalizedPath, getPathWithoutLocale } from '../i18n/translations';
 
 interface Props {
   title: string;
@@ -21,6 +21,11 @@ const alternateLocale = getAlternateLocale(locale);
 // For logo: use / for root page, localized path for other pages
 const isRootPage = Astro.url.pathname === '/' || Astro.url.pathname === '/index.html';
 const logoHref = isRootPage ? '/' : getLocalizedPath('/', locale);
+
+// Language switcher: preserve current page context
+const currentPathname = Astro.url.pathname;
+const pathWithoutLocale = getPathWithoutLocale(currentPathname);
+const langSwitchHref = getLocalizedPath(pathWithoutLocale, alternateLocale);
 ---
 
 <BaseLayout 
@@ -40,7 +45,7 @@ const logoHref = isRootPage ? '/' : getLocalizedPath('/', locale);
         <a href={getLocalizedPath('/promos', locale)}>{t.nav.promos}</a>
       </nav>
       <div class="lang-switch">
-        <a href={isRootPage ? getLocalizedPath('/', alternateLocale) : getLocalizedPath('/', alternateLocale)}>
+        <a href={langSwitchHref}>
           {alternateLocale === 'en' ? 'EN' : '中'}
         </a>
       </div>

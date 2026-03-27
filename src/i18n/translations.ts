@@ -46,11 +46,21 @@ export function getLocalizedPath(basePath: string, locale: string): string {
 }
 
 export function getPathWithoutLocale(path: string): string {
-  const segments = path.split('/').filter(Boolean);
+  // Handle locale root pages (/en.html, /zh.html)
+  if (path === '/en.html') return '/';
+  if (path === '/zh.html') return '/';
+  
+  // Remove trailing slash
+  let cleanPath = path.endsWith('/') ? path.slice(0, -1) : path;
+  
+  const segments = cleanPath.split('/').filter(Boolean);
+  
+  // Remove locale prefix if present
   if (segments[0] === 'en' || segments[0] === 'zh') {
     return '/' + segments.slice(1).join('/');
   }
-  return path;
+  
+  return cleanPath || '/';
 }
 
 export function getCurrentLocale(pathname: string): string {
