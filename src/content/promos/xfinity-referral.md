@@ -22,8 +22,8 @@ faq:
   - question: "What happens if my referral doesn't complete within 30 days?"
     answer: "The referred person has 30 days to accept the invite link and add eligible services. If they don't, you'll need to send a new referral."
 seo:
-  title: "Xfinity Referral Program - Earn $50+ Credits"
-  description: "Earn $50 for Xfinity Internet referrals and $50 per mobile line. Learn how the Xfinity Refer-a-Friend program works and use our referral link."
+  title: "Xfinity Refer-a-Friend: Get $50 Off Internet + $50/Line Mobile (2026)"
+  description: "Save up to $300 with the Xfinity Refer-a-Friend program. Get $50 off Internet and $50 per mobile line for both you and your friend. Verified March 2026."
 adEligible: true
 ---
 
