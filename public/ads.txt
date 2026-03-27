@@ -1,14 +1,1 @@
-# AdSense ads.txt
-# This file is required for Google AdSense to verify your site.
-# Replace the line below with the actual AdSense publisher line provided by Google.
-# 
-# To get your ads.txt line:
-# 1. Sign in to your AdSense account
-# 2. Go to Settings > Account information
-# 3. Click on "Access and authentication"
-# 4. Copy the ads.txt line and replace the placeholder below
-#
-# Example line format:
-# google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, XXXXXXXXXXXXXXXXXX
-
 google.com, pub-3992506272308291, DIRECT, f08c47fec0942fa0

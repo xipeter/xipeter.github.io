@@ -1,6 +1,6 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
-import { getTranslations } from '../../i18n/index';
+import { getTranslations, getLocalizedPath } from '../../i18n/index';
 
 export function getStaticPaths() {
   return [
@@ -15,7 +15,7 @@ const t = getTranslations(lang);
 
 <MainLayout
   title={t.about.title}
-  description={t.about.missionText}
+  description={t.about.missionText.substring(0, 160)}
   pageType="about"
   locale={lang}
 >
@@ -24,7 +24,33 @@ const t = getTranslations(lang);
 
     <section>
       <h2>{t.about.missionTitle}</h2>
-      <p>{t.about.missionText}</p>
+      {t.about.missionText.split('\n\n').map((p: string) => (
+        <p>{p}</p>
+      ))}
+    </section>
+
+    <section>
+      <h2>{t.about.whatWeOfferTitle}</h2>
+      <div class="offer-grid">
+        {t.about.whatWeOfferItems.map((item: any) => (
+          <div class="offer-card">
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section>
+      <h2>{t.about.valuesTitle}</h2>
+      <div class="values-grid">
+        {t.about.values.map((item: any) => (
+          <div class="value-item">
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+          </div>
+        ))}
+      </div>
     </section>
 
     <section>
@@ -34,6 +60,10 @@ const t = getTranslations(lang);
           <li>{item}</li>
         ))}
       </ul>
+    </section>
+
+    <section class="contact-note">
+      <p>{t.about.contactNote} <a href={getLocalizedPath('/contact', lang)}>&rarr;</a></p>
     </section>
   </article>
 </MainLayout>
@@ -46,4 +76,10 @@ const t = getTranslations(lang);
   section p { color: var(--text-secondary); line-height: 1.7; }
   ul { list-style: disc; margin-left: var(--spacing-lg); color: var(--text-secondary); }
   li { margin-bottom: var(--spacing-sm); line-height: 1.7; }
+  .offer-grid, .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--spacing-md); }
+  .offer-card, .value-item { background: var(--bg-secondary); padding: var(--spacing-lg); border-radius: 8px; }
+  .offer-card h3, .value-item h3 { font-size: 1.125rem; margin-bottom: var(--spacing-sm); }
+  .offer-card p, .value-item p { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; margin: 0; }
+  .contact-note { background: var(--bg-secondary); padding: var(--spacing-lg); border-radius: 8px; }
+  .contact-note p { margin: 0; }
 </style>

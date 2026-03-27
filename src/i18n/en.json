@@ -59,13 +59,48 @@
   "about": {
     "title": "About TechHub",
     "missionTitle": "Our Mission",
-    "missionText": "TechHub was created to help developers and tech enthusiasts find practical tools, quality content, and honest recommendations. We believe in transparency, accuracy, and usefulness in everything we do.",
+    "missionText": "TechHub is an independent technology resource built and maintained by a solo developer who is passionate about creating genuinely useful tools and content for the tech community. What started as a personal project to organize developer utilities has grown into a curated hub of browser-based tools, in-depth technical articles, and carefully verified promotional offers.\n\nOur goal is simple: provide developers and tech enthusiasts with resources that are practical, trustworthy, and respectful of your privacy. Every tool on TechHub runs entirely in your browser — your data never leaves your device. Every article is written with care and accuracy in mind, and every promotion we feature has been personally tested and verified.\n\nWe believe the internet needs more straightforward, no-nonsense resources. TechHub exists to be exactly that — a place where you can find what you need without tracking, paywalls, or misleading content.",
     "focusTitle": "What We Focus On",
     "focusItems": [
       "Browser-based developer tools that protect your privacy",
       "In-depth technical articles and tutorials",
       "Verified promotional offers from trusted sources"
-    ]
+    ],
+    "whatWeOfferTitle": "What We Offer",
+    "whatWeOfferItems": [
+      {
+        "title": "Browser-Based Tools",
+        "description": "Free developer utilities that run entirely in your browser. From content previewers to photo tools, everything processes locally on your device with zero data transmission to external servers."
+      },
+      {
+        "title": "Technical Articles",
+        "description": "In-depth tutorials, guides, and technical write-ups covering topics relevant to developers and tech enthusiasts. We focus on practical, actionable content that you can apply immediately."
+      },
+      {
+        "title": "Verified Promotions",
+        "description": "Carefully tested and verified promotional offers and referral deals. We only feature promotions we have personally used or thoroughly researched, and we always disclose affiliate relationships."
+      }
+    ],
+    "valuesTitle": "Our Values",
+    "values": [
+      {
+        "title": "Privacy First",
+        "description": "Your data belongs to you. Our tools run locally in your browser, and we minimize data collection across the entire site."
+      },
+      {
+        "title": "Transparency",
+        "description": "We clearly disclose affiliate relationships, editorial policies, and how we operate. No hidden agendas."
+      },
+      {
+        "title": "Accuracy",
+        "description": "We take accuracy seriously. Content is reviewed before publication and updated when new information becomes available."
+      },
+      {
+        "title": "No Nonsense",
+        "description": "We respect your time. No clickbait, no misleading headlines, no unnecessary bloat. Just useful content and tools."
+      }
+    ],
+    "contactNote": "Have questions, suggestions, or feedback? We would love to hear from you. Visit our contact page to get in touch."
   },
   "contact": {
     "title": "Contact Us",
@@ -76,30 +111,48 @@
   "privacy": {
     "title": "Privacy Policy",
     "lastUpdated": "Last updated: March 2026",
-    "intro": "Your privacy is important to us. This policy explains what information we collect and how we use it.",
+    "intro": "Your privacy is important to us. This privacy policy explains what information we collect, how we use it, and the choices you have regarding your data when you visit and use TechHub.",
     "collectTitle": "Information We Collect",
     "collectIntro": "This website may collect limited information in the following ways:",
-    "collectProvide": "Information you provide",
-    "collectProvideText": "If you contact us via email, we receive your email address and any content you provide.",
-    "collectAuto": "Automatically collected information",
-    "collectAutoText": "Basic non-personal data such as browser type, device information, referring pages may be collected for analytics and security purposes.",
-    "cookiesTitle": "Cookies and Tracking",
-    "cookiesText": "This website may use cookies for analytics purposes. You can disable cookies in your browser settings.",
+    "collectProvide": "Information You Provide",
+    "collectProvideText": "If you contact us via email or through our contact page, we receive your email address and any content you choose to provide. We use this information solely to respond to your inquiry and do not share it with third parties.",
+    "collectAuto": "Automatically Collected Information",
+    "collectAutoText": "When you visit our website, certain non-personal information may be collected automatically, including your browser type, operating system, device information, referring URLs, pages visited, and the date and time of your visit. This information is used for analytics, site improvement, and security purposes.",
+    "cookiesTitle": "Cookies and Tracking Technologies",
+    "cookiesText": "This website uses cookies and similar tracking technologies. Cookies are small text files stored on your device that help us improve your experience. We use cookies for website analytics, remembering your preferences, and serving advertisements. Third-party advertising partners, including Google, use cookies to serve ads based on your prior visits to this website and other websites. Google's use of advertising cookies, including the DoubleClick cookie, enables it and its partners to serve ads to you based on your browsing history. You can manage or disable cookies through your browser settings at any time.",
+    "adsTitle": "Advertising",
+    "adsText": "We use Google AdSense to display advertisements on this website. Google AdSense uses cookies, including the DoubleClick cookie, to serve ads based on your visits to this site and other sites on the internet. These cookies allow Google and its partners to display ads that are relevant to your interests. You can opt out of personalized advertising by visiting Google's Ads Settings page (https://adssettings.google.com). Alternatively, you can opt out of some third-party advertising cookies by visiting the Digital Advertising Alliance's opt-out page at www.aboutads.info. Please note that opting out of personalized ads does not mean you will stop seeing ads — it means the ads you see may be less relevant to you.",
     "thirdPartyTitle": "Third-Party Services",
-    "thirdPartyText": "We may use third-party services such as Google Analytics. These services have their own privacy policies.",
+    "thirdPartyText": "We use the following third-party services on this website, each of which has its own privacy policy governing the use of your information:\n\n- Google AdSense: Used to display advertisements. Google may collect and use data to personalize ads. Google's privacy policy can be found at https://policies.google.com/privacy.\n\n- Google Analytics: Used to analyze website traffic and usage patterns. Google Analytics collects anonymized data about how visitors interact with our site, including pages visited, time on site, and referral sources. Google's privacy policy applies to this data.\n\nWe encourage you to review the privacy policies of these third-party services to understand how they handle your data.",
+    "dataRetentionTitle": "Data Retention",
+    "dataRetentionText": "TechHub does not store personal data on its servers. All tools on this website run entirely within your browser, and no user data from tool usage is transmitted to or stored on our servers. Contact form submissions (email address and message content) are retained only as long as necessary to respond to your inquiry. Analytics data collected by third-party services is subject to their respective retention policies.",
+    "yourRightsTitle": "Your Rights",
+    "yourRightsText": "You have the following rights regarding your data and privacy:\n\n- Disable cookies: You can disable or manage cookies at any time through your browser settings.\n- Opt out of personalized ads: You can opt out of Google's personalized advertising by visiting Google's Ads Settings or the Digital Advertising Alliance's opt-out page.\n- Access and deletion: If you have contacted us and wish to have your information deleted, please reach out through our contact page.\n- Ask questions: If you have any questions or concerns about our privacy practices, you are welcome to contact us at any time.",
     "contactTitle": "Contact",
-    "contactText": "If you have questions about this policy, please contact us."
+    "contactText": "If you have questions about this privacy policy or our data practices, please contact us through our contact page. We will respond to your inquiry as promptly as possible.",
+    "childrenTitle": "Children's Privacy",
+    "childrenText": "TechHub is not directed at children under the age of 13. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe that your child has provided us with personal information, please contact us so that we can take appropriate action to remove that information."
   },
   "terms": {
     "title": "Terms of Service",
     "lastUpdated": "Last updated: March 2026",
-    "intro": "By using TechHub, you agree to these terms. Please read them carefully.",
+    "intro": "By using TechHub, you agree to these terms of service. Please read them carefully before using this website.",
     "acceptTitle": "Acceptance of Terms",
-    "acceptText": "By using this website, you agree to these terms. If you do not agree, please do not use this site.",
+    "acceptText": "By accessing and using this website, you acknowledge that you have read, understood, and agree to be bound by these terms of service. If you do not agree to these terms, please do not use this site.",
     "useTitle": "Use of Content",
-    "useText": "All content on this website is for informational purposes only. We strive for accuracy but cannot guarantee all information is current or correct.",
+    "useText": "All content on this website, including articles, guides, tool descriptions, and promotional information, is provided for informational and educational purposes only. While we strive for accuracy and regularly update our content, we cannot guarantee that all information is current, complete, or free of errors. You should verify any critical information independently before relying on it.",
     "responsibilityTitle": "User Responsibility",
-    "responsibilityText": "You are responsible for any actions taken based on information from this website."
+    "responsibilityText": "You are responsible for any actions taken based on information obtained from this website. TechHub provides tools and content as a resource, but the decision to act on any information is solely yours. You agree to use this website in compliance with all applicable laws and regulations.",
+    "intellectualPropertyTitle": "Intellectual Property",
+    "intellectualPropertyText": "All content on TechHub, including text, graphics, logos, images, and software, is the property of TechHub or its content creators and is protected by applicable intellectual property laws. You may not reproduce, distribute, or create derivative works from our content without prior written permission. The tools provided on this website are offered for personal, non-commercial use unless otherwise stated.",
+    "thirdPartyLinksTitle": "Third-Party Links",
+    "thirdPartyLinksText": "This website may contain links to third-party websites, services, or resources that are not owned or controlled by TechHub. We are not responsible for the content, privacy policies, or practices of any third-party websites. The inclusion of any link does not imply endorsement by TechHub. We encourage you to review the terms and privacy policies of any third-party sites you visit.",
+    "advertisingTitle": "Advertising",
+    "advertisingText": "This website may display advertisements provided by third-party advertising networks, including Google AdSense. The content of these advertisements is controlled by the respective advertisers and advertising networks, not by TechHub. We do not endorse or guarantee the products or services advertised. Any interactions you have with advertisers are solely between you and the advertiser.",
+    "disclaimerTitle": "Disclaimer",
+    "disclaimerText": "All tools, content, and services on TechHub are provided on an \"as is\" and \"as available\" basis without warranties of any kind, either express or implied. TechHub does not warrant that the website will be uninterrupted, error-free, or free of viruses or other harmful components. To the fullest extent permitted by law, TechHub disclaims all warranties, including but not limited to implied warranties of merchantability, fitness for a particular purpose, and non-infringement.",
+    "changesTitle": "Changes to Terms",
+    "changesText": "We reserve the right to update or modify these terms of service at any time without prior notice. Changes will be effective immediately upon posting to this website. Your continued use of TechHub after any changes to these terms constitutes your acceptance of the revised terms. We encourage you to review this page periodically for updates."
   },
   "editorial": {
     "title": "Editorial Policy",

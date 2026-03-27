@@ -25,6 +25,10 @@ const t = getTranslations(lang);
     <p class="last-updated">{t.privacy.lastUpdated}</p>
 
     <section>
+      <p>{t.privacy.intro}</p>
+    </section>
+
+    <section>
       <h2>{t.privacy.collectTitle}</h2>
       <p>{t.privacy.collectIntro}</p>
       <ul>
@@ -39,8 +43,32 @@ const t = getTranslations(lang);
     </section>
 
     <section>
+      <h2>{t.privacy.adsTitle}</h2>
+      <p>{t.privacy.adsText}</p>
+    </section>
+
+    <section>
       <h2>{t.privacy.thirdPartyTitle}</h2>
-      <p>{t.privacy.thirdPartyText}</p>
+      {t.privacy.thirdPartyText.split('\n\n').map((p: string) => (
+        <p>{p}</p>
+      ))}
+    </section>
+
+    <section>
+      <h2>{t.privacy.dataRetentionTitle}</h2>
+      <p>{t.privacy.dataRetentionText}</p>
+    </section>
+
+    <section>
+      <h2>{t.privacy.yourRightsTitle}</h2>
+      {t.privacy.yourRightsText.split('\n\n').map((p: string) => (
+        <p>{p}</p>
+      ))}
+    </section>
+
+    <section>
+      <h2>{t.privacy.childrenTitle}</h2>
+      <p>{t.privacy.childrenText}</p>
     </section>
 
     <section>
