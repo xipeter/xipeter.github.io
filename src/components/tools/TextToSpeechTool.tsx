@@ -606,25 +606,24 @@ export function TextToSpeechTool({ locale, articles }: Props) {
 
         <Box sx={{ p: 2 }}>
           {tabIndex === 0 ? (
-            <FormControl fullWidth size="small">
-              <InputLabel id="article-label">{t.selectArticle}</InputLabel>
-              <Select
-                labelId="article-label"
-                label={t.selectArticle}
-                value={selectedArticleSlug}
-                onChange={(e) => setSelectedArticleSlug(e.target.value as string)}
-                displayEmpty
-              >
-                <MenuItem value="">
-                  <em>{t.chooseArticle}</em>
+            <Select
+              fullWidth
+              size="small"
+              value={selectedArticleSlug}
+              onChange={(e) => setSelectedArticleSlug(e.target.value as string)}
+              displayEmpty
+              renderValue={(val) =>
+                val
+                  ? articles.find(a => a.slug === val)?.title ?? String(val)
+                  : <em style={{ color: '#aaa' }}>{t.chooseArticle}</em>
+              }
+            >
+              {articles.map((a) => (
+                <MenuItem key={a.slug} value={a.slug}>
+                  {a.title}
                 </MenuItem>
-                {articles.map((a) => (
-                  <MenuItem key={a.slug} value={a.slug}>
-                    {a.title}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+              ))}
+            </Select>
           ) : (
             <TextField
               multiline

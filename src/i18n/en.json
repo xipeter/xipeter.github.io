@@ -202,8 +202,8 @@
     },
     "tts": {
       "title": "Text to Speech Reader",
-      "pageTitle": "Free Text to Speech Reader — Listen to Articles Online",
-      "description": "Free browser-based text-to-speech tool. Read articles aloud in English and Chinese with adjustable speed, voice, and volume. No sign-up required.",
+      "pageTitle": "Free Text to Speech Reader — English & Chinese TTS Tool",
+      "description": "Free online text-to-speech tool. Listen to articles read aloud in English or Chinese. Choose voice, adjust speed (0.5x–2x) and volume. 100% browser-based — no sign-up, no install.",
       "features": {
         "voices": "Multiple voices including male and female options",
         "speed": "Adjustable speed from 0.5x to 2.0x",
