@@ -156,6 +156,7 @@ export function TextToSpeechTool({ locale, articles }: Props) {
   const volumeRef = useRef(0.8);
   const selectedVoiceURIRef = useRef('');
   const isPlayingRef = useRef(false);
+  const isPausedRef = useRef(isPaused);
   const voicesRef = useRef<SpeechSynthesisVoice[]>([]);
 
   const contentRef = useRef<HTMLDivElement>(null);
@@ -184,6 +185,10 @@ export function TextToSpeechTool({ locale, articles }: Props) {
   useEffect(() => {
     isPlayingRef.current = isPlaying;
   }, [isPlaying]);
+
+  useEffect(() => {
+    isPausedRef.current = isPaused;
+  }, [isPaused]);
 
   useEffect(() => {
     voicesRef.current = voices;
@@ -223,6 +228,7 @@ export function TextToSpeechTool({ locale, articles }: Props) {
     loadVoices();
     window.speechSynthesis.addEventListener('voiceschanged', loadVoices);
     return () => {
+      synthRef.current?.cancel();
       window.speechSynthesis.removeEventListener('voiceschanged', loadVoices);
     };
   }, [locale]);
@@ -278,7 +284,7 @@ export function TextToSpeechTool({ locale, articles }: Props) {
   }, []); // no deps — uses refs only
 
   const handlePlay = useCallback(() => {
-    if (isPaused && synthRef.current) {
+    if (isPausedRef.current && synthRef.current) {
       synthRef.current.resume();
       setIsPlaying(true);
       isPlayingRef.current = true;
@@ -289,7 +295,7 @@ export function TextToSpeechTool({ locale, articles }: Props) {
       setIsPaused(false);
       speakSentence(currentSentenceIndexRef.current);
     }
-  }, [isPaused, speakSentence]);
+  }, [speakSentence]);
 
   const handlePause = useCallback(() => {
     if (synthRef.current) {
@@ -388,8 +394,7 @@ export function TextToSpeechTool({ locale, articles }: Props) {
         sentencesRef.current = [];
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tabIndex, selectedArticleSlug, pasteText]);
+  }, [tabIndex, selectedArticleSlug, pasteText, articles]);
 
   // --- Auto-scroll ----------------------------------------------------------
   useEffect(() => {
