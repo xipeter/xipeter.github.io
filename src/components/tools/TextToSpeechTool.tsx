@@ -144,6 +144,7 @@ export function TextToSpeechTool({ locale, articles }: Props) {
   const [tabIndex, setTabIndex] = useState(0);
   const [selectedArticleSlug, setSelectedArticleSlug] = useState('');
   const [pasteText, setPasteText] = useState('');
+  const [debouncedPasteText, setDebouncedPasteText] = useState('');
   const [sentences, setSentences] = useState<string[]>([]);
   const [currentSentenceIndex, setCurrentSentenceIndex] = useState(0);
   const [markdownContent, setMarkdownContent] = useState('');
@@ -193,6 +194,11 @@ export function TextToSpeechTool({ locale, articles }: Props) {
   useEffect(() => {
     voicesRef.current = voices;
   }, [voices]);
+
+  useEffect(() => {
+    const id = setTimeout(() => setDebouncedPasteText(pasteText), 500);
+    return () => clearTimeout(id);
+  }, [pasteText]);
 
   // --- Voice loading --------------------------------------------------------
   useEffect(() => {
@@ -244,8 +250,13 @@ export function TextToSpeechTool({ locale, articles }: Props) {
   }, []);
 
   const speakSentence = useCallback((index: number) => {
-    if (!synthRef.current) return;
+    if (!synthRef.current || index < 0) return;
+
+    // Prevent onend handler of cancelled utterance from advancing
+    const wasPlaying = isPlayingRef.current;
+    isPlayingRef.current = false;
     synthRef.current.cancel();
+    isPlayingRef.current = wasPlaying;
 
     const currentSentences = sentencesRef.current;
     if (index < 0 || index >= currentSentences.length) return;
@@ -302,6 +313,7 @@ export function TextToSpeechTool({ locale, articles }: Props) {
       synthRef.current.pause();
     }
     setIsPaused(true);
+    isPausedRef.current = true;
     setIsPlaying(false);
     isPlayingRef.current = false;
   }, []);
@@ -385,8 +397,8 @@ export function TextToSpeechTool({ locale, articles }: Props) {
     } else {
       // Paste tab
       setMarkdownContent('');
-      if (pasteText.trim()) {
-        const s = splitSentences(pasteText);
+      if (debouncedPasteText.trim()) {
+        const s = splitSentences(debouncedPasteText);
         setSentences(s);
         sentencesRef.current = s;
       } else {
@@ -394,7 +406,7 @@ export function TextToSpeechTool({ locale, articles }: Props) {
         sentencesRef.current = [];
       }
     }
-  }, [tabIndex, selectedArticleSlug, pasteText, articles]);
+  }, [tabIndex, selectedArticleSlug, debouncedPasteText, articles]);
 
   // --- Auto-scroll ----------------------------------------------------------
   useEffect(() => {
