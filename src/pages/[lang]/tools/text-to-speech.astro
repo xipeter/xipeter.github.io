@@ -1,0 +1,165 @@
+---
+import MainLayout from '../../../layouts/MainLayout.astro';
+import { getTranslations } from '../../../i18n/index';
+import { getCollection } from 'astro:content';
+import { TextToSpeechTool } from '../../../components/tools/TextToSpeechTool';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'zh' } }
+  ];
+}
+
+const { lang } = Astro.params;
+const t = getTranslations(lang);
+
+const siteUrl = 'https://xipeter.github.io';
+const pageUrl = `${siteUrl}/${lang}/tools/text-to-speech/`;
+
+const allArticles = await getCollection('articles');
+const articleData = allArticles.map(a => ({
+  slug: a.slug,
+  title: a.data.title,
+  body: a.body ?? '',
+}));
+
+const appJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": lang === 'en' ? "Text to Speech Reader" : "文字转语音朗读器",
+  "description": t.toolsContent.tts.description,
+  "url": pageUrl,
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any (Web Browser)",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Read articles aloud in English and Chinese",
+    "Multiple voice options (male, female, different accents)",
+    "Adjustable speed from 0.5x to 2.0x",
+    "Volume control",
+    "Sentence-by-sentence navigation",
+    "Visual sentence highlighting",
+    "Paste custom text support",
+    "100% browser-based — no data sent to servers"
+  ]
+});
+
+const faqItems = [
+  {
+    q: lang === 'en' ? "Is this text-to-speech tool free?" : "这个文字转语音工具免费吗？",
+    a: lang === 'en'
+      ? "Yes, completely free. It uses your browser's built-in speech synthesis — no API keys or accounts needed."
+      : "是的，完全免费。它使用浏览器内置的语音合成引擎，无需 API 密钥或账户。"
+  },
+  {
+    q: lang === 'en' ? "What languages are supported?" : "支持哪些语言？",
+    a: lang === 'en'
+      ? "English and Chinese are the primary languages. Additional languages depend on your browser and operating system."
+      : "英语和中文是主要支持的语言。其他语言取决于您的浏览器和操作系统。"
+  },
+  {
+    q: lang === 'en' ? "Can I adjust the reading speed?" : "可以调节朗读速度吗？",
+    a: lang === 'en'
+      ? "Yes, speed can be adjusted from 0.5x (slow) to 2.0x (fast) using the speed slider."
+      : "可以，使用速度滑块可以将语速从 0.5 倍（慢速）调节到 2.0 倍（快速）。"
+  },
+  {
+    q: lang === 'en' ? "Why do voices sound different on different devices?" : "为什么不同设备上声音不同？",
+    a: lang === 'en'
+      ? "The tool uses your browser's Web Speech API, which relies on voices installed on your operating system. Chrome typically has the best selection."
+      : "该工具使用浏览器的 Web Speech API，依赖于操作系统上安装的语音。Chrome 通常拥有最佳的语音选择。"
+  },
+  {
+    q: lang === 'en' ? "Can I use this with my own text?" : "可以用自己的文字吗？",
+    a: lang === 'en'
+      ? "Yes, switch to the 'Paste Text' tab to enter any text you want read aloud."
+      : "可以，切换到\u201c粘贴文字\u201d标签页，输入任何您想朗读的文字。"
+  }
+];
+
+const faqJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map(item => ({
+    "@type": "Question",
+    "name": item.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.a
+    }
+  }))
+});
+---
+
+<MainLayout
+  title={t.toolsContent.tts.pageTitle}
+  description={t.toolsContent.tts.description}
+  pageType="tool"
+  locale={lang}
+>
+  <script type="application/ld+json" set:html={appJsonLd} />
+  <script type="application/ld+json" set:html={faqJsonLd} />
+
+  <TextToSpeechTool client:load locale={lang} articles={articleData} />
+
+  <section class="seo-content">
+    <h2>{lang === 'en' ? 'Free Online Text to Speech Reader' : '免费在线文字转语音朗读器'}</h2>
+    <p>{lang === 'en'
+      ? 'Listen to articles and text read aloud — right in your browser. This text-to-speech tool uses your browser\'s built-in speech synthesis to convert written content into spoken audio with natural-sounding voices. No sign-up, no API keys, completely free.'
+      : '在浏览器中收听文章和文字朗读。这款文字转语音工具使用浏览器内置的语音合成技术，将文字内容转换为自然发音的语音。无需注册，无需 API 密钥，完全免费。'}</p>
+
+    <h3>{lang === 'en' ? 'Use Cases' : '使用场景'}</h3>
+    <ul>
+      <li><strong>{lang === 'en' ? 'Accessibility' : '无障碍'}</strong> — {lang === 'en' ? 'Make written content accessible to users with visual impairments or reading difficulties' : '让有视觉障碍或阅读困难的用户也能获取文字内容'}</li>
+      <li><strong>{lang === 'en' ? 'Language Learning' : '语言学习'}</strong> — {lang === 'en' ? 'Listen to articles in English or Chinese to practice pronunciation and comprehension' : '收听英语或中文文章，练习发音和理解能力'}</li>
+      <li><strong>{lang === 'en' ? 'Multitasking' : '多任务处理'}</strong> — {lang === 'en' ? 'Listen to technical articles while commuting, exercising, or cooking' : '在通勤、锻炼或做饭时收听技术文章'}</li>
+      <li><strong>{lang === 'en' ? 'Proofreading' : '校对'}</strong> — {lang === 'en' ? 'Hearing your writing read aloud helps catch errors and awkward phrasing' : '听自己的文字被朗读出来有助于发现错误和不当措辞'}</li>
+    </ul>
+
+    <h3>{lang === 'en' ? 'Tips for Best Results' : '最佳使用提示'}</h3>
+    <ul>
+      <li>{lang === 'en' ? 'Use Chrome or Edge for the best voice quality and largest voice selection' : '使用 Chrome 或 Edge 获得最佳语音质量和最多语音选择'}</li>
+      <li>{lang === 'en' ? 'Start at 1.0x speed and gradually increase as you get comfortable' : '从 1.0 倍速开始，逐渐加快到您舒适的速度'}</li>
+      <li>{lang === 'en' ? 'Try different voices — quality varies significantly between options' : '尝试不同的声音——不同选项之间的质量差异很大'}</li>
+      <li>{lang === 'en' ? 'For Chinese text, ensure Chinese voices are installed on your system' : '对于中文文字，请确保系统上安装了中文语音'}</li>
+    </ul>
+
+    <h3>{lang === 'en' ? 'Frequently Asked Questions' : '常见问题'}</h3>
+    <div class="faq-list">
+      {faqItems.map(item => (
+        <details class="faq-item">
+          <summary>{item.q}</summary>
+          <p>{item.a}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+</MainLayout>
+
+<style>
+  .seo-content {
+    max-width: 800px;
+    margin: var(--spacing-xl) auto 0;
+    padding-top: var(--spacing-xl);
+    border-top: 1px solid var(--border);
+  }
+  .seo-content h2 { font-size: 1.5rem; margin-bottom: var(--spacing-md); }
+  .seo-content h3 { font-size: 1.25rem; margin-top: var(--spacing-xl); margin-bottom: var(--spacing-md); }
+  .seo-content p { color: var(--text-secondary); line-height: 1.7; margin-bottom: var(--spacing-md); }
+  .seo-content ul { list-style: none; padding: 0; margin-bottom: var(--spacing-md); }
+  .seo-content li { padding: var(--spacing-sm) 0; color: var(--text-secondary); border-bottom: 1px solid var(--border); }
+  .seo-content li strong { color: var(--text); }
+  .faq-list { display: flex; flex-direction: column; gap: var(--spacing-sm); }
+  .faq-item { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .faq-item summary { padding: var(--spacing-md) var(--spacing-lg); font-weight: 600; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after { content: '+'; font-size: 1.25rem; color: var(--text-secondary); }
+  .faq-item[open] summary::after { content: '-'; }
+  .faq-item[open] summary { border-bottom: 1px solid var(--border); }
+  .faq-item p { padding: var(--spacing-md) var(--spacing-lg); color: var(--text-secondary); line-height: 1.7; margin: 0; }
+</style>
