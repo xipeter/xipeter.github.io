@@ -199,6 +199,16 @@
         "crop": "Crop to perfect passport ratio",
         "preview": "Live preview before download"
       }
+    },
+    "tts": {
+      "title": "Text to Speech Reader",
+      "pageTitle": "Free Text to Speech Reader — Listen to Articles Online",
+      "description": "Free browser-based text-to-speech tool. Read articles aloud in English and Chinese with adjustable speed, voice, and volume. No sign-up required.",
+      "features": {
+        "voices": "Multiple voices including male and female options",
+        "speed": "Adjustable speed from 0.5x to 2.0x",
+        "articles": "Built-in article library"
+      }
     }
   }
 }
