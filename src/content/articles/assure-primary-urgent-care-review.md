@@ -32,13 +32,13 @@ Their walk-in hours ended at 5:30 PM, and we arrived a few minutes past the cuto
 
 By the next day, his cough had improved significantly. As an unexpected bonus, his seasonal allergy symptoms also eased up noticeably in the days that followed.
 
-![Prescriptions from the visit: Children's Loratadine oral solution and Albuterol Sulfate HFA inhalation aerosol](/articles/assure-urgent-care-prescriptions.png)
+![Prescriptions from the visit: Children's Loratadine oral solution and Albuterol Sulfate HFA inhalation aerosol](/articles/assure-urgent-care-prescriptions.webp)
 
 ## Cost
 
 The pricing was very reasonable — much more approachable than what we'd expected from urgent care in this area. After insurance, our final out-of-pocket cost was **$22.65** on a $515 billed amount — covering the office visit, a SARS-CoV-2/Influenza A&B test, a Strep A assay, and the in-office nebulizer (airway inhalation) treatment.
 
-![Claim cost breakdown: $515 billed, $22.65 out-of-pocket after plan discount and insurance](/articles/assure-urgent-care-claim.png)
+![Claim cost breakdown: $515 billed, $22.65 out-of-pocket after plan discount and insurance](/articles/assure-urgent-care-claim.webp)
 
 ## Verdict
 
@@ -65,13 +65,13 @@ If you're looking for a nearby walk-in clinic with patient, attentive staff and 
 
 第二天孩子的咳嗽就明显好转了。更意外的是，接下来几天他的过敏症状也跟着缓解了不少。
 
-![从诊所拿到的药品：儿童氯雷他定口服液和沙丁胺醇吸入气雾剂](/articles/assure-urgent-care-prescriptions.png)
+![从诊所拿到的药品：儿童氯雷他定口服液和沙丁胺醇吸入气雾剂](/articles/assure-urgent-care-prescriptions.webp)
 
 ## 费用
 
 费用也非常友好，比我们预期的 urgent care 价格要合理很多。总账单 $515，经过保险和 plan discount 之后，我们实际自付只有 **$22.65**——包含门诊费、流感/新冠检测、链球菌检测和当场的雾化治疗。
 
-![医疗账单明细：$515 总账单，经保险处理后自付 $22.65](/articles/assure-urgent-care-claim.png)
+![医疗账单明细：$515 总账单，经保险处理后自付 $22.65](/articles/assure-urgent-care-claim.webp)
 
 ## 总结
 
