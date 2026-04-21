@@ -14,7 +14,15 @@ const { lang } = Astro.params;
 const t = getTranslations(lang);
 
 const articles = await getCollection('articles');
-const sortedArticles = articles
+const baseArticles = articles.filter(a => !a.slug.endsWith('-zh'));
+const localized = baseArticles.map(a => {
+  if (lang === 'zh') {
+    const zh = articles.find(x => x.slug === `${a.slug}-zh`);
+    if (zh) return { slug: a.slug, data: zh.data };
+  }
+  return { slug: a.slug, data: a.data };
+});
+const sortedArticles = localized
   .sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime());
 ---
 

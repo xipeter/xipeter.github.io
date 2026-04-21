@@ -18,11 +18,17 @@ const siteUrl = 'https://xipeter.github.io';
 const pageUrl = `${siteUrl}/${lang}/tools/text-to-speech/`;
 
 const allArticles = await getCollection('articles');
-const articleData = allArticles.map(a => ({
-  slug: a.slug,
-  title: a.data.title,
-  body: a.body ?? '',
-}));
+const baseArticles = allArticles.filter(a => !a.slug.endsWith('-zh'));
+const articleData = baseArticles.map(a => {
+  const source = lang === 'zh'
+    ? (allArticles.find(x => x.slug === `${a.slug}-zh`) ?? a)
+    : a;
+  return {
+    slug: a.slug,
+    title: source.data.title,
+    body: source.body ?? '',
+  };
+});
 
 const appJsonLd = JSON.stringify({
   "@context": "https://schema.org",
